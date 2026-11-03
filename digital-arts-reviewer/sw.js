@@ -1,6 +1,6 @@
 /* Offline support: every app file is cached on the first visit.
    Stale-while-revalidate: pages open instantly from cache and refresh in the background when online. */
-const CACHE = 'digital-arts-reviewer-v1';
+const CACHE = 'rva-cs301-reviewer-v2';
 const FILES = ['./', 'index.html', 'style.css', 'app.js', 'notes.js', 'bank.js', 'manifest.webmanifest', 'icon.svg'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

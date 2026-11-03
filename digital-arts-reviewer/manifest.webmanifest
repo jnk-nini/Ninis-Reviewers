@@ -1,6 +1,6 @@
 {
-  "name": "Digital Arts Reviewer",
-  "short_name": "Digital Arts",
+  "name": "RVA Midterms CS301 Reviewer",
+  "short_name": "CS301 Reviewer",
   "description": "Notes, read-aloud, flashcards, drills and mock exams for Digital Arts and Technology and Reading Images.",
   "start_url": "./",
   "scope": "./",

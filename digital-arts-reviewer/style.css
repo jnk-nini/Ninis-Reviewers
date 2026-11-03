@@ -91,6 +91,8 @@ img{max-width:100%}
   /* backdrop-filter would make the header the containing block of the fixed bottom nav */
   .bar{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bg)}
   .logo small{max-width:46vw}
+  .logo{flex:1;min-width:0}
+  .logo b{white-space:normal;font-size:.98rem;line-height:1.15}
   .path button{grid-template-columns:40px 1fr;align-items:start}
   .path em{grid-column:2;white-space:normal}
   #sky .moon{top:auto;bottom:22vh;right:-16px;width:56px;height:56px;opacity:.85}

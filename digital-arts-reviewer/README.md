@@ -1,4 +1,4 @@
-# Digital Arts Reviewer
+# RVA Midterms CS301 Reviewer
 
 Reviewer for **Lesson 1: Digital Arts and Technology** and **Lesson 2: Reading Images, Symbolism, Meaning & Context, Visual Communication**.
 
