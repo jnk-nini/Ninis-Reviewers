@@ -405,9 +405,4 @@ mark{background:#FDE68A;color:#1F2937;border-radius:4px;padding:0 2px}
   .hero{padding:18px 16px 18px}
   .choices.tf{grid-template-columns:1fr 1fr}
   .chev span{font-size:.66rem;padding:10px 4px 10px 14px}
-  /* one-handed use: main buttons sit on the right (thumb side), the main one rightmost */
-  .acts,.qacts,.secacts{flex-direction:row-reverse;justify-content:flex-start}
-  .qacts.qnext{position:sticky;bottom:calc(72px + env(safe-area-inset-bottom));z-index:15;padding:8px 0 2px;margin-top:10px}
-  .qacts.qnext .btn{min-height:52px;padding:12px 26px;font-size:1.05rem;box-shadow:0 6px 18px rgba(0,0,0,.35)}
-  .typed .in{flex-direction:row}
 }

@@ -202,16 +202,16 @@ function renderCheat(){
   else if(chTab==="nums"){
     B.innerHTML="<p class='muted'>The numbers and quantities from the slides. Exams love these.</p>"+chipTopics(chT,"data-chf")+
       "<div class='numt'>"+D.NUMS.filter(x=>inT(x[0])).map(x=>"<div class='card tp-"+x[0]+"'><span class='chip'>"+T[x[0]].short+"</span><b>"+esc(x[2])+"</b><span class='v'>"+esc(x[3])+"</span><span class='chip sl'>"+slideTxt(x[1])+"</span></div>").join("")+"</div>"+
-      "<div class='row acts' style='margin-top:12px'><button class='btn pri' data-practice='pmc'>Practice missing-word questions ▶</button></div>"}
+      "<div class='row' style='margin-top:12px'><button class='btn pri' data-practice='pmc'>Practice missing-word questions ▶</button></div>"}
   else if(chTab==="pairs"){
     B.innerHTML="<p class='muted'>Terms that look alike. Know exactly what separates them.</p>"+chipTopics(chT,"data-chf")+
       D.PAIRS.filter(x=>inT(x[0])).map(x=>"<div class='trapc card tp-"+x[0]+"'><b>"+esc(x[1])+"</b> <span class='muted'>vs</span> <b>"+esc(x[2])+"</b><div class='yes muted'>"+esc(x[3])+"</div></div>").join("")+
-      "<div class='row acts' style='margin-top:12px'><button class='btn pri' data-practice='tmc'>Practice: which term? ▶</button></div>"}
+      "<div class='row' style='margin-top:12px'><button class='btn pri' data-practice='tmc'>Practice: which term? ▶</button></div>"}
   else{
     const list=TFS.filter(u=>!u.tr&&inT(u.t));
     B.innerHTML="<p class='muted'>In true or false, one word is changed to make a statement false. Here is every false statement, with the wrong phrase crossed out and the slide's phrase next to it.</p>"+chipTopics(chT,"data-chf")+
       list.map(u=>{const body=esc(u.s).replace(esc(u.w),"<span class='strike'>"+esc(u.w)+"</span> <span class='fix'>"+esc(u.r)+"</span>");return"<div class='trapc card tp-"+u.t+"'><span class='chip'>"+T[u.t].short+"</span> <span class='chip sl'>"+slideTxt(u.sl)+"</span><div style='margin-top:8px'>"+body+"</div></div>"}).join("")+
-      "<div class='row acts' style='margin-top:12px'><button class='btn pri' data-practice='ctr'>Practice: find the counter ▶</button><button class='btn' data-practice='tf'>True or false drill ▶</button></div>"}}
+      "<div class='row' style='margin-top:12px'><button class='btn pri' data-practice='ctr'>Practice: find the counter ▶</button><button class='btn' data-practice='tf'>True or false drill ▶</button></div>"}}
 $("#chTabs").onclick=e=>{const b=e.target.closest("[data-ct]");if(b){chTab=b.dataset.ct;renderCheat()}};
 $("#chBody").onclick=e=>{const b=e.target.closest("[data-chf]");if(b){chT=b.dataset.chf;renderCheat();return}
   const p=e.target.closest("[data-practice]");if(p)openSetup("drill",[p.dataset.practice])};
@@ -320,7 +320,7 @@ function answer(ok,user){Q.done=true;const q=Q.list[Q.i];const cb=$("#clueBtn");
   mark(q.u,ok,Q.clueUsed);
   Q.log.push({q,ok,user,clue:Q.clueUsed});
   const last=Q.i===Q.n-1;
-  const btn="<div class='qacts qnext'><button class='btn pri' id='nextBtn'>"+(last?"See my results 🏁":"Next ▶")+"</button></div>";
+  const btn="<div class='qacts'><button class='btn pri' id='nextBtn'>"+(last?"See my results 🏁":"Next ▶")+"</button></div>";
   const right=q.type==="typed"?q.official:q.type==="ctr"?q.u.w:q.correct;
   if(Q.mode==="drill"){
     if(!ok){$("#qcard").classList.add("shake");setTimeout(()=>$("#qcard").classList.remove("shake"),400)}
@@ -389,7 +389,7 @@ function renderList(){const A=$("#lArea");
   if(LS.i>=LS.deck.length){$("#lProg").style.width="100%";$("#lCount").textContent=LS.deck.length+" / "+LS.deck.length;const pct=LS.tot?Math.round(LS.got/LS.tot*100):0;
     A.innerHTML="<div class='res card' style='margin-top:16px'><div class='bigscore'>"+pct+"%</div><h2>You recalled "+LS.got+" of "+LS.tot+" items</h2>"+
       (LS.res.filter(r=>r.ok<r.n).length?"<p class='muted' style='margin:0'>Lists to repeat: "+LS.res.filter(r=>r.ok<r.n).map(r=>esc(r.u.q)).join(" · ")+"</p>":"")+
-      "<div class='row acts'><button class='btn pri' id='lNew'>New set</button><button class='btn ghost' data-go='home'>Home</button></div></div>";$("#lNew").onclick=()=>openSetup("list");return}
+      "<div class='row center'><button class='btn pri' id='lNew'>New set</button><button class='btn ghost' data-go='home'>Home</button></div></div>";$("#lNew").onclick=()=>openSetup("list");return}
   const l=LS.deck[LS.i];$("#lProg").style.width=(LS.i/LS.deck.length*100)+"%";$("#lCount").textContent=(LS.i+1)+" / "+LS.deck.length;
   A.innerHTML="<div class='lcard card tp-"+l.t+"'><div class='qmeta'><span class='chip'>"+T[l.t].icon+" "+T[l.t].short+"</span><span class='chip sl'>"+l.items.length+" items</span><span class='chip sl'>📄 "+slideTxt(l.sl)+"</span></div><div class='qtext'>"+esc(l.q)+"</div>"+
     "<textarea id='lIn' placeholder='Type one item per line (or separate with commas)' aria-label='Your list'></textarea><div id='lClue'></div><div class='qacts'><button class='btn pri' id='lChk'>Check my list</button><button class='btn sm' id='lClueB'>💡 First letters</button><button class='btn sm ghost' id='lShow'>I don't know, show me</button></div><div id='lOut'></div></div>";
