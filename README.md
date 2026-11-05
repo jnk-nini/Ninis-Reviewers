@@ -10,7 +10,7 @@ Folders are named `<course code>-<subject>`.
 |---|---|---|---|
 | [`cscn07c-computer-architecture`](cscn07c-computer-architecture) | CSCN07C | Computer Architecture and Organization | `cscn07c-reviewer` |
 | [`cselc01c-cloud-databases`](cselc01c-cloud-databases) | CSELC01C | Cloud Databases and Data Services, Vol 1 & 2 | `cselc01c-clouddb-reviewer` |
-| [`cs301-digital-arts`](cs301-digital-arts) | CS301 | RVA Midterms: Digital Arts and Technology, Reading Images | `rva-midterms-cs301-reviewer` |
+| [`rvan01g-rva`](rvan01g-rva) | RVAN01G | RVA (Midterms): Digital Arts and Technology, Reading Images | `rva-midterms-cs301-reviewer` |
 | [`math7-mathematics-q2`](math7-mathematics-q2) | Math 7 | Mathematics 7, Quarter 2 | `math7-q2-reviewer` |
 
 ### Deployed but not in this repo yet
