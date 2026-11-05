@@ -1,0 +1,11 @@
+{
+  "name": "JPL Midterm Reviewer",
+  "short_name": "JPL Reviewer",
+  "description": "Dr. Jose P. Laurel midterm reviewer with notes, active recall, drills and mock quizzes. Works offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F6F3EA",
+  "theme_color": "#E2EEDD",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

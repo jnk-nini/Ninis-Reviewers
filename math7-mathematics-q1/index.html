@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Math 7 Reviewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap">
+<style>
+/* Layout: one-column "sticker notebook" app — pastel topic stickers with chunky ink outlines on dotted paper */
+:root{
+  --bg:#FAF7FF; --dot:#E2D9F3; --card:#FFFFFF; --ink:#2A2140; --muted:#6B6386; --edge:#2A2140; --line:#E6DFF4;
+  --accent:#6D4AFF; --accent-soft:#ECE6FF; --on-accent:#FFFFFF; --pop:#FF5E99;
+  --good:#11935F; --good-soft:#D9F5E8; --bad:#D93A44; --bad-soft:#FDE3E5; --gold:#E9A800; --gold-soft:#FFF2C4;
+  --speed-bg:#FFDCE6; --speed-fg:#D9466F;
+  --percent-bg:#D9ECFF; --percent-fg:#2F7BD6;
+  --order-bg:#DAF5E2; --order-fg:#23A052;
+  --numline-bg:#FFF0BF; --numline-fg:#B98600;
+  --cube-bg:#E9E0FF; --cube-fg:#7A55E8;
+  --square-bg:#FFE0F3; --square-fg:#C2409A;
+  --fraction-bg:#D5F4F0; --fraction-fg:#15978A;
+  --ratirr-bg:#DFE6FF; --ratirr-fg:#4A5FD9;
+  --decimal-bg:#FFE5D2; --decimal-fg:#D9661A;
+  --f-display:'Fredoka','Baloo 2',ui-rounded,'Arial Rounded MT Bold','Segoe UI',system-ui,sans-serif;
+  --f-body:'Nunito',ui-rounded,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --r:18px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16132A; --dot:#2A2546; --card:#221D3B; --ink:#F2EEFF; --muted:#ABA3CC; --edge:#0B0918; --line:#352E57;
+  --accent:#9C85FF; --accent-soft:#2F2752; --on-accent:#140F2B; --pop:#FF7FB0;
+  --good:#43D49A; --good-soft:#163A2E; --bad:#FF6B72; --bad-soft:#40202A; --gold:#FFC93D; --gold-soft:#3A3115;
+  --speed-bg:#3D2232; --speed-fg:#FF8FB0; --percent-bg:#1D2F48; --percent-fg:#7DB8FF; --order-bg:#1B3826; --order-fg:#6EE29A;
+  --numline-bg:#3A3115; --numline-fg:#FFD45E; --cube-bg:#2D2552; --cube-fg:#B9A2FF; --square-bg:#3B1F36; --square-fg:#FF93D6;
+  --fraction-bg:#163733; --fraction-fg:#5EE0D0; --ratirr-bg:#212A50; --ratirr-fg:#97A8FF; --decimal-bg:#3D2618; --decimal-fg:#FFA766;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16132A; --dot:#2A2546; --card:#221D3B; --ink:#F2EEFF; --muted:#ABA3CC; --edge:#0B0918; --line:#352E57;
+  --accent:#9C85FF; --accent-soft:#2F2752; --on-accent:#140F2B; --pop:#FF7FB0;
+  --good:#43D49A; --good-soft:#163A2E; --bad:#FF6B72; --bad-soft:#40202A; --gold:#FFC93D; --gold-soft:#3A3115;
+  --speed-bg:#3D2232; --speed-fg:#FF8FB0; --percent-bg:#1D2F48; --percent-fg:#7DB8FF; --order-bg:#1B3826; --order-fg:#6EE29A;
+  --numline-bg:#3A3115; --numline-fg:#FFD45E; --cube-bg:#2D2552; --cube-fg:#B9A2FF; --square-bg:#3B1F36; --square-fg:#FF93D6;
+  --fraction-bg:#163733; --fraction-fg:#5EE0D0; --ratirr-bg:#212A50; --ratirr-fg:#97A8FF; --decimal-bg:#3D2618; --decimal-fg:#FFA766;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  background-image:radial-gradient(var(--dot) 1.2px,transparent 1.2px);background-size:22px 22px;min-height:100vh}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3,.disp{font-family:var(--f-display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+.wrap{max-width:780px;margin:0 auto;padding-inline:16px;padding-block:12px 64px}
+.tp-speed{--tbg:var(--speed-bg);--tfg:var(--speed-fg)} .tp-percent{--tbg:var(--percent-bg);--tfg:var(--percent-fg)}
+.tp-order{--tbg:var(--order-bg);--tfg:var(--order-fg)} .tp-numline{--tbg:var(--numline-bg);--tfg:var(--numline-fg)}
+.tp-cube{--tbg:var(--cube-bg);--tfg:var(--cube-fg)} .tp-square{--tbg:var(--square-bg);--tfg:var(--square-fg)}
+.tp-fraction{--tbg:var(--fraction-bg);--tfg:var(--fraction-fg)} .tp-ratirr{--tbg:var(--ratirr-bg);--tfg:var(--ratirr-fg)}
+.tp-decimal{--tbg:var(--decimal-bg);--tfg:var(--decimal-fg)}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:2px solid var(--line)}
+.bar-in{max-width:780px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center;gap:8px;background:none;border:0;padding:0}
+.logo b{font-family:var(--f-display);font-size:20px;font-weight:700}
+.logo .m{width:34px;height:34px;border-radius:10px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-family:var(--f-display);font-weight:700;border:2px solid var(--edge);box-shadow:0 2px 0 var(--edge)}
+.sp{flex:1}
+.logo b{white-space:nowrap}@media (max-width:540px){.logo b{display:none}}
+.lvl{display:flex;align-items:center;gap:8px;min-width:0}
+.lvl .t{font-size:12px;font-weight:800;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
+.xpbar{width:80px;height:10px;border-radius:9px;background:var(--line);overflow:hidden;border:1.5px solid var(--edge)}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--pop));width:0;transition:width .6s}
+.ib{width:38px;height:38px;border-radius:12px;border:2px solid var(--edge);background:var(--card);display:grid;place-items:center;font-size:18px;box-shadow:0 2px 0 var(--edge)}
+.ib:active{transform:translateY(2px);box-shadow:none}
+
+/* stickers & buttons */
+.sticker{background:var(--card);border:2px solid var(--edge);border-radius:var(--r);box-shadow:0 4px 0 var(--edge)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid var(--edge);border-radius:14px;padding:12px 18px;font-weight:800;background:var(--card);box-shadow:0 4px 0 var(--edge);transition:transform .08s,box-shadow .08s;text-decoration:none}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--edge)}
+.btn.pri{background:var(--accent);color:var(--on-accent)}
+.btn.pop{background:var(--pop);color:#fff}
+.btn.good{background:var(--good);color:var(--on-accent)}
+.btn.ghost{box-shadow:none;border-color:var(--line)}
+.btn.big{font-size:18px;padding:14px 22px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.muted{color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--tbg,var(--accent-soft));color:var(--tfg,var(--accent));border:1.5px solid currentColor}
+.secttl{display:flex;align-items:baseline;gap:10px;margin:28px 0 12px}
+.secttl h2{font-size:24px}
+.secttl span{color:var(--muted);font-size:14px;font-weight:700}
+
+/* hero */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:18px;margin-top:14px;background:linear-gradient(135deg,var(--accent-soft),var(--card) 70%)}
+.hero h1{font-size:clamp(30px,7vw,44px);font-weight:700}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.bubble{position:relative;background:var(--card);border:2px solid var(--edge);border-radius:14px;padding:8px 12px;font-weight:700;font-size:15px;margin-top:8px;display:inline-block}
+.bubble:before{content:"";position:absolute;left:-9px;top:14px;width:14px;height:14px;background:var(--card);border-left:2px solid var(--edge);border-bottom:2px solid var(--edge);transform:rotate(45deg)}
+.mascot{width:96px;height:auto;flex:none}
+.mascot.bounce{animation:bounce .6s}
+@keyframes bounce{30%{transform:translateY(-12px) rotate(-4deg)}60%{transform:translateY(0) rotate(3deg)}}
+@keyframes wobble{25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
+.mascot.wobble{animation:wobble .4s 2}
+
+/* mode grid */
+.modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (min-width:640px){.modes{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mode{text-align:left;padding:16px;display:flex;flex-direction:column;gap:6px;transition:transform .12s}
+.mode:hover{transform:translateY(-2px) rotate(-.4deg)}
+.mode:active{transform:translateY(3px);box-shadow:0 1px 0 var(--edge)}
+.mode .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:var(--mbg);border:2px solid var(--edge)}
+.mode h3{font-size:19px}
+.mode p{margin:0;font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.35}
+.mode .best{font-size:12px;font-weight:800;color:var(--good)}
+
+/* readiness */
+.ready{padding:18px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+@media (max-width:520px){.ready{grid-template-columns:1fr}}
+.ring{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;margin:auto;
+  background:conic-gradient(var(--good) calc(var(--p)*1%),var(--line) 0);border:2px solid var(--edge)}
+.ring div{width:88px;height:88px;border-radius:50%;background:var(--card);display:grid;place-items:center;text-align:center;border:2px solid var(--edge)}
+.ring b{font-family:var(--f-display);font-size:26px;line-height:1}
+.ring small{font-size:11px;font-weight:800;color:var(--muted)}
+.mast{display:grid;gap:7px}
+.mrow{display:grid;grid-template-columns:150px 1fr 40px;gap:8px;align-items:center;font-size:13px;font-weight:800}
+@media (max-width:420px){.mrow{grid-template-columns:118px 1fr 36px;font-size:12px}}
+.mrow .tr{height:12px;border-radius:9px;background:var(--line);overflow:hidden}
+.mrow .tr i{display:block;height:100%;background:var(--tfg);border-radius:9px;transition:width .6s}
+.mrow span:last-child{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* setup */
+.panel{padding:20px;display:grid;gap:20px}
+.panel h3{font-size:17px;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:2px solid var(--edge);border-radius:999px;padding:8px 14px;font-weight:800;background:var(--card);box-shadow:0 2px 0 var(--edge)}
+.pill[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.pill.tp[aria-pressed="true"]{background:var(--tfg);color:var(--card)}
+.pill:active{transform:translateY(2px);box-shadow:none}
+.num-in{width:84px;border:2px solid var(--edge);border-radius:12px;padding:8px 10px;font-weight:800;background:var(--card);text-align:center}
+.note{font-size:14px;background:var(--gold-soft);border:2px dashed var(--gold);border-radius:14px;padding:10px 12px;font-weight:700}
+
+/* quiz */
+.qtop{display:flex;align-items:center;gap:10px;margin-top:12px}
+.prog{flex:1;height:16px;border-radius:12px;background:var(--line);border:2px solid var(--edge);overflow:hidden}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--pop));transition:width .4s}
+.stats{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
+.stat{font-weight:800;font-size:14px;padding:4px 10px;border-radius:10px;background:var(--card);border:2px solid var(--line);font-variant-numeric:tabular-nums}
+.stat.fire{border-color:var(--pop);color:var(--pop)}
+.qcard{padding:20px;position:relative;overflow:hidden}
+.qcard:before{content:"";position:absolute;inset:0 0 auto 0;height:8px;background:var(--tfg)}
+.qmeta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.qtext{font-size:clamp(19px,4.6vw,24px);font-weight:800;line-height:1.4}
+.qtext b{color:var(--tfg)}
+.qvis{margin:14px 0 0;overflow-x:auto}
+.qvis svg{width:100%;height:auto;max-width:620px;display:block}
+.choices{display:grid;gap:10px;margin-top:18px}
+@media (min-width:600px){.choices{grid-template-columns:1fr 1fr}}
+.choice{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 14px;border:2px solid var(--edge);border-radius:14px;background:var(--card);box-shadow:0 3px 0 var(--edge);font-weight:800;font-size:18px;min-height:58px}
+.choice .k{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-family:var(--f-display);font-size:16px}
+.choice:active{transform:translateY(2px);box-shadow:0 1px 0 var(--edge)}
+.choice.ok{background:var(--good-soft);border-color:var(--good)}
+.choice.ok .k{background:var(--good);color:var(--card)}
+.choice.no{background:var(--bad-soft);border-color:var(--bad)}
+.choice.no .k{background:var(--bad);color:var(--card)}
+.choice[disabled]{cursor:default}
+.typed{margin-top:18px;display:grid;gap:10px}
+.typed .in{display:flex;gap:10px}
+.typed input{flex:1;min-width:0;font-size:20px;font-weight:800;padding:12px 14px;border:2px solid var(--edge);border-radius:14px;background:var(--card)}
+.typed input.ok{border-color:var(--good);background:var(--good-soft)}
+.typed input.no{border-color:var(--bad);background:var(--bad-soft)}
+.keys{display:flex;gap:8px;flex-wrap:wrap}
+.keys button{min-width:44px;height:40px;border-radius:10px;border:2px solid var(--line);background:var(--card);font-weight:800;font-size:18px}
+.hintline{font-size:13px;color:var(--muted);font-weight:700}
+.qacts{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.clue{margin-top:12px;background:var(--gold-soft);border:2px solid var(--gold);border-radius:14px;padding:10px 14px;font-weight:700;animation:pop .25s}
+.clue b{color:var(--gold)}
+@keyframes pop{from{transform:scale(.92);opacity:.3}to{transform:none;opacity:1}}
+.fb{margin-top:16px;padding:14px 16px;border-radius:16px;border:2px solid;animation:pop .25s}
+.fb.ok{background:var(--good-soft);border-color:var(--good)}
+.fb.no{background:var(--bad-soft);border-color:var(--bad)}
+.fb h3{font-size:22px}
+.fb.ok h3{color:var(--good)} .fb.no h3{color:var(--bad)}
+.fb p{margin:6px 0 0;font-weight:600}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.float{position:fixed;font-family:var(--f-display);font-weight:700;font-size:28px;color:var(--good);pointer-events:none;z-index:40;animation:floatup 1s forwards}
+@keyframes floatup{to{transform:translateY(-70px);opacity:0}}
+
+/* math bits */
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.1;margin:0 .1em}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 .15em}
+.rad{white-space:nowrap}
+.rad sup{font-size:.6em;margin-right:-.35em;vertical-align:.7em}
+.ol{border-top:2px solid currentColor;padding:0 .1em;margin-left:.05em}
+
+/* results */
+.res{padding:24px;text-align:center;display:grid;gap:12px;justify-items:center}
+.stars{font-size:46px;letter-spacing:6px}
+.stars .off{opacity:.2;filter:grayscale(1)}
+.bigscore{font-family:var(--f-display);font-size:56px;font-weight:700;line-height:1}
+.rstats{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.review{display:grid;gap:12px;margin-top:8px}
+.rv{padding:14px 16px;border-left:8px solid var(--tfg)}
+.rv .q{font-weight:800}
+.rv .a{font-size:14.5px;margin-top:6px;display:grid;gap:3px}
+.rv .a .y{color:var(--bad);font-weight:800} .rv .a .c{color:var(--good);font-weight:800}
+
+/* learn */
+.tnav{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
+.tnav button{flex:none}
+.lcard{padding:0;overflow:hidden;margin-bottom:18px;scroll-margin-top:80px}
+.lhead{background:var(--tbg);padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--edge)}
+.lhead .ic{font-size:28px}
+.lhead h2{font-size:24px;color:var(--ink)}
+.lbody{padding:16px 18px;display:grid;gap:14px}
+.lbody p{margin:0}
+.idea{font-weight:700;font-size:17px}
+.formula{background:var(--tbg);border:2px solid var(--tfg);border-radius:14px;padding:12px 16px;font-family:var(--f-display);font-size:24px;font-weight:600;text-align:center;color:var(--ink)}
+.ex{border:2px dashed var(--line);border-radius:14px;padding:10px 14px}
+.ex h4{margin:0 0 4px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--tfg)}
+.tip{background:var(--gold-soft);border-radius:14px;padding:10px 14px;font-weight:700;font-size:15px}
+.widget{border:2px solid var(--edge);border-radius:14px;padding:14px;display:grid;gap:10px;background:var(--bg)}
+.widget h4{margin:0;font-family:var(--f-display);font-size:16px;font-weight:600}
+.widget label{font-weight:800;font-size:14px;display:grid;grid-template-columns:110px 1fr 70px;gap:8px;align-items:center}
+.widget label output{text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--tfg,var(--accent))}
+.out{font-family:var(--f-display);font-size:22px;font-weight:600;text-align:center}
+.track{position:relative;height:44px;border-bottom:3px dashed var(--muted);overflow:hidden}
+.track .car{position:absolute;left:0;bottom:2px;font-size:30px;animation:drive linear infinite}
+@keyframes drive{from{left:-40px}to{left:100%}}
+.pie{width:110px;height:110px;border-radius:50%;border:2px solid var(--edge);margin:auto;background:conic-gradient(var(--tfg) calc(var(--p)*1%),var(--card) 0)}
+.grid-sq{display:grid;gap:3px;margin:auto;width:min(220px,100%)}
+.grid-sq i{aspect-ratio:1;background:var(--tfg);border-radius:3px;opacity:.85;animation:pop .2s}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{padding:3px 10px;border-radius:9px;background:var(--tbg);border:1.5px solid var(--tfg);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums}
+.bars{display:flex;gap:3px}
+.bars i{flex:1;height:28px;border:2px solid var(--edge);border-radius:5px;background:var(--card)}
+.bars i.a{background:var(--tfg)} .bars i.b{background:var(--pop)}
+.tbl{width:100%;border-collapse:collapse;font-weight:700;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{border:2px solid var(--line);padding:6px 8px;text-align:center}
+.tbl th{background:var(--tbg);font-size:13px}
+.pv{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}
+.pv div{display:grid;justify-items:center;gap:2px}
+.pv b{font-family:var(--f-display);font-size:28px;width:44px;height:48px;display:grid;place-items:center;border:2px solid var(--edge);border-radius:10px;background:var(--card)}
+.pv small{font-size:10.5px;font-weight:800;color:var(--muted);text-align:center;max-width:64px;line-height:1.1}
+.pv .dot b{border:0;background:none;width:14px}
+
+/* flashcards */
+.flip{perspective:1200px;margin-top:14px}
+.fcard{position:relative;width:100%;min-height:300px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer;border:0;background:none;padding:0;display:block}
+.fcard.on{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:grid;place-items:center;text-align:center;padding:22px;border:2px solid var(--edge);border-radius:22px;box-shadow:0 5px 0 var(--edge)}
+.face.f{background:var(--tbg)}
+.face.b{background:var(--card);transform:rotateY(180deg);font-weight:700;font-size:17px}
+.face.f .big{font-family:var(--f-display);font-size:clamp(28px,7vw,40px);font-weight:600}
+.face .tapnote{position:absolute;bottom:12px;left:0;right:0;font-size:12px;font-weight:800;color:var(--muted)}
+.face .fm{display:block;font-family:var(--f-display);font-size:22px;margin:8px 0;color:var(--tfg)}
+
+/* match */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;margin-top:14px}
+.tile{min-height:84px;padding:8px;border:2px solid var(--edge);border-radius:14px;background:var(--card);box-shadow:0 3px 0 var(--edge);font-weight:800;font-size:15.5px;line-height:1.25;display:grid;place-items:center;text-align:center}
+.tile.term{background:var(--accent-soft)}
+.tile.sel{background:var(--gold-soft);border-color:var(--gold);transform:translateY(-3px)}
+.tile.done{background:var(--good-soft);border-color:var(--good);box-shadow:none;animation:pop .3s;opacity:.55}
+.tile.miss{animation:shake .4s;background:var(--bad-soft)}
+
+footer{margin-top:40px;text-align:center;font-size:13px;color:var(--muted);font-weight:700}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+.quitbtn.arm{background:var(--bad);color:#fff}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+<header class="bar"><div class="bar-in">
+  <button class="logo" id="goHome" aria-label="Go to home"><span class="m">7</span><b>Math 7 Reviewer</b></button>
+  <span class="sp"></span>
+  <div class="lvl" title="Your level"><span class="t" id="lvlName">Lv 1</span><div class="xpbar"><i id="xpFill"></i></div></div>
+  <button class="ib" id="sndBtn" aria-label="Sound on or off">🔊</button>
+  <button class="ib" id="thmBtn" aria-label="Switch light or dark">🌙</button>
+</div></header>
+
+<main class="wrap">
+<!-- HOME -->
+<section id="v-home">
+  <div class="hero sticker">
+    <svg class="mascot" id="mascot" viewBox="0 0 100 120" aria-hidden="true">
+      <rect x="10" y="8" width="80" height="104" rx="18" fill="var(--accent)" stroke="var(--edge)" stroke-width="3"/>
+      <rect x="20" y="18" width="60" height="38" rx="8" fill="var(--card)" stroke="var(--edge)" stroke-width="3"/>
+      <circle cx="38" cy="34" r="4.5" fill="var(--ink)"/><circle cx="62" cy="34" r="4.5" fill="var(--ink)"/>
+      <circle cx="30" cy="44" r="3.5" fill="var(--pop)" opacity=".6"/><circle cx="70" cy="44" r="3.5" fill="var(--pop)" opacity=".6"/>
+      <path class="mouth" d="M41 43 Q50 51 59 43" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <g fill="var(--card)" stroke="var(--edge)" stroke-width="2.5"><rect x="20" y="64" width="16" height="12" rx="4"/><rect x="42" y="64" width="16" height="12" rx="4"/><rect x="64" y="64" width="16" height="12" rx="4" fill="var(--pop)"/><rect x="20" y="82" width="16" height="12" rx="4"/><rect x="42" y="82" width="16" height="12" rx="4"/><rect x="64" y="82" width="16" height="22" rx="4" fill="var(--gold)"/><rect x="20" y="98" width="38" height="8" rx="4"/></g>
+    </svg>
+    <div style="min-width:0">
+      <h1>Math 7 <em>Reviewer</em></h1>
+      <div class="bubble" id="homeBubble">Hi! I'm Calci. Let's get you exam-ready!</div>
+    </div>
+  </div>
+
+  <div class="secttl"><h2>Study</h2><span>Learn it, then remember it</span></div>
+  <div class="modes" id="studyModes"></div>
+
+  <div class="secttl"><h2>Practice</h2><span>Pick a mode, choose how many items</span></div>
+  <div class="modes" id="quizModes"></div>
+
+  <div class="secttl"><h2>Exam readiness</h2><span>Fills up as you answer correctly</span></div>
+  <div class="ready sticker">
+    <div class="ring" id="readyRing" style="--p:0"><div><span><b id="readyPct">0%</b><br><small>READY</small></span></div></div>
+    <div style="display:grid;gap:12px;min-width:0">
+      <div class="mast" id="mastery"></div>
+      <div class="row"><button class="btn pop" id="weakBtn">Train my weakest topic</button></div>
+    </div>
+  </div>
+  <footer>Made for Grade 7. Works online and offline, no sign-up needed. Your progress stays on this device.</footer>
+</section>
+
+<!-- LEARN -->
+<section id="v-learn" hidden>
+  <div class="secttl"><h2>Study Notes</h2><span>Tap a topic</span></div>
+  <div class="tnav" id="tnav"></div>
+  <div id="learnList"></div>
+</section>
+
+<!-- SETUP -->
+<section id="v-setup" hidden>
+  <div class="secttl"><h2 id="setupTitle">Setup</h2></div>
+  <div class="panel sticker">
+    <div><h3>How many items?</h3>
+      <div class="pills" id="countPills"></div>
+      <div class="row" style="margin-top:10px"><span class="muted" style="font-weight:700">or type a number:</span><input id="countIn" class="num-in" type="number" min="1" max="100" value="10" inputmode="numeric" aria-label="Number of items"></div>
+    </div>
+    <div><h3>Which topics?</h3><div class="pills" id="topicPills"></div></div>
+    <div class="note" id="setupNote">💡 Every question has a clue. Using a clue gives you half points, so try first!</div>
+    <div class="row"><button class="btn pri big" id="startBtn">Start! ▶</button><button class="btn ghost" data-home>Back</button></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="v-quiz" hidden>
+  <div class="qtop"><button class="ib quitbtn" id="quitBtn" aria-label="Quit quiz">✕</button><div class="prog"><i id="progFill"></i></div><span class="disp" id="qCount" style="font-size:18px;white-space:nowrap">1/10</span></div>
+  <div class="stats"><span class="stat" id="sScore">⭐ 0 pts</span><span class="stat fire" id="sStreak" hidden>🔥 0</span><span class="stat" id="sSection" hidden></span></div>
+  <div class="qcard sticker" id="qcard">
+    <div class="qmeta" id="qmeta"></div>
+    <div class="qtext" id="qtext"></div>
+    <div class="qvis" id="qvis"></div>
+    <div id="qans"></div>
+    <div id="qclue"></div>
+    <div id="qfb"></div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="v-results" hidden>
+  <div class="res sticker" style="margin-top:16px">
+    <div class="stars" id="rStars"></div>
+    <div class="bigscore" id="rPct">0%</div>
+    <h2 id="rMsg"></h2>
+    <div class="rstats" id="rStats"></div>
+    <div class="row" style="justify-content:center">
+      <button class="btn pop" id="redoWrong">Practice my mistakes</button>
+      <button class="btn pri" id="againBtn">Try again</button>
+      <button class="btn" data-home>Home</button>
+    </div>
+  </div>
+  <div class="secttl" id="revTtl"><h2>Review</h2><span>Read these before your exam</span></div>
+  <div class="review" id="review"></div>
+</section>
+
+<!-- FLASHCARDS -->
+<section id="v-flash" hidden>
+  <div class="qtop"><button class="ib" data-home aria-label="Back home">✕</button><div class="prog"><i id="fProg"></i></div><span class="disp" id="fCount" style="font-size:18px">1/10</span></div>
+  <div id="fArea"></div>
+</section>
+
+<!-- MATCH -->
+<section id="v-match" hidden>
+  <div class="secttl"><h2>Match Game</h2><span>Tap a card, then tap its partner</span></div>
+  <div class="row" id="mSetup"><span style="font-weight:800">Pairs:</span><div class="pills" id="pairPills"></div><button class="btn pri" id="mStart">Play</button><button class="btn ghost" data-home>Back</button></div>
+  <div class="stats" id="mStats"></div>
+  <div class="mgrid" id="mgrid"></div>
+</section>
+</main>
+
+<script>
+(function(){
+"use strict";
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1};
+const lcm=(a,b)=>a*b/gcd(a,b);
+const neg=x=>String(x).replace('-','−');
+const fmt=x=>Number.isInteger(x)?neg(x):neg(+x.toFixed(4));
+function F(n,d){if(d===1)return neg(n);const isN=typeof n==='number',s=isN&&n<0?'−':'';return s+'<span class="fr"><span>'+(isN?Math.abs(n):n)+'</span><span>'+d+'</span></span>'}
+function simp(n,d){const g=gcd(n,d);n/=g;d/=g;if(d<0){n=-n;d=-d}return[n,d]}
+const FS=(n,d)=>{const[a,b]=simp(n,d);return F(a,b)};
+const SQ=x=>'<span class="rad">√<span class="ol">'+x+'</span></span>';
+const CB=x=>'<span class="rad"><sup>3</sup>√<span class="ol">'+x+'</span></span>';
+const strip=h=>String(h).replace(/<span class="fr"><span>(.*?)<\/span><span>(.*?)<\/span><\/span>/g,'$1/$2').replace(/<[^>]+>/g,'');
+
+/* ---------- storage ---------- */
+const DEF={xp:0,mastery:{},best:{},sound:true,theme:null,matchBest:{}};
+let S;try{S=Object.assign({},DEF,JSON.parse(localStorage.getItem('m7rev')||'{}'))}catch(e){S=Object.assign({},DEF)}
+function save(){try{localStorage.setItem('m7rev',JSON.stringify(S))}catch(e){}}
+
+/* ---------- topics ---------- */
+const TOPICS={
+ speed:{name:'Speed',icon:'🚗'},
+ percent:{name:'Percentage',icon:'💯'},
+ order:{name:'Ordering Rational Numbers',short:'Ordering Numbers',icon:'📶'},
+ numline:{name:'Number Line',icon:'🐸'},
+ cube:{name:'Cube Root',icon:'🧊'},
+ square:{name:'Square Root',icon:'🟪'},
+ fraction:{name:'Adding & Subtracting Fractions',short:'Fractions',icon:'🍕'},
+ ratirr:{name:'Rational & Irrational Numbers',short:'Rational & Irrational',icon:'🔢'},
+ decimal:{name:'Decimals',icon:'🔟'}
+};
+const TK=Object.keys(TOPICS);
+const tname=t=>TOPICS[t].short||TOPICS[t].name;
+
+/* ---------- sound ---------- */
+let AC=null;
+function tone(fs,dur,type,gap){if(!S.sound)return;dur=dur||.12;type=type||'sine';gap=gap||.09;
+ try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const t0=AC.currentTime+.01;
+ fs.forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;const st=t0+i*gap;
+  g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(.16,st+.02);g.gain.exponentialRampToValueAtTime(.0001,st+dur);
+  o.connect(g);g.connect(AC.destination);o.start(st);o.stop(st+dur+.05)})}catch(e){}}
+const sfx={good:()=>tone([660,990]),bad:()=>tone([240,170],.2,'triangle',.13),tap:()=>tone([520],.05,'triangle'),
+ win:()=>tone([523,659,784,1046],.2,'sine',.11),flip:()=>tone([380,560],.06,'triangle',.05),clue:()=>tone([880,740],.08,'triangle',.07)};
+
+/* ---------- mascot ---------- */
+const MOUTH={happy:'M41 43 Q50 51 59 43',sad:'M41 48 Q50 41 59 48',think:'M42 46 L58 44',wow:'M46 45 Q50 39 54 45 Q50 51 46 45'};
+function mood(m){document.querySelectorAll('.mascot .mouth').forEach(p=>p.setAttribute('d',MOUTH[m]||MOUTH.happy));
+ const el=$('#mascot');if(!el)return;el.classList.remove('bounce','wobble');void el.offsetWidth;el.classList.add(m==='sad'?'wobble':'bounce')}
+
+/* ---------- confetti ---------- */
+function confetti(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const c=$('#confetti'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+ const cols=['#6D4AFF','#FF5E99','#E9A800','#11935F','#2F7BD6','#FF8A3D'];
+ const P=Array.from({length:140},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height*.5,vx:(Math.random()-.5)*4,vy:2+Math.random()*4,r:4+Math.random()*5,a:Math.random()*6,c:pick(cols)}));
+ let f=0;(function loop(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.05;p.a+=.15;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.fillRect(-p.r,-p.r/2,p.r*2,p.r);x.restore()});
+ if(++f<170)requestAnimationFrame(loop);else x.clearRect(0,0,c.width,c.height)})()}
+function floatTxt(txt,el){const r=el.getBoundingClientRect();const d=document.createElement('div');d.className='float';d.textContent=txt;d.style.left=(r.left+r.width/2-30)+'px';d.style.top=(r.top)+'px';document.body.appendChild(d);setTimeout(()=>d.remove(),1000)}
+
+/* ---------- number line svg ---------- */
+function nlSVG(lo,hi,pts,hop){
+ const W=620,H=hop?150:110,pad=28,base=hop?105:65,X=v=>pad+(v-lo)*((W-2*pad)/(hi-lo));
+ let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Number line">';
+ s+='<line x1="8" y1="'+base+'" x2="'+(W-8)+'" y2="'+base+'" stroke="var(--ink)" stroke-width="3"/>';
+ s+='<path d="M8 '+base+' l12 -8 v16z M'+(W-8)+' '+base+' l-12 -8 v16z" fill="var(--ink)"/>';
+ const step=(hi-lo)>14?2:1;
+ for(let v=lo;v<=hi;v++){const x=X(v);s+='<line x1="'+x+'" y1="'+(base-8)+'" x2="'+x+'" y2="'+(base+8)+'" stroke="var(--ink)" stroke-width="2"/>';
+  if(v%step===0||v===0)s+='<text x="'+x+'" y="'+(base+30)+'" text-anchor="middle" font-size="17" font-weight="800" fill="var(--ink)" font-family="Nunito,system-ui,sans-serif">'+neg(v)+'</text>'}
+ (pts||[]).forEach(p=>{const x=X(p.v);s+='<circle cx="'+x+'" cy="'+base+'" r="9" fill="'+(p.c||'var(--accent)')+'" stroke="var(--edge)" stroke-width="2"/>';
+  if(p.label)s+='<text x="'+x+'" y="'+(base-18)+'" text-anchor="middle" font-size="15" font-weight="800" fill="'+(p.c||'var(--accent)')+'" font-family="Nunito,system-ui,sans-serif">'+p.label+'</text>'});
+ if(hop){const a=X(hop.a),b=X(hop.b),m=(a+b)/2;
+  s+='<path d="M'+a+' '+(base-10)+' Q'+m+' 0 '+b+' '+(base-10)+'" fill="none" stroke="var(--pop)" stroke-width="4" stroke-dasharray="7 6" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="200" to="0" dur=".7s"/></path>';
+  s+='<text x="'+m+'" y="'+(base-62)+'" text-anchor="middle" font-size="20" font-weight="800" fill="var(--pop)" font-family="Nunito,system-ui,sans-serif">'+hop.lbl+'</text>';
+  s+='<circle cx="'+b+'" cy="'+base+'" r="10" fill="var(--good)" stroke="var(--edge)" stroke-width="2"/>'}
+ return s+'</svg>'}
+
+/* ---------- question generators ---------- */
+// raw: {q, num|text|fixed, ansHtml, dis[], clue, explain, unit, nl}
+const G={
+speed(typed){const v=R(0,3);
+ if(v===0){const t=R(2,5),s=pick([40,45,50,60,65,70,80,90]),d=s*t,w=pick(['A bus','A jeepney','A car','A train','A van']);
+  return{q:w+' travels <b>'+d+' km</b> in <b>'+t+' hours</b>. What is its speed?',num:s,unit:'km/h',ansHtml:s+' km/h',dis:[d*t,s+10,s-5,d-t].map(x=>x+' km/h'),
+  clue:'Speed = Distance ÷ Time. Divide the distance by the time.',explain:'Speed = '+d+' km ÷ '+t+' h = <b>'+s+' km/h</b>'}}
+ if(v===1){const t=R(2,6),s=pick([4,5,12,15,20,30,40,60]),d=s*t,w=pick(['A cyclist','A runner','A tricycle','Mia on her bike']);
+  return{q:w+' moves at <b>'+s+' km/h</b> for <b>'+t+' hours</b>. How far does it go?',num:d,unit:'km',ansHtml:d+' km',dis:[s+t,d+s,d-s,s*(t+1)+1].map(x=>x+' km'),
+  clue:'Distance = Speed × Time. Multiply!',explain:'Distance = '+s+' × '+t+' = <b>'+d+' km</b>'}}
+ if(v===2){const t=R(2,6),s=pick([30,40,50,60,80]),d=s*t;
+  return{q:'A car travels <b>'+d+' km</b> at a speed of <b>'+s+' km/h</b>. How many hours did the trip take?',num:t,unit:'hours',ansHtml:t+' hours',dis:[t+1,t+2,t*2,Math.max(1,t-1)].map(x=>x+' hours'),
+  clue:'Time = Distance ÷ Speed.',explain:'Time = '+d+' ÷ '+s+' = <b>'+t+' hours</b>'}}
+ const s=pick([2,4,5,8,10]),t=pick([10,20,25,50]),d=s*t;
+ return{q:'A sprinter runs <b>'+d+' meters</b> in <b>'+t+' seconds</b>. What is the speed in meters per second (m/s)?',num:s,unit:'m/s',ansHtml:s+' m/s',dis:[s*2,s+5,d-t,t/s].map(x=>fmt(x)+' m/s'),
+  clue:'Speed = Distance ÷ Time → '+d+' ÷ '+t,explain:'Speed = '+d+' m ÷ '+t+' s = <b>'+s+' m/s</b>'}},
+percent(typed){const v=R(0,2);
+ if(v===0){let p,n;do{p=pick([10,20,25,50,75,5,15,30,40,60]);n=pick([20,40,60,80,100,120,160,200,240,300,400])}while(p*n%100);const a=p*n/100;
+  return{q:'Find <b>'+p+'%</b> of <b>'+n+'</b>.',num:a,ansHtml:fmt(a),dis:[n-a,a*2,a+p,p],
+  clue:p+'% means '+p+' out of 100, so change it to '+F(p,100)+' (or '+fmt(p/100)+') and multiply by '+n+'.',explain:F(p,100)+' × '+n+' = '+fmt(p/100)+' × '+n+' = <b>'+fmt(a)+'</b>'}}
+ if(v===1){let w,pc,pt;do{w=pick([20,25,40,50,10]);pc=pick([40,50,60,70,75,80,90,95]);pt=w*pc/100}while(!Number.isInteger(pt));const nm=pick(['Liza','Paolo','Andrea','Miguel','Bea']);
+  return{q:nm+' got <b>'+pt+' out of '+w+'</b> items correct on a quiz. What percent is that?',num:pc,unit:'%',ansHtml:pc+'%',dis:[100-pc,pt,pc+5,Math.round(w/pt*100)].map(x=>x+'%'),
+  clue:'Percentage = Part ÷ Whole × 100%. Part = '+pt+', Whole = '+w+'.',explain:pt+' ÷ '+w+' × 100% = <b>'+pc+'%</b>'}}
+ let pr,off,a;do{pr=pick([200,250,300,400,500,800,1000,1200]);off=pick([10,20,25,50,30,15]);a=pr*off/100}while(!Number.isInteger(a));
+ return{q:'A pair of shoes costs <b>₱'+pr+'</b>. It is <b>'+off+'% off</b>. How much money do you save?',num:a,unit:'pesos',ansHtml:'₱'+a,dis:[pr-a,off,a*2,a+off].map(x=>'₱'+x),
+  clue:'The amount you save is '+off+'% of ₱'+pr+'. Multiply '+F(off,100)+' × '+pr+'.',explain:off+'% of ₱'+pr+' = '+fmt(off/100)+' × '+pr+' = <b>₱'+a+'</b>'}},
+order(typed){
+ const pool=[[-5],[-3],[-2],[-1],[0],[1],[2],[3],[1,2],[-1,2],[1,3],[2,3],[3,4],[-3,4],[1,4],[5,2],[-5,2],[-3,2]].map(p=>p.length===1?{v:p[0],h:neg(p[0])}:{v:p[0]/p[1],h:F(p[0],p[1])});
+ const set=shuffle(pool).slice(0,5);const sorted=set.slice().sort((a,b)=>a.v-b.v);const list=set.map(x=>x.h).join(', ');
+ const v=typed?R(0,1):R(0,3);
+ const ex='In order: '+sorted.map(x=>x.h).join(' &lt; ');
+ if(v<2){const least=v===0,ans=least?sorted[0]:sorted[4];
+  return{q:'Which number is the <b>'+(least?'LEAST (smallest)':'GREATEST (largest)')+'</b>?<br>'+list,num:ans.v,ansHtml:ans.h,dis:set.filter(x=>x!==ans).map(x=>x.h),
+   clue:least?'Negative numbers are smaller than 0. The farther left on the number line, the smaller it is!':'Positive numbers beat negatives. Change fractions to decimals: '+F(1,2)+' = 0.5, '+F(2,3)+' ≈ 0.67, '+F(3,4)+' = 0.75.',
+   explain:ex,typedHint:'Type a number or fraction like 3/4 or -1/2'}}
+ const inc=v===2,good=(inc?sorted:sorted.slice().reverse()).map(x=>x.h).join(', ');
+ const bad1=(inc?sorted.slice().reverse():sorted).map(x=>x.h).join(', ');
+ const bad2=set.slice().sort((a,b)=>Math.abs(a.v)-Math.abs(b.v)).map(x=>x.h).join(', ');
+ let s3=(inc?sorted:sorted.slice().reverse()).slice();[s3[1],s3[2]]=[s3[2],s3[1]];const bad3=s3.map(x=>x.h).join(', ');
+ return{q:'Arrange in <b>'+(inc?'INCREASING order (least → greatest)':'DECREASING order (greatest → least)')+'</b>:<br>'+list,fixed:[good,bad1,bad2,bad3],
+  clue:inc?'Start with the most negative number, end with the biggest positive number.':'Start with the biggest positive number, end with the most negative number.',explain:ex}},
+numline(typed){let a,b,dir,ans;do{a=R(-6,5);b=R(1,7);dir=pick([1,-1]);ans=a+dir*b}while(ans<-9||ans>9);
+ const lo=Math.min(a,ans,0)-1,hi=Math.max(a,ans,0)+1;const v=R(0,1);
+ const q=v===0?'Start at <b>'+neg(a)+'</b> on the number line. Move <b>'+b+' units to the '+(dir>0?'RIGHT':'LEFT')+'</b>. Where do you land?':'Use the number line: <b>'+neg(a)+' '+(dir>0?'+':'−')+' '+b+'</b> = ?';
+ return{q,num:ans,ansHtml:neg(ans),dis:[a-dir*b,ans+1,ans-1,-ans],nl:{lo,hi,a,b:ans,lbl:(dir>0?'+':'−')+b},
+  clue:dir>0?'Moving RIGHT means add (+). Count '+b+' hops to the right of '+neg(a)+'.':'Moving LEFT means subtract (−). Count '+b+' hops to the left of '+neg(a)+'.',
+  explain:neg(a)+' '+(dir>0?'+':'−')+' '+b+' = <b>'+neg(ans)+'</b>'}},
+cube(typed){const v=R(0,2);
+ if(v===0){let n;do{n=R(-6,6)}while(n===0);if(Math.random()<.15)n=10;const c=n**3;
+  return{q:'What is '+CB(neg(c))+' ?',num:n,ansHtml:neg(n),dis:[-n,Math.round(c/3),n+1,n*n],
+   clue:'Find a number that, multiplied by itself 3 times, gives '+neg(c)+'.'+(n<0?' A negative × negative × negative is negative!':''),explain:CB(neg(c))+' = <b>'+neg(n)+'</b> because ('+neg(n)+')³ = '+neg(n)+' × '+neg(n)+' × '+neg(n)+' = '+neg(c)}}
+ if(v===1){const n=R(2,6),c=n**3;
+  return{q:'A cube-shaped box has a volume of <b>'+c+' cm³</b>. How long is each edge?',num:n,unit:'cm',ansHtml:n+' cm',dis:[Math.round(c/3),n+1,n*n,Math.round(c/6)].map(x=>x+' cm'),
+   clue:'Volume of a cube = edge × edge × edge. Find '+CB(c)+'.',explain:CB(c)+' = <b>'+n+' cm</b> because '+n+' × '+n+' × '+n+' = '+c}}
+ const n=R(-5,6)||2,c=n**3;
+ return{q:'If '+CB('x')+' = '+neg(n)+', what is x?',num:c,ansHtml:neg(c),dis:[n*3,n*n,c+n,-c],clue:CB('x')+' = y means y³ = x. So multiply '+neg(n)+' three times.',explain:'x = ('+neg(n)+')³ = <b>'+neg(c)+'</b>'}},
+square(typed){const v=R(0,2);
+ if(v===0){const n=R(2,15),s=n*n;
+  return{q:'What is '+SQ(s)+' ?',num:n,ansHtml:String(n),dis:[n+1,n-1,n*2,Math.round(s/2)],clue:'Which number times itself gives '+s+'? Think of your multiplication table.',explain:SQ(s)+' = <b>'+n+'</b> because '+n+' × '+n+' = '+s}}
+ if(v===1){const n=R(3,12),s=n*n;
+  return{q:'A square garden has an area of <b>'+s+' m²</b>. How long is one side?',num:n,unit:'m',ansHtml:n+' m',dis:[Math.round(s/4),n+1,n*2,Math.round(s/2)].map(x=>x+' m'),clue:'Area of a square = side × side. So side = '+SQ(s)+'.',explain:SQ(s)+' = <b>'+n+' m</b> because '+n+' × '+n+' = '+s}}
+ const n=R(2,12),s=n*n;
+ return{q:'If '+SQ('x')+' = '+n+', what is x?',num:s,ansHtml:String(s),dis:[n*2,n+2,s+n,s-1],clue:SQ('x')+' = y means y² = x. Multiply '+n+' by itself.',explain:'x = '+n+'² = '+n+' × '+n+' = <b>'+s+'</b>'}},
+fraction(typed){const v=R(0,3);
+ if(v<2){const d=pick([5,7,8,9,10,11,12]);let a,b;
+  if(v===0){a=R(1,d-2);b=R(1,d-1-a)}else{a=R(2,d-1);b=R(1,a-1)}
+  const r=v===0?a+b:a-b,op=v===0?'+':'−';
+  return{q:'Solve: '+F(a,d)+' '+op+' '+F(b,d)+' = ?',num:r/d,ansHtml:FS(r,d),dis:[FS(r,d+d),FS(v===0?a*b:a+b,d),FS(r+1,d),FS(r,d+1)],
+   clue:'Same denominator! Just '+(v===0?'add':'subtract')+' the numerators ('+a+' '+op+' '+b+') and keep the denominator '+d+'.',
+   explain:F(a,d)+' '+op+' '+F(b,d)+' = '+F(r,d)+(gcd(r,d)>1?' = <b>'+FS(r,d)+'</b> (simplified)':' → <b>'+FS(r,d)+'</b>'),typedHint:'Type a fraction like 5/8'}}
+ const pairs=[[2,3],[3,4],[2,5],[3,5],[4,5],[4,6],[2,7],[3,8],[6,8],[4,10],[5,6],[3,10]];let b1,b2,a,c;
+ do{[b1,b2]=pick(pairs);a=R(1,b1-1);c=R(1,b2-1)}while(v===3&&a/b1<=c/b2||gcd(a,b1)>1||gcd(c,b2)>1);
+ const L=lcm(b1,b2),A=a*L/b1,C=c*L/b2,r=v===2?A+C:A-C,op=v===2?'+':'−';
+ return{q:'Solve: '+F(a,b1)+' '+op+' '+F(c,b2)+' = ?',num:r/L,ansHtml:FS(r,L),dis:[FS(v===2?a+c:Math.abs(a-c)||1,v===2?b1+b2:Math.abs(b1-b2)||1),FS(a*c,b1*b2),FS(v===2?a+c:Math.abs(a-c)||1,L),FS(r+1,L)],
+  clue:'Different denominators! The LCD (Least Common Denominator) of '+b1+' and '+b2+' is '+L+'. Rewrite both fractions over '+L+' first.',
+  explain:F(a,b1)+' = '+F(A,L)+' and '+F(c,b2)+' = '+F(C,L)+'. So '+F(A,L)+' '+op+' '+F(C,L)+' = '+F(r,L)+(gcd(r,L)>1?' = <b>'+FS(r,L)+'</b>':' → <b>'+FS(r,L)+'</b>'),typedHint:'Type a fraction like 5/12'}},
+ratirr(typed){
+ const rat=[[F(1,2),'It is already a fraction of two integers.'],[F(-3,4),'It is a fraction of two integers.'],['0','0 = 0/1, a fraction of two integers.'],['5','5 = 5/1, a fraction of two integers.'],['0.25','0.25 = 1/4.'],[SQ(16),'√16 = 4 = 4/1. Simplify first!'],[SQ(9),'√9 = 3 = 3/1.'],['0.333… (repeating)','Repeating decimals are rational: 0.333… = 1/3.'],['−7','−7 = −7/1.'],['2.5','2.5 = 5/2.']];
+ const irr=[[SQ(2),'√2 = 1.41421356… never ends and never repeats.'],[SQ(3),'√3 = 1.7320508… never ends and never repeats.'],['π','π = 3.14159… never ends and never repeats.'],[SQ(5),'√5 is not a perfect square, so its decimal never ends or repeats.'],['0.101001000…','The pattern grows, so it never repeats. It cannot be a fraction.'],[SQ(7),'7 is not a perfect square, so √7 is irrational.'],[SQ(10),'10 is not a perfect square, so √10 is irrational.']];
+ const v=typed?0:R(0,2);
+ if(v===0){const isR=Math.random()<.5,it=pick(isR?rat:irr);
+  return{q:'Is <b>'+it[0]+'</b> rational or irrational?',text:[isR?'rational':'irrational',isR?'rational number':'irrational number'],ansHtml:isR?'Rational':'Irrational',fixed2:['Rational','Irrational'],fixedAns:isR?0:1,
+   clue:'Can you write it as a fraction of two integers (a/b, b ≠ 0)? Yes → rational. Never-ending, never-repeating decimal → irrational.',explain:'<b>'+(isR?'Rational':'Irrational')+'</b>. '+it[1],typedHint:'Type: rational or irrational'}}
+ const wantIrr=v===1,one=pick(wantIrr?irr:rat),others=shuffle(wantIrr?rat:irr).slice(0,3);
+ return{q:'Which of these is <b>'+(wantIrr?'IRRATIONAL':'RATIONAL')+'</b>?',fixed:[one[0]].concat(others.map(o=>o[0])),
+  clue:wantIrr?'Look for a square root of a NON-perfect square, π, or a decimal that never ends and never repeats.':'Look for a number you can write as a fraction. Careful: √ of a perfect square (like √9) is rational!',explain:'<b>'+one[0]+'</b>. '+one[1]}},
+decimal(typed){const v=R(0,2);
+ if(v===0){const t=pick([[1,2],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],[1,8],[3,8],[7,10],[9,10],[3,20],[1,20]]),d=t[0]/t[1];
+  return{q:'Write '+F(t[0],t[1])+' as a decimal.',num:d,ansHtml:fmt(d),dis:[+(t[0]+'.'+t[1]),d*10,d/10,+(t[1]+'.'+t[0])].map(fmt),
+   clue:'Divide the numerator by the denominator: '+t[0]+' ÷ '+t[1]+'.',explain:t[0]+' ÷ '+t[1]+' = <b>'+fmt(d)+'</b>'}}
+ if(v===1){const p=pick([5,8,12,25,40,50,75,60,35,150]),d=p/100;
+  return{q:'Write <b>'+p+'%</b> as a decimal.',num:d,ansHtml:fmt(d),dis:[p/10,p/1000,p,d*2].map(fmt),
+   clue:'Percent means "per hundred". Divide by 100 (move the decimal point 2 places to the LEFT).',explain:p+'% = '+p+' ÷ 100 = <b>'+fmt(d)+'</b>'}}
+ const d=pick([0.3,0.45,0.08,0.6,0.125,1.2,0.9,0.05,0.72]),p=Math.round(d*1000)/10;
+ return{q:'Write <b>'+fmt(d)+'</b> as a percent.',num:p,unit:'%',ansHtml:fmt(p)+'%',dis:[fmt(p/10)+'%',fmt(p*10)+'%',fmt(d)+'%',fmt(p+10)+'%'],
+  clue:'Multiply by 100 (move the decimal point 2 places to the RIGHT) and add the % sign.',explain:fmt(d)+' × 100 = <b>'+fmt(p)+'%</b>'}}
+};
+
+/* ---------- fixed banks ---------- */
+const MC_BANK=[
+ ['speed','What is the formula for speed?',['Distance ÷ Time','Time ÷ Distance','Distance × Time','Distance + Time'],'km/h is read "kilometers PER hour". "Per" means divide.','Speed = Distance ÷ Time'],
+ ['speed','Which of these is a unit of speed?',['km/h','km','hours','kg'],'It should have a distance AND a time in it.','km/h (kilometers per hour) combines distance and time.'],
+ ['speed','If you know speed and time, how do you find distance?',['Speed × Time','Speed ÷ Time','Time ÷ Speed','Speed − Time'],'Think: 60 km/h for 2 hours = 120 km.','Distance = Speed × Time'],
+ ['percent','"Percentage" means…',['per hundred (parts out of 100)','per thousand','per ten','a whole number'],'"Cent" means 100, like 100 centavos in ₱1.','Percent means per hundred.'],
+ ['percent','Which formula finds a percentage?',['Part ÷ Whole × 100%','Whole ÷ Part × 100%','Part × Whole','Part − Whole'],'Put the smaller piece on top.','Percentage = Part ÷ Whole × 100%'],
+ ['percent','50% of a number is the same as…',['half of it','double it','the whole number','one-tenth of it'],'50 out of 100 = ?','50% = 50/100 = 1/2, so it is half.'],
+ ['order','Arranging numbers from least to greatest is called…',['Increasing order','Decreasing order','Random order','Reverse order'],'The numbers go UP.','Least → greatest is increasing order.'],
+ ['order','Arranging numbers from greatest to least is called…',['Decreasing order','Increasing order','Equal order','Number order'],'The numbers go DOWN.','Greatest → least is decreasing order.'],
+ ['order','Any negative number is ___ than any positive number.',['less','greater','equal','sometimes greater'],'Negatives are on the LEFT side of 0.','All negatives are less than 0, and 0 is less than all positives.'],
+ ['order','Which can you use to compare rational numbers?',['Number line, common denominator, or decimal form','Only a calculator','Counting digits','Guessing'],'Your notes list three ways.','Use a number line, a common denominator, or change them to decimals.'],
+ ['numline','On a number line, moving to the RIGHT means…',['adding (+)','subtracting (−)','multiplying','dividing'],'Numbers get bigger as you go right.','Right = add. Left = subtract.'],
+ ['numline','Which number is farthest to the LEFT on a number line?',['−8','−2','0','3'],'The most negative number is on the far left.','−8 is the smallest, so it is farthest left.'],
+ ['cube','The cube root of a number, multiplied by itself ___ times, gives the number.',['three','two','four','one'],'The little 3 in ∛ is the clue!','Cube root → multiply 3 times.'],
+ ['cube','∛x = y means…',['y³ = x','y² = x','3y = x','x³ = y'],'Cube the answer to get back the number inside.','∛x = y means y³ = x.'],
+ ['cube','What is ∛(−8)?',['−2','2','−4','No answer'],'(−2) × (−2) × (−2) = ?','∛−8 = −2 because (−2)³ = −8.'],
+ ['square','√x = y means…',['y² = x','y³ = x','2y = x','x² = y'],'Square the answer to get back the number inside.','√x = y means y² = x.'],
+ ['square','Which number is a perfect square?',['49','50','27','18'],'Which one is a number times itself?','49 = 7 × 7.'],
+ ['square','What is √81?',['9','8','40.5','81'],'What times itself is 81?','√81 = 9 because 9² = 81.'],
+ ['fraction','When adding fractions with the SAME denominator, you…',['add the numerators and keep the denominator','add the numerators and the denominators','multiply everything','keep the numerators and add the denominators'],'3/8 + 2/8 = 5/8. What changed?','Add the numerators, keep the denominator.'],
+ ['fraction','What does LCD stand for?',['Least Common Denominator','Largest Common Digit','Lowest Counting Decimal','Long Common Division'],'It is about the bottom number of a fraction.','LCD = Least Common Denominator.'],
+ ['fraction','What is the LCD (Least Common Denominator) of 1/4 and 1/6?',['12','24','10','4'],'List multiples of 4 and 6. Which comes first in both?','Multiples of 4: 4, 8, 12… Multiples of 6: 6, 12… The LCD is 12.'],
+ ['ratirr','A rational number can be written as a/b where…',['a and b are integers and b ≠ 0','b = 0','a and b are decimals only','a is bigger than b'],'Remember "a fraction of two integers".','a and b are integers, and b cannot be 0.'],
+ ['ratirr','π (pi) is…',['irrational','rational','a whole number','a fraction of two integers'],'3.14159… never ends and never repeats.','π is irrational.'],
+ ['decimal','A decimal is a number written in base…',['10','2','100','5'],'Count your fingers!','Decimals use base 10.'],
+ ['decimal','In 3.1416, which digit is in the tenths place?',['1','3','4','6'],'Tenths is the FIRST digit after the decimal point.','3.1416 → the tenths digit is 1.'],
+ ['decimal','0.5 is the same as…',['1/2','1/5','5/1','1/50'],'5 tenths = 5/10. Simplify it.','0.5 = 5/10 = 1/2.']
+].map(([topic,q,ch,clue,explain])=>({topic,q,fixed:ch,clue,explain:'<b>'+ch[0]+'</b>. '+explain,bank:1}));
+
+const ID_BANK=[
+ ['speed','The distance traveled per unit of time.',['speed'],'A speedometer shows this! S _ _ _ _'],
+ ['speed','Speed = Distance ÷ _____',['time'],'Hours, minutes, seconds…'],
+ ['percent','A part out of 100, or "per hundred".',['percentage','percent'],'Its symbol is %'],
+ ['percent','Percentage = Part ÷ _____ × 100%',['whole'],'The opposite of "part".'],
+ ['order','Arranging numbers from least to greatest.',['increasing order','increasing','ascending order','ascending'],'The numbers go UP ↗'],
+ ['order','Arranging numbers from greatest to least.',['decreasing order','decreasing','descending order','descending'],'The numbers go DOWN ↘'],
+ ['numline','A line used to show the position of numbers and the direction of change (addition or subtraction).',['number line','numberline'],'N _ _ _ _ _   L _ _ _'],
+ ['numline','Moving to the RIGHT on a number line means this operation.',['addition','add','adding','plus'],'It uses the + sign.'],
+ ['numline','Moving to the LEFT on a number line means this operation.',['subtraction','subtract','subtracting','minus'],'It uses the − sign.'],
+ ['cube','The value that, when multiplied by itself THREE times, gives the original number.',['cube root'],'Think of a box (3D) + root'],
+ ['cube','The small "3" in ∛ tells you it is a _____ root.',['cube'],'A dice is shaped like this.'],
+ ['square','The value that, when multiplied by itself, gives the original number.',['square root'],'Its symbol is √'],
+ ['square','A number like 16, 25 or 81 that comes from a whole number times itself is a perfect _____.',['square'],'A shape with 4 equal sides.'],
+ ['square','The √ symbol is called the _____ sign.',['radical','square root'],'R _ _ _ _ _ _'],
+ ['fraction','LCD stands for this (3 words).',['least common denominator'],'L = Least, C = Common, D = ?'],
+ ['fraction','The BOTTOM number of a fraction.',['denominator'],'D for Down → D _ _ _ _ _ _ _ _ _ _'],
+ ['fraction','The TOP number of a fraction.',['numerator'],'N _ _ _ _ _ _ _ _'],
+ ['ratirr','A number that CAN be written as a fraction of two integers (b ≠ 0).',['rational number','rational'],'The word "ratio" is hiding inside it.'],
+ ['ratirr','A number that CANNOT be written as a fraction of two integers, like √2 and π.',['irrational number','irrational'],'Opposite of rational. Add "ir-".'],
+ ['ratirr','The never-ending number 3.14159… written with a Greek letter.',['pi'],'π is read as…'],
+ ['decimal','A number written in base 10, like 0.5 or 2.75.',['decimal','decimal number'],'It has a dot called the _____ point.'],
+ ['decimal','The first digit after the decimal point is in the _____ place.',['tenths','tenth'],'1 out of 10 is one-…']
+].map(([topic,q,acc,clue])=>({topic,q,text:acc,ansHtml:acc[0].replace(/\b\w/g,c=>c.toUpperCase()),clue,explain:'Answer: <b>'+acc[0].replace(/\b\w/g,c=>c.toUpperCase())+'</b>',bank:1}));
+
+/* ---------- checking ---------- */
+function parseNum(s){s=String(s).replace(/[−–—]/g,'-').replace(/,/g,'').replace(/-\s+/g,'-').trim();let m;
+ if((m=s.match(/(-?)(\d+)\s+(\d+)\s*\/\s*(\d+)/))){const v=+m[2]+(+m[3])/(+m[4]);return{v:m[1]?-v:v,dec:false}}
+ if((m=s.match(/(-?\d*\.?\d+)\s*\/\s*(-?\d*\.?\d+)/))){const d=+m[2];if(!d)return null;return{v:+m[1]/d,dec:false}}
+ if((m=s.match(/-?\d*\.?\d+/)))return{v:+m[0],dec:m[0].includes('.')};return null}
+function checkNum(inp,ans){const p=parseNum(inp);if(!p)return false;if(Math.abs(p.v-ans)<1e-9)return true;
+ const exact=Math.abs(ans*1000-Math.round(ans*1000))<1e-9;return p.dec&&!exact&&Math.abs(p.v-ans)<0.0051}
+const norm=s=>String(s).toLowerCase().replace(/[^a-z]/g,'');
+function lev(a,b){const d=Array.from({length:a.length+1},(_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;
+ for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]}
+function checkText(inp,acc){const u=norm(inp);if(!u)return false;return acc.some(a=>{const n=norm(a);return u===n||(n.length>=6&&lev(u,n)<=1)})}
+
+/* ---------- building quiz items ---------- */
+function uniq3(ans,cands){const seen=new Set([strip(ans)]),out=[];
+ for(const c of cands){if(c==null)continue;const h=typeof c==='number'?(isFinite(c)?fmt(c):null):c;if(h==null||/NaN|Infinity/.test(h))continue;const k=strip(h);if(!seen.has(k)){seen.add(k);out.push(h)}if(out.length===3)break}
+ let k=1;while(out.length<3&&k<40){const h=typeof ans==='string'&&/^-?[\d−.]+$/.test(strip(ans))?fmt(parseFloat(strip(ans).replace('−','-'))+(k%2?k:-k)):strip(ans)+' ('+k+')';const key=strip(h);if(!seen.has(key)){seen.add(key);out.push(h)}k++}
+ return out}
+function toMC(raw,topic){let choices,correct;
+ if(raw.fixed){correct=raw.fixed[0];const sn=new Set();choices=shuffle(raw.fixed.filter(c=>{const k=strip(c);if(sn.has(k))return false;sn.add(k);return true}))}
+ else if(raw.fixed2){correct=raw.fixed2[raw.fixedAns];choices=raw.fixed2.slice()}
+ else{correct=raw.ansHtml;choices=shuffle([raw.ansHtml].concat(uniq3(raw.ansHtml,raw.dis||[])))}
+ return Object.assign({},raw,{topic:raw.topic||topic,type:'mc',choices,correct})}
+function toTyped(raw,topic,type){if(raw.fixed&&!raw.text)return null;return Object.assign({},raw,{topic:raw.topic||topic,type})}
+
+function buildQuestions(mode,n,topics){
+ const T=TK.filter(t=>topics.has(t));let seq=[];
+ for(let i=0;i<n;i++){if(mode==='exam')seq.push(i<Math.round(n*.4)?'mc':i<Math.round(n*.7)?'id':'ps');
+  else if(mode==='mix')seq.push(pick(['mc','mc','id','ps','ps']));else seq.push(mode)}
+ let mcPool=[],idPool=[];const refill=(b)=>shuffle(b.filter(q=>topics.has(q.topic)));
+ const out=[],seen=new Set();
+ for(const type of seq){let q=null;
+  for(let tries=0;tries<60;tries++){const t=pick(T);let c=null;
+   if(type==='mc'){if(Math.random()<.4){if(!mcPool.length)mcPool=refill(MC_BANK);if(mcPool.length)c=toMC(mcPool.pop())}if(!c)c=toMC(G[t](false),t)}
+   else if(type==='id'){if(Math.random()<.75||!topics.has('ratirr')){if(!idPool.length)idPool=refill(ID_BANK);if(idPool.length)c=toTyped(idPool.pop(),null,'id')}else c=toTyped(G.ratirr(true),'ratirr','id')}
+   else{c=toTyped(G[t](true),t,'ps');if(!c)continue}
+   if(!c)continue;const key=strip(c.q);if(!seen.has(key)||tries>50){seen.add(key);q=c;break}}
+  if(q)out.push(q)}
+ return out}
+
+/* ---------- views ---------- */
+const VIEWS=['home','learn','setup','quiz','results','flash','match'];
+function show(v){VIEWS.forEach(x=>$('#v-'+x).hidden=x!==v);window.scrollTo({top:0});if(v==='home')renderHome()}
+document.addEventListener('click',e=>{if(e.target.closest('[data-home]')){sfx.tap();show('home')}});
+$('#goHome').onclick=()=>{sfx.tap();show('home')};
+
+/* ---------- header: xp/level, sound, theme ---------- */
+const LEVELS=['Number Newbie','Fraction Fighter','Decimal Detective','Root Ranger','Percent Pro','Speed Star','Math Ninja','Math 7 Master'];
+function renderXP(){const lv=Math.floor(S.xp/100);$('#lvlName').textContent='Lv '+(lv+1)+' · '+LEVELS[Math.min(lv,LEVELS.length-1)];$('#xpFill').style.width=(S.xp%100)+'%'}
+function renderSnd(){$('#sndBtn').textContent=S.sound?'🔊':'🔇'}
+$('#sndBtn').onclick=()=>{S.sound=!S.sound;save();renderSnd();sfx.tap()};
+function applyTheme(){if(S.theme)document.documentElement.setAttribute('data-theme',S.theme);else document.documentElement.removeAttribute('data-theme');
+ const dark=S.theme?S.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;$('#thmBtn').textContent=dark?'☀️':'🌙'}
+$('#thmBtn').onclick=()=>{const dark=S.theme?S.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;S.theme=dark?'light':'dark';save();applyTheme()};
+
+/* ---------- home ---------- */
+const MODES={
+ learn:{name:'Study Notes',icon:'📒',bg:'var(--order-bg)',desc:'All 9 lessons with examples and things to play with.'},
+ flash:{name:'Flashcards',icon:'🃏',bg:'var(--square-bg)',desc:'Flip cards to memorize formulas and definitions.'},
+ match:{name:'Match Game',icon:'🧩',bg:'var(--numline-bg)',desc:'Pair each term with its meaning, beat your time!'},
+ mc:{name:'Multiple Choice',icon:'🔤',bg:'var(--percent-bg)',desc:'Pick the right answer from A, B, C, D.'},
+ id:{name:'Identification',icon:'🔎',bg:'var(--cube-bg)',desc:'Read the meaning, type the term.'},
+ ps:{name:'Problem Solving',icon:'🧮',bg:'var(--fraction-bg)',desc:'Solve and type your answer. New numbers every time!'},
+ exam:{name:'Mock Exam',icon:'📝',bg:'var(--speed-bg)',desc:'Test I Multiple Choice, Test II Identification, Test III Problem Solving.'}
+};
+function modeBtn(k){const m=MODES[k],b=S.best[k];return '<button class="mode sticker" data-mode="'+k+'" style="--mbg:'+m.bg+'"><span class="ic">'+m.icon+'</span><h3>'+m.name+'</h3><p>'+m.desc+'</p>'+(b!=null?'<span class="best">Best: '+b+'%</span>':'')+'</button>'}
+function mastery(t){const m=S.mastery[t];if(!m||!m.a)return 0;return Math.round(m.c/m.a*Math.min(m.a,6)/6*100)}
+const BUBBLES=['Hi! I\'m Calci. Let\'s get you exam-ready!','Tip: use clues only when you\'re stuck. You get more points without them!','Small steps, big progress!','Did you know? √16 is rational, because it equals 4!','Never add the denominators! 1/4 + 1/6 is NOT 2/10.','Right on the number line = add. Left = subtract.','Practice your mistakes. That\'s how pros study!'];
+function renderHome(){
+ $('#studyModes').innerHTML=['learn','flash','match'].map(modeBtn).join('');
+ $('#quizModes').innerHTML=['mc','id','ps','exam'].map(modeBtn).join('');
+ const vals=TK.map(mastery),avg=Math.round(vals.reduce((a,b)=>a+b,0)/TK.length);
+ $('#readyRing').style.setProperty('--p',avg);$('#readyPct').textContent=avg+'%';
+ $('#mastery').innerHTML=TK.map((t,i)=>'<div class="mrow tp-'+t+'"><span>'+TOPICS[t].icon+' '+tname(t)+'</span><span class="tr"><i style="width:'+vals[i]+'%"></i></span><span>'+vals[i]+'%</span></div>').join('');
+ $('#homeBubble').textContent=pick(BUBBLES);renderXP()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b)return;sfx.tap();const k=b.dataset.mode;
+ if(k==='learn'){renderLearn();show('learn')}else if(k==='match'){openMatch()}else openSetup(k)});
+$('#weakBtn').onclick=()=>{sfx.tap();let w=TK[0],lo=1e9;TK.forEach(t=>{const v=mastery(t)+Math.random();if(v<lo){lo=v;w=t}});startQuiz('mix',8,new Set([w]),'Training: '+tname(w))};
+
+/* ---------- setup ---------- */
+let SET={mode:'mc',count:10,topics:new Set(TK)};
+function openSetup(mode){SET.mode=mode;$('#setupTitle').textContent=MODES[mode].icon+' '+MODES[mode].name;
+ $('#setupNote').innerHTML=mode==='flash'?'💡 Tap a card to flip it. Sort it into "I know it!" or "Still learning".':'💡 Every question has a clue. Using a clue gives you half points, so try first!';
+ $('#startBtn').textContent=mode==='flash'?'Start flipping! ▶':'Start! ▶';renderSetup();show('setup')}
+function renderSetup(){
+ $('#countPills').innerHTML=[5,10,15,20,30,50].map(n=>'<button class="pill" aria-pressed="'+(SET.count===n)+'" data-count="'+n+'">'+n+'</button>').join('');
+ $('#countIn').value=SET.count;const all=SET.topics.size===TK.length;
+ $('#topicPills').innerHTML='<button class="pill" aria-pressed="'+all+'" data-topic="all">⭐ All topics</button>'+TK.map(t=>'<button class="pill tp tp-'+t+'" aria-pressed="'+SET.topics.has(t)+'" data-topic="'+t+'">'+TOPICS[t].icon+' '+tname(t)+'</button>').join('');
+ $('#startBtn').disabled=!SET.topics.size}
+$('#countPills').onclick=e=>{const b=e.target.closest('[data-count]');if(!b)return;sfx.tap();SET.count=+b.dataset.count;renderSetup()};
+$('#countIn').oninput=e=>{let v=parseInt(e.target.value,10);if(v>0){SET.count=Math.min(100,v);document.querySelectorAll('#countPills .pill').forEach(p=>p.setAttribute('aria-pressed',+p.dataset.count===SET.count))}};
+$('#topicPills').onclick=e=>{const b=e.target.closest('[data-topic]');if(!b)return;sfx.tap();const t=b.dataset.topic;
+ if(t==='all'){SET.topics=SET.topics.size===TK.length?new Set():new Set(TK)}else{SET.topics.has(t)?SET.topics.delete(t):SET.topics.add(t)}renderSetup()};
+$('#startBtn').onclick=()=>{sfx.tap();const n=Math.max(1,Math.min(100,SET.count||10));if(SET.mode==='flash')startFlash(n,SET.topics);else startQuiz(SET.mode,n,new Set(SET.topics))};
+
+/* ---------- quiz engine ---------- */
+let Q=null;
+const TYPE_NAME={mc:'Multiple Choice',id:'Identification',ps:'Problem Solving'};
+const PRAISE=['Galing! 🎉','Correct! 🌟','You got it! 💪','Nailed it! ✨','Awesome! 🚀','Perfect! 🎯'];
+const OOPS=['Almost! Let\'s check it.','Not quite. You\'ll get the next one!','Oops! Learn this one:'];
+function startQuiz(mode,n,topics,label,list){
+ const qs=list||buildQuestions(mode,n,topics);
+ Q={mode,label,topics,n:qs.length,list:qs,i:0,score:0,streak:0,best:0,clues:0,correct:0,log:[],t0:Date.now()};
+ show('quiz');renderQ()}
+function renderQ(){const q=Q.list[Q.i];Q.clueUsed=false;Q.done=false;
+ const card=$('#qcard');card.className='qcard sticker tp-'+q.topic;
+ $('#progFill').style.width=(Q.i/Q.n*100)+'%';$('#qCount').textContent=(Q.i+1)+'/'+Q.n;
+ $('#sScore').textContent='⭐ '+Q.score+' pts';$('#sStreak').hidden=Q.streak<2;$('#sStreak').textContent='🔥 '+Q.streak+' in a row';
+ const sec=$('#sSection');if(Q.mode==='exam'){sec.hidden=false;sec.textContent={mc:'Test I',id:'Test II',ps:'Test III'}[q.type]+' · '+TYPE_NAME[q.type]}else sec.hidden=true;
+ $('#qmeta').innerHTML='<span class="chip">'+TOPICS[q.topic].icon+' '+tname(q.topic)+'</span><span class="chip" style="--tbg:var(--accent-soft);--tfg:var(--accent)">'+TYPE_NAME[q.type]+'</span>';
+ $('#qtext').innerHTML=q.type==='id'&&q.bank?'Identify: '+q.q:q.q;
+ $('#qvis').innerHTML=q.nl?nlSVG(q.nl.lo,q.nl.hi,[{v:q.nl.a,label:'start'}]):'';
+ $('#qclue').innerHTML='';$('#qfb').innerHTML='';
+ const A=$('#qans');
+ if(q.type==='mc'){A.innerHTML='<div class="choices">'+q.choices.map((c,i)=>'<button class="choice" data-i="'+i+'"><span class="k">'+'ABCD'[i]+'</span><span>'+c+'</span></button>').join('')+'</div>'+clueBtn();
+  A.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{if(Q.done)return;const c=q.choices[+b.dataset.i],ok=strip(c)===strip(q.correct);
+   A.querySelectorAll('.choice').forEach(x=>{x.disabled=true;if(strip(q.choices[+x.dataset.i])===strip(q.correct))x.classList.add('ok')});if(!ok)b.classList.add('no');answer(ok,c,b)})}
+ else{const isText=!!q.text;const hint=q.typedHint||(isText?'Type the word or term':'Type a number'+(q.unit?' (unit: '+q.unit+')':''));
+  A.innerHTML='<div class="typed"><div class="in"><input id="ansIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Your answer" aria-label="Your answer" '+(isText?'':'inputmode="text"')+'><button class="btn pri" id="chkBtn">Check</button></div>'+
+   (isText?'':'<div class="keys">'+['−','/','.'].map(k=>'<button data-k="'+k+'">'+k+'</button>').join('')+'</div>')+'<div class="hintline">'+hint+'</div></div>'+clueBtn();
+  const inp=$('#ansIn');setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(e){}},50);
+  A.querySelectorAll('[data-k]').forEach(k=>k.onclick=()=>{inp.value+=k.dataset.k==='−'?'-':k.dataset.k;inp.focus()});
+  const go=()=>{if(Q.done)return;const v=inp.value.trim();if(!v){inp.classList.add('shake');setTimeout(()=>inp.classList.remove('shake'),400);return}
+   const ok=isText?checkText(v,q.text):checkNum(v,q.num);inp.classList.add(ok?'ok':'no');inp.disabled=true;$('#chkBtn').disabled=true;answer(ok,v.replace(/</g,'&lt;'),inp)};
+  $('#chkBtn').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()}}
+ const cb=$('#clueBtn');if(cb)cb.onclick=()=>{if(Q.done||Q.clueUsed)return;Q.clueUsed=true;Q.clues++;sfx.clue();mood('think');cb.disabled=true;
+  $('#qclue').innerHTML='<div class="clue"><b>💡 Clue:</b> '+q.clue+'</div>'}}
+function clueBtn(){return '<div class="qacts"><button class="btn" id="clueBtn">💡 Show clue</button></div>'}
+function answer(ok,user,el){Q.done=true;const q=Q.list[Q.i];const cb=$('#clueBtn');if(cb)cb.disabled=true;
+ const pts=ok?(Q.clueUsed?5:10)+(Q.streak>=2?2:0):0;
+ if(ok){Q.correct++;Q.streak++;Q.best=Math.max(Q.best,Q.streak);Q.score+=pts;sfx.good();floatTxt('+'+pts,el)}else{Q.streak=0;sfx.bad();$('#qcard').classList.add('shake');setTimeout(()=>$('#qcard').classList.remove('shake'),400)}
+ S.xp+=ok?(Q.clueUsed?3:6):1;const m=S.mastery[q.topic]||(S.mastery[q.topic]={c:0,a:0});m.a++;if(ok)m.c+=Q.clueUsed?.5:1;save();renderXP();
+ Q.log.push({q,ok,user,clue:Q.clueUsed});
+ if(q.nl)$('#qvis').innerHTML=nlSVG(q.nl.lo,q.nl.hi,[{v:q.nl.a,label:'start'}],{a:q.nl.a,b:q.nl.b,lbl:q.nl.lbl});
+ $('#sScore').textContent='⭐ '+Q.score+' pts';$('#sStreak').hidden=Q.streak<2;$('#sStreak').textContent='🔥 '+Q.streak+' in a row';
+ const last=Q.i===Q.n-1;
+ $('#qfb').innerHTML='<div class="fb '+(ok?'ok':'no')+'"><h3>'+(ok?pick(PRAISE)+(Q.streak>=3?' 🔥 '+Q.streak+' streak!':''):pick(OOPS))+'</h3>'+
+  (ok?'':'<p>Correct answer: <b>'+(q.type==='mc'?q.correct:q.ansHtml)+'</b></p>')+'<p>'+q.explain+'</p>'+
+  '<div class="qacts"><button class="btn '+(ok?'good':'pri')+'" id="nextBtn">'+(last?'See my results 🏁':'Next ▶')+'</button></div></div>';
+ const nb=$('#nextBtn');nb.onclick=()=>{sfx.tap();if(last)results();else{Q.i++;renderQ();window.scrollTo({top:0,behavior:'smooth'})}};
+ setTimeout(()=>{try{nb.focus({preventScroll:true})}catch(e){};$('#qfb').scrollIntoView({behavior:'smooth',block:'nearest'})},80)}
+let armT=null;
+$('#quitBtn').onclick=e=>{const b=e.currentTarget;if(b.classList.contains('arm')){clearTimeout(armT);b.classList.remove('arm');b.textContent='✕';show('home')}
+ else{b.classList.add('arm');b.textContent='Quit?';b.style.width='auto';b.style.padding='0 10px';armT=setTimeout(()=>{b.classList.remove('arm');b.textContent='✕';b.style.width='';b.style.padding=''},2500)}};
+document.addEventListener('keydown',e=>{if($('#v-quiz').hidden||!Q)return;if(!Q.done&&Q.list[Q.i].type==='mc'){const i='abcd1234'.indexOf(e.key.toLowerCase())%4;if(i>=0&&'abcd1234'.includes(e.key.toLowerCase())){const b=document.querySelector('.choice[data-i="'+i+'"]');if(b)b.click()}}});
+
+function results(){const pct=Math.round(Q.correct/Q.n*100),secs=Math.round((Date.now()-Q.t0)/1000);
+ $('#progFill').style.width='100%';
+ if(Q.mode!=='mix'&&!Q.retry){S.best[Q.mode]=Math.max(S.best[Q.mode]||0,pct)}
+ const bonus=pct===100?20:pct>=75?10:0;S.xp+=bonus;save();renderXP();
+ const st=pct>=90?3:pct>=70?2:pct>=40?1:0;
+ $('#rStars').innerHTML=[0,1,2].map(i=>'<span class="'+(i<st?'':'off')+'">⭐</span>').join('');
+ $('#rPct').textContent=pct+'%';
+ $('#rMsg').textContent=pct===100?'PERFECT! You\'re exam-ready! 🏆':pct>=75?'Great job! Almost there! 🎉':pct>=50?'Good effort! Review the ones you missed. 💪':'Keep going! Study the notes, then try again. 📒';
+ $('#rStats').innerHTML='<span class="stat">✅ '+Q.correct+'/'+Q.n+' correct</span><span class="stat">⭐ '+Q.score+' pts</span><span class="stat">🔥 Best streak '+Q.best+'</span><span class="stat">💡 '+Q.clues+' clues</span><span class="stat">⏱ '+Math.floor(secs/60)+'m '+(secs%60)+'s</span>'+(bonus?'<span class="stat" style="color:var(--good)">+'+bonus+' bonus XP</span>':'');
+ const wrong=Q.log.filter(l=>!l.ok);$('#redoWrong').hidden=!wrong.length;
+ $('#revTtl').hidden=!wrong.length;
+ $('#review').innerHTML=wrong.map(l=>'<div class="rv sticker tp-'+l.q.topic+'"><span class="chip">'+tname(l.q.topic)+'</span><div class="q" style="margin-top:6px">'+l.q.q+'</div><div class="a"><span class="y">Your answer: '+l.user+'</span><span class="c">Correct: '+(l.q.type==='mc'?l.q.correct:l.q.ansHtml)+'</span><span>'+l.q.explain+'</span></div></div>').join('');
+ show('results');if(pct>=75){confetti();sfx.win()}}
+$('#againBtn').onclick=()=>{sfx.tap();startQuiz(Q.mode,Q.n,Q.topics,Q.label)};
+$('#redoWrong').onclick=()=>{sfx.tap();const list=Q.log.filter(l=>!l.ok).map(l=>l.q.type==='mc'?Object.assign({},l.q,{choices:shuffle(l.q.choices)}):l.q);const m=Q.mode;startQuiz(m,list.length,Q.topics,'Mistakes',shuffle(list));Q.retry=true};
+
+/* ---------- learn ---------- */
+const DST='<svg viewBox="0 0 200 150" width="170" style="display:block;margin:auto" aria-label="Distance Speed Time triangle"><path d="M100 8 L192 142 L8 142 Z" fill="var(--tbg)" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/><line x1="52" y1="80" x2="148" y2="80" stroke="var(--ink)" stroke-width="3"/><line x1="100" y1="80" x2="100" y2="142" stroke="var(--ink)" stroke-width="3"/><g font-family="Fredoka,system-ui,sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)"><text x="100" y="66">D</text><text x="72" y="124">S</text><text x="128" y="124">T</text></g><text x="100" y="114" text-anchor="middle" font-size="18" fill="var(--ink)">×</text></svg>';
+const LEARN={
+speed:()=>'<p class="idea">Speed is the distance traveled per unit of time.</p><div class="formula">Speed = '+F('Distance','Time')+'</div>'+
+ '<div class="ex"><h4>Example</h4>A car travels 120 km in 2 hours.<br>Speed = 120 ÷ 2 = <b>60 km/h</b></div>'+
+ '<div class="widget" style="grid-template-columns:1fr"><h4>Memory trick: the D-S-T triangle</h4>'+DST+'<p class="muted" style="text-align:center;font-weight:700">Cover what you want to find.<br>Speed = D ÷ T · Time = D ÷ S · Distance = S × T</p></div>'+
+ '<div class="widget"><h4>Try it: drive the car!</h4><label>Distance <input type="range" id="wD" min="10" max="300" step="10" value="120"><output id="wDo">120 km</output></label><label>Time <input type="range" id="wT" min="1" max="6" value="2"><output id="wTo">2 h</output></label><div class="out" id="wSo"></div><div class="track"><span class="car" id="wCar">🚗</span></div></div>',
+percent:()=>'<p class="idea">Percentage means "per hundred", or parts out of 100.</p><div class="formula">Percentage = '+F('Part','Whole')+' × 100%</div>'+
+ '<div class="ex"><h4>Example</h4>Find 25% of 80.<br>25% of 80 = '+F(25,100)+' × 80 = 0.25 × 80 = <b>20</b></div>'+
+ '<div class="widget"><h4>Try it: slice the pie</h4><label>Percent <input type="range" id="wP" min="0" max="100" step="5" value="25"><output id="wPo">25%</output></label><label>Of the number <input type="range" id="wW" min="20" max="400" step="20" value="80"><output id="wWo">80</output></label><div class="pie" id="wPie" style="--p:25"></div><div class="out" id="wPr"></div></div>'+
+ '<div class="tip">⚡ Quick tricks: 50% = half · 25% = one-fourth · 75% = three-fourths · 10% = move the decimal point 1 place left</div>',
+order:()=>'<p class="idea">Rational numbers can be written in order from least to greatest (increasing) or from greatest to least (decreasing).</p>'+
+ '<div class="ex"><h4>Increasing order (least → greatest)</h4>1. Compare the values (use the number line, a common denominator, or decimal form).<br>2. Arrange from the smallest to the largest.</div>'+
+ '<div class="ex"><h4>Decreasing order (greatest → least)</h4>1. Compare the values.<br>2. Arrange from the largest to the smallest.</div>'+
+ '<div class="ex"><h4>Example (increasing)</h4>−3, '+F(1,2)+', −1, 0, '+F(2,3)+' → <b>−3, −1, 0, '+F(1,2)+', '+F(2,3)+'</b></div>'+
+ '<div class="ex"><h4>Example (decreasing)</h4>'+F(2,3)+', −1, '+F(1,2)+', −3, 0 → <b>'+F(2,3)+', '+F(1,2)+', 0, −1, −3</b></div>'+
+ '<div class="widget" style="grid-template-columns:1fr"><h4>See them on the number line</h4><div class="qvis" style="margin:0">'+nlSVG(-4,1,[{v:-3,label:'−3'},{v:-1,label:'−1'},{v:0,label:'0',c:'var(--pop)'},{v:.5,label:'½',c:'var(--good)'},{v:2/3,label:'⅔',c:'var(--gold)'}])+'</div><p class="muted" style="margin:0;font-weight:700">Left = smaller. Right = bigger. ½ = 0.5 and ⅔ ≈ 0.67, so ½ comes before ⅔.</p></div>',
+numline:()=>'<p class="idea">A number line shows the position of numbers and the direction of change (addition or subtraction).</p>'+
+ '<div class="ex"><h4>Example</h4>Start at 0, move 4 units right. You will be at <b>4</b>.</div><div class="tip">➡️ Right = add (+) &nbsp; ⬅️ Left = subtract (−)</div>'+
+ '<div class="widget"><h4>Try it: help the frog hop!</h4><div class="qvis" id="frogLine" style="margin:0"></div><div class="row" style="justify-content:center"><button class="btn" id="fL">⬅️ −1</button><button class="btn" id="f0">Reset</button><button class="btn" id="fR">+1 ➡️</button></div><div class="out" id="frogOut"></div></div>',
+cube:()=>'<p class="idea">The cube root of a number is the value that, when multiplied by itself three times, gives the original number.</p><div class="formula">'+CB('x')+' = y &nbsp;means&nbsp; y³ = x</div>'+
+ '<div class="ex"><h4>Examples</h4>'+CB(27)+' = <b>3</b> &nbsp;(because 3³ = 27)<br>'+CB('−8')+' = <b>−2</b> &nbsp;(because (−2)³ = −8)</div>'+
+ '<div class="widget"><h4>Try it: build a cube</h4><label>Edge <input type="range" id="wC" min="1" max="10" value="3"><output id="wCo">3</output></label><div class="out" id="wCr"></div></div>'+
+ '<div class="ex"><h4>Perfect cubes to memorize</h4><div class="chips">'+[1,2,3,4,5,6,7,8,9,10].map(n=>'<span>'+n+'³ = '+n**3+'</span>').join('')+'</div></div><div class="tip">🧊 The cube root of a negative number is negative!</div>',
+square:()=>'<p class="idea">The square root of a number is the value that, when multiplied by itself, gives the original number.</p><div class="formula">'+SQ('x')+' = y &nbsp;means&nbsp; y² = x</div>'+
+ '<div class="ex"><h4>Examples</h4>'+SQ(16)+' = <b>4</b> &nbsp;(because 4² = 16)<br>'+SQ(81)+' = <b>9</b> &nbsp;(because 9² = 81)</div>'+
+ '<div class="widget"><h4>Try it: build a square</h4><label>Side <input type="range" id="wQ" min="1" max="12" value="4"><output id="wQo">4</output></label><div class="grid-sq" id="wGrid"></div><div class="out" id="wQr"></div></div>'+
+ '<div class="ex"><h4>Perfect squares to memorize</h4><div class="chips">'+[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(n=>'<span>'+n+'² = '+n*n+'</span>').join('')+'</div></div>',
+fraction:()=>'<div class="ex"><h4>Same denominator</h4>Add or subtract the numerators, keep the denominator.<div class="formula" style="margin-top:8px">'+F(3,8)+' + '+F(2,8)+' = '+F('3 + 2',8)+' = '+F(5,8)+'</div>'+
+ '<div class="bars" style="margin-top:10px" aria-label="3 eighths plus 2 eighths">'+Array.from({length:8},(_,i)=>'<i class="'+(i<3?'a':i<5?'b':'')+'"></i>').join('')+'</div></div>'+
+ '<div class="ex"><h4>Different denominator</h4>Find the LCD (Least Common Denominator), then add or subtract.<div class="formula" style="margin-top:8px">'+F(1,4)+' + '+F(1,6)+' = '+F(3,12)+' + '+F(2,12)+' = '+F(5,12)+'</div>'+
+ '<p style="margin-top:8px">Multiples of 4: 4, 8, <b>12</b>, 16… &nbsp;Multiples of 6: 6, <b>12</b>, 18… → LCD = 12</p></div>'+
+ '<div class="tip">🚫 Never add the denominators! '+F(1,4)+' + '+F(1,6)+' is NOT '+F(2,10)+'.</div>',
+ratirr:()=>'<div class="ex"><h4>Rational number</h4>Can be written as a fraction of two integers ('+F('a','b')+', b ≠ 0).<br>Examples: '+F(1,2)+', '+F(-3,4)+', 0, 5 (also 0.25 and 0.333… repeating)</div>'+
+ '<div class="ex"><h4>Irrational number</h4>Cannot be written as a fraction of two integers. Its decimal never ends and never repeats.<br>Examples: '+SQ(2)+', '+SQ(3)+', π, 0.101001000…</div>'+
+ '<div class="tip">🕵️ Sneaky one: '+SQ(16)+' = 4, so it is RATIONAL. Only square roots of non-perfect squares are irrational.</div>',
+decimal:()=>'<p class="idea">A decimal is a number written in base 10.</p><div class="ex"><h4>Examples</h4>0.5, 2.75, 3.1416</div>'+
+ '<div class="widget" style="grid-template-columns:1fr"><h4>Place value of 3.1416</h4><div class="pv"><div><b>3</b><small>ones</small></div><div class="dot"><b>.</b><small></small></div><div><b>1</b><small>tenths</small></div><div><b>4</b><small>hundredths</small></div><div><b>1</b><small>thousandths</small></div><div><b>6</b><small>ten-thousandths</small></div></div></div>'+
+ '<div style="overflow-x:auto"><table class="tbl"><tr><th>Fraction</th><th>Decimal</th><th>Percent</th></tr>'+[[1,2,'0.5','50%'],[1,4,'0.25','25%'],[3,4,'0.75','75%'],[1,5,'0.2','20%'],[1,10,'0.1','10%'],[1,8,'0.125','12.5%']].map(r=>'<tr><td>'+F(r[0],r[1])+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>').join('')+'</table></div>'+
+ '<div class="tip">➗ Fraction → decimal: divide top by bottom. &nbsp;Decimal → percent: × 100. &nbsp;Percent → decimal: ÷ 100.</div>'
+};
+let learnBuilt=false;
+function renderLearn(){if(learnBuilt)return;learnBuilt=true;
+ $('#tnav').innerHTML=TK.map(t=>'<button class="pill tp tp-'+t+'" aria-pressed="false" data-go="'+t+'">'+TOPICS[t].icon+' '+tname(t)+'</button>').join('');
+ $('#learnList').innerHTML=TK.map(t=>'<article class="lcard sticker tp-'+t+'" id="L-'+t+'"><div class="lhead"><span class="ic">'+TOPICS[t].icon+'</span><h2>'+TOPICS[t].name+'</h2></div><div class="lbody">'+LEARN[t]()+'<div class="row"><button class="btn pri" data-quick="'+t+'">Quick check: 5 questions ▶</button></div></div></article>').join('');
+ $('#tnav').onclick=e=>{const b=e.target.closest('[data-go]');if(b)$('#L-'+b.dataset.go).scrollIntoView({behavior:'smooth'})};
+ $('#learnList').addEventListener('click',e=>{const b=e.target.closest('[data-quick]');if(b){sfx.tap();startQuiz('mix',5,new Set([b.dataset.quick]),'Quick check')}});
+ // speed widget
+ const sp=()=>{const d=+$('#wD').value,t=+$('#wT').value,s=d/t;$('#wDo').textContent=d+' km';$('#wTo').textContent=t+' h';$('#wSo').innerHTML='Speed = '+d+' ÷ '+t+' = <b>'+fmt(+s.toFixed(2))+' km/h</b>';$('#wCar').style.animationDuration=Math.max(.6,12/Math.max(s,1)*4)+'s'};
+ $('#wD').oninput=sp;$('#wT').oninput=sp;sp();
+ const pc=()=>{const p=+$('#wP').value,w=+$('#wW').value;$('#wPo').textContent=p+'%';$('#wWo').textContent=w;$('#wPie').style.setProperty('--p',p);$('#wPr').innerHTML=p+'% of '+w+' = '+F(p,100)+' × '+w+' = <b>'+fmt(p*w/100)+'</b>'};
+ $('#wP').oninput=pc;$('#wW').oninput=pc;pc();
+ let fp=0;const fr=(lbl)=>{$('#frogLine').innerHTML=nlSVG(-6,6,[{v:fp,label:'🐸',c:'var(--good)'}]);$('#frogOut').innerHTML=lbl||'The frog is at <b>'+neg(fp)+'</b>'};
+ $('#fL').onclick=()=>{if(fp>-6){fp--;sfx.tap();fr('Moved left (subtract 1) → <b>'+neg(fp)+'</b>')}};$('#fR').onclick=()=>{if(fp<6){fp++;sfx.tap();fr('Moved right (add 1) → <b>'+neg(fp)+'</b>')}};$('#f0').onclick=()=>{fp=0;fr()};fr();
+ const cu=()=>{const n=+$('#wC').value;$('#wCo').textContent=n;$('#wCr').innerHTML=n+' × '+n+' × '+n+' = '+n**3+' → '+CB(n**3)+' = <b>'+n+'</b>'};$('#wC').oninput=cu;cu();
+ const sq=()=>{const n=+$('#wQ').value;$('#wQo').textContent=n;const g=$('#wGrid');g.style.gridTemplateColumns='repeat('+n+',1fr)';g.innerHTML='<i></i>'.repeat(n*n);$('#wQr').innerHTML=n+' × '+n+' = '+n*n+' → '+SQ(n*n)+' = <b>'+n+'</b>'};$('#wQ').oninput=sq;sq()}
+
+/* ---------- flashcards ---------- */
+const CARDS=[
+ ['speed','Speed','The distance traveled per unit of time.<span class="fm">Speed = Distance ÷ Time</span>120 km in 2 h → 60 km/h'],
+ ['speed','Distance formula','<span class="fm">Distance = Speed × Time</span>60 km/h for 3 h → 180 km'],
+ ['speed','Time formula','<span class="fm">Time = Distance ÷ Speed</span>150 km at 50 km/h → 3 h'],
+ ['percent','Percentage','"Per hundred", or parts out of 100.<span class="fm">Part ÷ Whole × 100%</span>25% of 80 = 0.25 × 80 = 20'],
+ ['percent','Common percents','50% = ½ · 25% = ¼ · 75% = ¾ · 10% = '+F(1,10)],
+ ['order','Increasing order','Arrange from <b>least to greatest</b>.<span class="fm">−3, −1, 0, ½, ⅔</span>'],
+ ['order','Decreasing order','Arrange from <b>greatest to least</b>.<span class="fm">⅔, ½, 0, −1, −3</span>'],
+ ['order','3 ways to compare rational numbers','1. Number line<br>2. Common denominator<br>3. Decimal form'],
+ ['numline','Number line','Shows the position of numbers and the direction of change.<span class="fm">Right = add · Left = subtract</span>Start at 0, move 4 right → 4'],
+ ['cube','Cube root','The value that, multiplied by itself <b>three</b> times, gives the number.<span class="fm">∛x = y means y³ = x</span>∛27 = 3 · ∛−8 = −2'],
+ ['cube','Perfect cubes','1, 8, 27, 64, 125, 216, 343, 512, 729, 1000'],
+ ['square','Square root','The value that, multiplied by itself, gives the number.<span class="fm">√x = y means y² = x</span>√16 = 4 · √81 = 9'],
+ ['square','Perfect squares','1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225'],
+ ['fraction','Adding fractions: same denominator','Add the numerators, keep the denominator.<span class="fm">3/8 + 2/8 = 5/8</span>'],
+ ['fraction','Adding fractions: different denominators','Find the LCD (Least Common Denominator) first.<span class="fm">1/4 + 1/6 = 3/12 + 2/12 = 5/12</span>'],
+ ['fraction','LCD','<b>Least Common Denominator</b>: the smallest number both denominators divide into.<span class="fm">LCD of 4 and 6 = 12</span>'],
+ ['ratirr','Rational number','Can be written as a fraction of two integers (a/b, b ≠ 0).<span class="fm">½, −¾, 0, 5, √9</span>'],
+ ['ratirr','Irrational number','Cannot be written as a fraction of two integers. Never ends, never repeats.<span class="fm">√2, √3, π, 0.101001000…</span>'],
+ ['decimal','Decimal','A number written in base 10.<span class="fm">0.5 · 2.75 · 3.1416</span>'],
+ ['decimal','Fraction ↔ Decimal ↔ Percent','½ = 0.5 = 50%<br>¼ = 0.25 = 25%<br>¾ = 0.75 = 75%<br>⅕ = 0.2 = 20%']
+].map(([topic,front,back])=>({topic,front,back}));
+let FL=null;
+function startFlash(n,topics){let deck=shuffle(CARDS.filter(c=>topics.has(c.topic)));while(deck.length<n&&deck.length)deck=deck.concat(shuffle(deck)).slice(0,n);deck=deck.slice(0,n);
+ FL={deck,i:0,known:0,learning:[],total:deck.length};show('flash');renderFlash()}
+function renderFlash(){const A=$('#fArea');
+ if(FL.i>=FL.deck.length){$('#fProg').style.width='100%';$('#fCount').textContent=FL.total+'/'+FL.total;
+  const l=FL.learning;A.innerHTML='<div class="res sticker" style="margin-top:16px"><div class="stars">🃏</div><h2>Deck done!</h2><p style="font-weight:700;margin:0">You knew <b>'+FL.known+'</b> card'+(FL.known===1?'':'s')+' on the first try.</p>'+
+   (l.length?'<p class="muted" style="margin:0;font-weight:700">Still learning: '+l.map(c=>c.front).join(', ')+'</p>':'')+
+   '<div class="row" style="justify-content:center">'+(l.length?'<button class="btn pop" id="fAgain">Review "still learning" cards</button>':'')+'<button class="btn pri" id="fNew">New deck</button><button class="btn" data-home>Home</button></div></div>';
+  if(l.length){$('#fAgain').onclick=()=>{sfx.tap();FL={deck:shuffle(l),i:0,known:0,learning:[],total:l.length};renderFlash()}}
+  $('#fNew').onclick=()=>{sfx.tap();openSetup('flash')};if(!l.length){confetti();sfx.win()}return}
+ const c=FL.deck[FL.i];$('#fProg').style.width=(FL.i/FL.deck.length*100)+'%';$('#fCount').textContent=(FL.i+1)+'/'+FL.deck.length;
+ A.innerHTML='<div class="flip tp-'+c.topic+'"><button class="fcard" id="fc" aria-label="Flip card"><div class="face f"><div><span class="chip">'+TOPICS[c.topic].icon+' '+tname(c.topic)+'</span><div class="big" style="margin-top:12px">'+c.front+'</div></div><span class="tapnote">Tap to flip 🔄</span></div><div class="face b"><div>'+c.back+'</div><span class="tapnote">Tap to flip back</span></div></button></div>'+
+  '<div class="row" style="justify-content:center;margin-top:18px"><button class="btn" id="fNo">😅 Still learning</button><button class="btn good" id="fYes">😎 I know it!</button></div>';
+ const fc=$('#fc');fc.onclick=()=>{fc.classList.toggle('on');sfx.flip()};
+ $('#fYes').onclick=()=>{sfx.good();FL.known++;S.xp+=1;save();renderXP();FL.i++;renderFlash()};
+ $('#fNo').onclick=()=>{sfx.tap();if(!FL.learning.includes(c))FL.learning.push(c);FL.i++;renderFlash()}}
+document.addEventListener('keydown',e=>{if($('#v-flash').hidden)return;if(e.key===' '&&$('#fc')){e.preventDefault();$('#fc').click()}});
+
+/* ---------- match game ---------- */
+const PAIRS=[['Speed','Distance ÷ Time'],['Percentage','Part ÷ Whole × 100%'],[SQ(81),'9'],[CB(27),'3'],[CB('−8'),'−2'],[SQ(16),'4'],['π','Irrational'],[F(-3,4),'Rational'],
+ ['Increasing order','Least → Greatest'],['Decreasing order','Greatest → Least'],['LCD','Least Common Denominator'],[F(1,4),'0.25'],[F(3,8)+' + '+F(2,8),F(5,8)],[F(1,4)+' + '+F(1,6),F(5,12)],
+ ['25% of 80','20'],['Move right on a number line','Add'],['Move left on a number line','Subtract'],['120 km in 2 hours','60 km/h'],['3.1416 → tenths digit','1'],['50%','Half']];
+let MG=null,mPairs=6;
+function openMatch(){$('#mgrid').innerHTML='';$('#mStats').innerHTML='';$('#mSetup').hidden=false;renderPairPills();show('match')}
+function renderPairPills(){$('#pairPills').innerHTML=[4,6,8,10].map(n=>'<button class="pill" aria-pressed="'+(mPairs===n)+'" data-pairs="'+n+'">'+n+'</button>').join('')}
+$('#pairPills').onclick=e=>{const b=e.target.closest('[data-pairs]');if(b){sfx.tap();mPairs=+b.dataset.pairs;renderPairPills()}};
+$('#mStart').onclick=()=>{sfx.tap();startMatch()};
+function startMatch(){let ps=[],usedR=new Set();for(const p of shuffle(PAIRS)){const k=strip(p[1]);if(usedR.has(k))continue;usedR.add(k);ps.push(p);if(ps.length===mPairs)break}
+ const tiles=shuffle(ps.flatMap((p,i)=>[{id:i,h:p[0],term:1},{id:i,h:p[1]}]));
+ MG={tiles,sel:null,moves:0,found:0,n:ps.length,t0:Date.now(),lock:false};
+ $('#mgrid').innerHTML=tiles.map((t,i)=>'<button class="tile'+(t.term?' term':'')+'" data-t="'+i+'">'+t.h+'</button>').join('');
+ clearInterval(MG.timer);MG.timer=setInterval(mStats,500);mStats()}
+function mStats(){if(!MG)return;const s=Math.round((Date.now()-MG.t0)/1000),b=S.matchBest[MG.n];$('#mStats').innerHTML='<span class="stat">✅ '+MG.found+'/'+MG.n+'</span><span class="stat">👆 '+MG.moves+' moves</span><span class="stat">⏱ '+s+'s</span>'+(b?'<span class="stat">🏆 Best '+b+'s</span>':'')}
+$('#mgrid').onclick=e=>{const b=e.target.closest('.tile');if(!b||!MG||MG.lock||b.classList.contains('done'))return;const t=MG.tiles[+b.dataset.t];
+ if(MG.sel===b){b.classList.remove('sel');MG.sel=null;return}
+ if(!MG.sel){MG.sel=b;b.classList.add('sel');sfx.tap();return}
+ const a=MG.sel,ta=MG.tiles[+a.dataset.t];MG.moves++;MG.sel=null;
+ if(ta.id===t.id&&a!==b){a.classList.remove('sel');a.classList.add('done');b.classList.add('done');MG.found++;sfx.good();S.xp+=1;save();renderXP();
+  if(MG.found===MG.n){clearInterval(MG.timer);const s=Math.round((Date.now()-MG.t0)/1000);const prev=S.matchBest[MG.n];if(!prev||s<prev)S.matchBest[MG.n]=s;S.xp+=5;save();mStats();
+   setTimeout(()=>{confetti();sfx.win();$('#mStats').insertAdjacentHTML('beforeend','<span class="stat" style="color:var(--good)">🎉 All matched in '+s+'s'+(!prev||s<prev?' · New best!':'')+'</span>')},250)}}
+ else{MG.lock=true;sfx.bad();a.classList.add('miss');b.classList.add('miss');setTimeout(()=>{a.classList.remove('miss','sel');b.classList.remove('miss');MG.lock=false},450)}
+ mStats()};
+
+/* ---------- boot ---------- */
+applyTheme();renderSnd();renderXP();renderHome();
+})();
+</script>
+
+</body>
+</html>

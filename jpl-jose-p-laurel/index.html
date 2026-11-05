@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>JPL Midterm Reviewer</title>
+<meta name="description" content="Midterm reviewer for Dr. Jose P. Laurel: “Buhay at Diwa ng Isang Makabayang Pilipino”. Notes, glossary, timeline, flashcards, active recall, drills and mock quizzes with clues. Works offline.">
+<meta name="theme-color" content="#E2EEDD">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="JPL Reviewer">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <button class="logo" id="goHome" aria-label="Go to home"><span class="m">JPL</span><span><b>JPL Midterm Reviewer</b><small>Buhay at Diwa ng Isang Makabayang Pilipino</small></span></button>
+  <span class="sp"></span>
+  <span class="off" id="offPill" hidden>✓ Offline ready</span>
+  <button class="ib" id="thmBtn" aria-label="Switch light or dark mode">🌙</button>
+</div></header>
+<noscript><p style="padding:16px">Please enable JavaScript to use the reviewer.</p></noscript>
+<main class="wrap">
+
+<section id="v-home">
+  <div class="hero card">
+    <svg class="lily" viewBox="0 0 120 120" aria-hidden="true"><g fill="#EFB9C6"><ellipse cx="60" cy="52" rx="12" ry="30"/><ellipse cx="60" cy="52" rx="12" ry="30" transform="rotate(50 60 75)"/><ellipse cx="60" cy="52" rx="12" ry="30" transform="rotate(-50 60 75)"/></g><ellipse cx="60" cy="92" rx="52" ry="14" fill="#7FA88A"/></svg>
+    <h1>Dr. Jose P. Laurel<br><em>Midterm Reviewer</em></h1>
+    <p>Lahat ng kailangan mo mula sa <b>Midterm Lessons JPL 2025</b> (94 slides), hinati sa <b>8 aralin</b>. Basahin, alalahanin, at subukan ang sarili.</p>
+    <div class="qs"><button class="btn pri" data-act="continue" id="contBtn">Start studying ▶</button><button class="btn" data-act="exam">📝 Full mock exam</button></div>
+  </div>
+
+  <div class="ttl"><h2>Your study path</h2><span>Go in order: read → recall → test</span></div>
+  <div class="path">
+    <div class="step card"><div class="step-h"><span class="step-n">1</span><div><h3>Read and understand</h3><span>Short notes with memory hooks</span></div></div>
+      <div class="tiles">
+        <button class="tile" data-act="notes"><span class="ic">📒</span><h4>Study notes</h4><p>All 8 lessons, short and clear, with slide numbers.</p></button>
+        <button class="tile" data-act="tline"><span class="ic">🗓️</span><h4>Timeline</h4><p>Every date in order, from 1906 to 1949.</p></button>
+        <button class="tile" data-act="gloss"><span class="ic">📚</span><h4>Glossary</h4><p>Search every name, term and place.</p></button>
+      </div></div>
+    <div class="step card"><div class="step-h"><span class="step-n">2</span><div><h3>Recall from memory</h3><span>Active recall: this is what makes it stick</span></div></div>
+      <div class="tiles">
+        <button class="tile" data-act="rcards"><span class="ic">🧠</span><h4>Recall cards</h4><p>Spaced repetition. Cards you miss come back sooner.</p><span class="badge" id="dueBadge" hidden></span></button>
+        <button class="tile" data-act="dump"><span class="ic">✍️</span><h4>Brain dump</h4><p>Write everything you remember, then check what you missed.</p></button>
+        <button class="tile" data-act="essay"><span class="ic">🗒️</span><h4>Essay practice</h4><p>“Sagutin” questions from the slides, with key points.</p></button>
+        <button class="tile" data-act="flash"><span class="ic">🃏</span><h4>Flashcards</h4><p>Quick flip cards for terms and names.</p></button>
+      </div></div>
+    <div class="step card"><div class="step-h"><span class="step-n">3</span><div><h3>Test yourself</h3><span>Every question has a clue</span></div></div>
+      <div class="tiles">
+        <button class="tile" data-act="drill"><span class="ic">🎯</span><h4>Drill</h4><p>Instant feedback after each answer.</p></button>
+        <button class="tile" data-act="quiz"><span class="ic">📝</span><h4>Mock quiz</h4><p>Answers shown at the end, like a real exam.</p></button>
+        <button class="tile" data-act="weak"><span class="ic">💪</span><h4>Weak spot</h4><p>Train the lesson you know least.</p></button>
+        <button class="tile" data-act="mistakes"><span class="ic">🔁</span><h4>My mistakes</h4><p>Redo questions you got wrong before.</p><span class="badge" id="missBadge" hidden></span></button>
+      </div></div>
+  </div>
+
+  <div class="ttl"><h2>Your progress</h2><span>Grows as you answer correctly</span></div>
+  <div class="prog-card card">
+    <div class="ring" id="ring" style="--p:0"><div><span><b id="ringPct">0%</b><br><small>READY</small></span></div></div>
+    <div id="mast"></div>
+  </div>
+  <div class="row" style="margin-top:10px;justify-content:flex-end"><button class="btn ghost" id="resetBtn" style="font-size:13px;padding:8px 12px">Reset progress</button></div>
+  <footer>No sign-up needed. Works online and offline. Progress is saved only on this device.<br>Based on “Midterm Lessons JPL 2025”. Also read the parts marked 📖 <b>Basahin sa Libro</b>.</footer>
+</section>
+
+<section id="v-notes" hidden>
+  <div class="ttl"><h2>📒 Study notes</h2><span>Pick a lesson, or read all lessons together</span></div>
+  <div class="tnav" id="tnav"></div>
+  <div class="coverbar"><button class="pill" id="coverBtn" aria-pressed="false">🙈 Cover mode (test yourself)</button></div>
+  <div id="notesList"></div>
+</section>
+
+<section id="v-tline" hidden>
+  <div class="ttl"><h2>🗓️ Timeline</h2><span id="tlCount"></span></div>
+  <div class="pills" id="tlTopics"></div>
+  <div class="tl" id="tlList"></div>
+  <div class="row" style="margin-top:14px"><button class="btn pri" id="tlDrill">Practice ordering events ▶</button></div>
+</section>
+
+<section id="v-gloss" hidden>
+  <div class="ttl"><h2>📚 Glossary</h2><span id="glCount"></span></div>
+  <input class="search" id="glSearch" type="search" placeholder="Search a name, term or meaning…" aria-label="Search the glossary" autocomplete="off">
+  <div class="pills" id="glTopics" style="margin-top:10px"></div>
+  <div class="gl" id="glList"></div>
+</section>
+
+<section id="v-setup" hidden>
+  <div class="ttl"><h2 id="setupTitle">Setup</h2><span id="setupSub"></span></div>
+  <div class="panel card">
+    <div id="fmtBox"><h3>1. Question type</h3><div class="fmts" id="fmts"></div></div>
+    <div><h3 id="topicH">2. Lessons</h3><div class="pills" id="topicPills"></div></div>
+    <div id="countBox"><h3 id="countH">3. How many items? <small id="availNote"></small></h3>
+      <div class="pills" id="countPills"></div>
+      <div class="row" style="margin-top:10px"><span class="muted">or type a number:</span><input id="countIn" class="num" type="number" min="1" value="10" inputmode="numeric" aria-label="Number of items"></div></div>
+    <div class="note" id="setupNote">💡 Every question has a <b>clue</b>. Using a clue gives half points, so try first!</div>
+    <div class="row"><button class="btn pri big" id="startBtn">Start ▶</button><button class="btn ghost" data-home>Back</button></div>
+  </div>
+</section>
+
+<section id="v-quiz" hidden>
+  <div class="qtop"><button class="ib" id="quitBtn" aria-label="Quit">✕</button><div class="prog"><i id="progFill"></i></div><b id="qCount" style="white-space:nowrap">1 / 10</b></div>
+  <div class="stats"><span class="stat" id="sMode"></span><span class="stat" id="sScore">⭐ 0 pts</span></div>
+  <div class="qcard card" id="qcard">
+    <div class="qmeta" id="qmeta"></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="qans"></div><div id="qclue"></div><div id="qfb"></div>
+  </div>
+</section>
+
+<section id="v-results" hidden>
+  <div class="res card">
+    <div class="bigscore" id="rPct">0%</div>
+    <h2 id="rMsg"></h2>
+    <div class="rstats" id="rStats"></div>
+    <div class="row" style="justify-content:center">
+      <button class="btn pri" id="againBtn">Try again</button>
+      <button class="btn" id="redoWrong">Practice my mistakes</button>
+      <button class="btn" data-home>Home</button>
+    </div>
+  </div>
+  <div class="ttl" id="revTtl"><h2>Review your mistakes</h2><span>Read these before your exam</span></div>
+  <div class="review" id="review"></div>
+</section>
+
+<section id="v-flash" hidden>
+  <div class="qtop"><button class="ib" data-home aria-label="Back home">✕</button><div class="prog"><i id="fProg"></i></div><b id="fCount" style="white-space:nowrap">1 / 10</b></div>
+  <div id="fArea"></div>
+</section>
+
+<section id="v-rcards" hidden>
+  <div class="qtop"><button class="ib" data-home aria-label="Back home">✕</button><div class="prog"><i id="rcProg"></i></div><b id="rcCount" style="white-space:nowrap"></b></div>
+  <div id="rcArea"></div>
+</section>
+
+<section id="v-dump" hidden>
+  <div class="ttl"><h2>✍️ Brain dump</h2><span>The strongest active recall method</span></div>
+  <div class="panel card" id="dumpArea"></div>
+</section>
+
+<section id="v-essay" hidden>
+  <div class="ttl"><h2>🗒️ Essay practice</h2><span>Questions from the “Sagutin” and “Pagpapalawak ng Kaalaman” slides</span></div>
+  <div id="essayArea"></div>
+</section>
+</main>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

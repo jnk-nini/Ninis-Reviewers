@@ -11,13 +11,17 @@ Folders are named `<course code>-<subject>`.
 | [`cscn07c-computer-architecture`](cscn07c-computer-architecture) | CSCN07C | Computer Architecture and Organization | `cscn07c-reviewer` |
 | [`cselc01c-cloud-databases`](cselc01c-cloud-databases) | CSELC01C | Cloud Databases and Data Services, Vol 1 & 2 | `cselc01c-clouddb-reviewer` |
 | [`rvan01g-rva`](rvan01g-rva) | RVAN01G | RVA (Midterms): Digital Arts and Technology, Reading Images | `rva-midterms-cs301-reviewer` |
+| [`math7-mathematics-q1`](math7-mathematics-q1) | Math 7 | Mathematics 7: percentages, rational numbers, fractions, decimals, roots | `math7-reviewer` |
 | [`math7-mathematics-q2`](math7-mathematics-q2) | Math 7 | Mathematics 7, Quarter 2 | `math7-q2-reviewer` |
+| [`jpl-jose-p-laurel`](jpl-jose-p-laurel) | JPL | Dr. Jose P. Laurel, Midterm | `jpl-midterm-reviewer` |
 
 ### Deployed but not in this repo yet
 
-These have live Vercel projects but their source still needs to be added here (then renamed to `<course code>-<subject>`):
+These have live Vercel projects but their source still needs to be added here (then named `<course code>-<subject>`):
 
-`math7-reviewer`, `eneman20-reviewer`, `cselc03c-reviewer`, `jpl-midterm-reviewer`, `rizal-ch5-reviewer`.
+`eneman20-reviewer`, `cselc03c-reviewer`, `rizal-ch5-reviewer`.
+
+Also, the live `cselc01c-clouddb-reviewer` is newer than the copy in `cselc01c-cloud-databases` (it has extra `data_sum.js` and `extra.css`).
 
 ## Adding a new reviewer
 
