@@ -2,6 +2,8 @@
 
 All my study reviewers live here, one folder per reviewer. Each one is a small static site (plain HTML/CSS/JS, no build step) that works offline and can be installed to the home screen.
 
+Open tasks are in [`TODO.md`](TODO.md). The standing instructions Claude follows when building or updating a reviewer are in [`CLAUDE.md`](CLAUDE.md).
+
 ## Reviewers
 
 Folders are named `<course code>-<subject>`.
