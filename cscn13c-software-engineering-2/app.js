@@ -320,7 +320,7 @@ function answer(ok,user){Q.done=true;const q=Q.list[Q.i];const cb=$("#clueBtn");
   mark(q.u,ok,Q.clueUsed);
   Q.log.push({q,ok,user,clue:Q.clueUsed});
   const last=Q.i===Q.n-1;
-  const btn="<div class='qacts'><button class='btn pri' id='nextBtn'>"+(last?"See my results 🏁":"Next ▶")+"</button></div>";
+  const btn="<div class='qacts qnext'><button class='btn pri' id='nextBtn'>"+(last?"See my results 🏁":"Next ▶")+"</button></div>";
   const right=q.type==="typed"?q.official:q.type==="ctr"?q.u.w:q.correct;
   if(Q.mode==="drill"){
     if(!ok){$("#qcard").classList.add("shake");setTimeout(()=>$("#qcard").classList.remove("shake"),400)}
