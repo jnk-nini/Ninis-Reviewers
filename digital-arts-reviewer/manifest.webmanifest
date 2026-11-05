@@ -1,0 +1,11 @@
+{
+  "name": "RVA Midterms CS301 Reviewer",
+  "short_name": "CS301 Reviewer",
+  "description": "Notes, read-aloud, flashcards, drills and mock exams for Digital Arts and Technology and Reading Images.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#081230",
+  "theme_color": "#0b1636",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
