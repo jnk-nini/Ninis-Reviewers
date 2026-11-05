@@ -16,6 +16,7 @@ Folders are named `<course code>-<subject>`.
 | [`math7-mathematics-q1`](math7-mathematics-q1) | Math 7 | Mathematics 7: percentages, rational numbers, fractions, decimals, roots | `math7-reviewer` |
 | [`math7-mathematics-q2`](math7-mathematics-q2) | Math 7 | Mathematics 7, Quarter 2 | `math7-q2-reviewer` |
 | [`jpln01g-jose-p-laurel`](jpln01g-jose-p-laurel) | JPLN01G | Dr. Jose P. Laurel, Midterm | `jpl-midterm-reviewer` |
+| [`cscn13c-software-engineering-2`](cscn13c-software-engineering-2) | CSCN13C | Software Engineering 2: documentation Ch 1–3, methodologies, use case and data flow diagrams | `cscn13c-se2-reviewer` |
 
 ### Deployed but not in this repo yet
 
