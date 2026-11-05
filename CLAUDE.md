@@ -8,6 +8,15 @@ This repo holds Nini's study reviewers, one folder per reviewer. Each is a small
 - Don't ask technical questions. Ask only what you can't work out: course code, subject name, which lessons or files.
 - Say what you changed outside the repo (Vercel, GitHub settings) and anything you could not do. Don't hide failures.
 
+## Must-have: every reviewer is PUBLIC (no login, no sign-up)
+
+Nini's classmates must be able to open every reviewer with just the link. This is the most important rule.
+
+- Vercel turns on **login protection** ("Vercel Authentication") by default on new projects, and it blocks anyone without a Vercel login. For every project, set `ssoProtection` to `null` with `update_project`, and make sure `passwordProtection` is off.
+- Check it with `get_project`: `ssoProtection.enabled` and `passwordProtection.enabled` must both be `false`. Do this after creating a project **and** whenever you touch its settings.
+- The reviewers themselves must never ask for a log in or sign up (progress is saved on the device, not in an account).
+- The Vercel fetch tools log in as Nini, so they can't prove a site is public. If you can't test from outside, say so and rely on the settings check.
+
 ## Building a new reviewer (the playbook)
 
 1. **Get the basics.** Course code (never guess it; ask), the subject, and the material (PDFs, slides, photos). Read the material fully before writing.
@@ -23,7 +32,7 @@ This repo holds Nini's study reviewers, one folder per reviewer. Each is a small
    - Phone-first layout
 6. **Test before saying it's done.** Chromium and Playwright are pre-installed. Open the page at phone width (about 390px wide), check for console errors, check that the service worker registers, and run one quiz from start to finish.
 7. **Commit the source to this repo.** The repo is the source of truth. Never leave the only copy of a reviewer on Vercel (that is how five reviewers got stranded).
-8. **Deploy.** Create a Vercel project for it. Use `create_git_project` with this repo, team `cdc-are`, the new folder as `rootDirectory`, and the folder name as the project name, so it redeploys automatically. Confirm the live page loads.
+8. **Deploy.** Create a Vercel project for it. Use `create_git_project` with this repo, team `cdc-are`, the new folder as `rootDirectory`, and the folder name as the project name, so it redeploys automatically. Then make it public (see the must-have rule above) and confirm the live page loads.
 9. **Update `README.md`** (add the row to the table) and `TODO.md` if anything is left open.
 10. **Report back** with the live link and a short plain summary.
 

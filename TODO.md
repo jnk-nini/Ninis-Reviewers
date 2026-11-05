@@ -25,7 +25,8 @@ Blocker: the session's shell cannot reach `vercel.app`. Either allow `vercel.app
 - [ ] After connecting, turn on "Skip deployments when there are no changes to the root directory" in each project.
 - [ ] In GitHub → Settings → Branches, confirm `main` is the default branch.
 - [ ] Once `main` is the default, delete the old `claude/...` branches.
-- [ ] Check that classmates can open the reviewer links **without a Vercel login**. The projects have Vercel's login protection switched on for `vercel.app` links. If it blocks them, turn it off in each project (Settings → Deployment Protection).
+- [x] Make all reviewers public (no Vercel login). Done 2026-11-05: login protection was on for `cscn07c`, `cselc01c`, `math7-reviewer` and `rizal-ch5`, and is now off for all nine projects.
+- [ ] Open one reviewer link in a private/incognito tab (or ask a classmate) to confirm it opens with no login.
 
 ## Small clean-ups
 
