@@ -1,0 +1,13 @@
+{
+  "name": "TODO Subject Reviewer",
+  "short_name": "TODO Short name",
+  "description": "TODO one-sentence description.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F2F8FE",
+  "theme_color": "#EAF4FD",
+  "icons": [
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ]
+}
