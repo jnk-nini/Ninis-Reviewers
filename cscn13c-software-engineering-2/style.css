@@ -222,7 +222,10 @@ section{animation:fade .25s ease}
 .flow .n small{color:var(--ink2);font-weight:500}
 .flow .n.loop{border-style:dashed;background:color-mix(in srgb,var(--tcol) 18%,transparent)}
 .flow .ar{color:var(--tcol);font:700 .85rem var(--mono);text-align:center}
-@media (max-width:640px){.flow{flex-direction:column;align-items:stretch}.flow .ar{transform:rotate(90deg);align-self:center;font-size:1rem}.flow .ar:not(:empty){white-space:nowrap}}
+.flow .ar.lbl{display:flex;align-items:center;gap:4px;white-space:nowrap}.flow .ar.lbl i,.flow .ar.lbl em{font-style:normal}
+.made{font:600 .72rem var(--mono);color:var(--warn,#f59e0b);text-align:center;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:640px){.flow{flex-direction:column;align-items:stretch}.flow .ar{transform:rotate(90deg);align-self:center;font-size:1rem}.flow .ar:not(:empty){white-space:nowrap}.flow .ar.lbl{transform:none;display:flex;flex-direction:column;align-items:center;gap:0;line-height:1.2;font-size:.8rem}.flow .ar.lbl i{font-style:normal;display:inline-block;transform:rotate(90deg)}.flow .ar.lbl em{font-style:normal}}
 
 /* kanban boards */
 .kb{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:8px 0 14px;padding:10px;border-radius:var(--r-sm);background:var(--card2);border:1px solid var(--line)}
