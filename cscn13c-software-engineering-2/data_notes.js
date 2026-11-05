@@ -461,7 +461,17 @@ e:[
 <tr><td>**Level 0 DFD (Context Diagram)**</td><td>Represents the **entire system as one single process**, showing its interaction with **external entities**. It highlights **major inputs and outputs** without internal details.</td></tr>
 <tr><td>**Level 1 DFD**</td><td>**Breaks the Level 0 process into major sub-processes.** Shows **internal data flows and data stores**.</td></tr>
 <tr><td>**Level 2 and Beyond**</td><td>**Further decomposes Level 1** sub-processes for a detailed view of specific functional areas. Useful for **large or complex systems** requiring deeper analysis.</td></tr></table>
-<div class="flow"><span class="n">Level 0<br><small>one process</small></span><span class="ar">→ more detail →</span><span class="n">Level 1<br><small>sub-processes</small></span><span class="ar">→ more detail →</span><span class="n">Level 2+<br><small>functional areas</small></span></div>`},
+<div class="flow"><span class="n">Level 0<br><small>one process</small></span><span class="ar lbl"><i>→</i><em>more detail</em></span><span class="n">Level 1<br><small>sub-processes</small></span><span class="ar lbl"><i>→</i><em>more detail</em></span><span class="n">Level 2+<br><small>functional areas</small></span></div>`},
+
+{h:"Example: Level 0 DFD (not from the slide)",sl:"uc·10",b:`
+<p class="note">⚠️ <b>Not from the slides.</b> The slides only show a Level 1 example, so this Level 0 (context diagram) was made up to match the same restaurant system. Use it to see the idea, not as slide content.</p>
+<p>The <b>whole system is one single process</b>. Only the <b>external entities</b> and the <b>major inputs and outputs</b> are shown. There are <b>no data stores</b> and <b>no internal details</b>.</p>
+<figure class="dia"><div class="made">Made-up example · not from the slide</div>{{svg:dfd0}}<figcaption>Level 0 DFD (context diagram), my own example</figcaption></figure>
+<table class="t"><tr><th>Part</th><th>In this example</th></tr>
+<tr><td>**External entities**</td><td>Customer · Kitchen · Restaurant manager</td></tr>
+<tr><td>**Single process**</td><td>0 Restaurant management system</td></tr>
+<tr><td>**Data stores**</td><td>**None** shown (they appear in Level 1)</td></tr>
+<tr><td>**Data flows**</td><td>Orders for food · Receipt · Food order · Management report</td></tr></table>`},
 
 {h:"Example: Level 1 DFD",sl:"uc·11",b:`
 <p>Slide 11 shows a <b>Level 1 DFD</b> for a restaurant.</p>
@@ -470,6 +480,16 @@ e:[
 <tr><td>**External entities**</td><td>Customer · Kitchen · Restaurant manager</td></tr>
 <tr><td>**Processes**</td><td>1.0 Processing of an order · 2.0 Update sold items file · 3.0 Update inventory file · 4.0 Generate management report</td></tr>
 <tr><td>**Data stores**</td><td>Database of sold items · Inventory database</td></tr>
-<tr><td>**Data flows**</td><td>Orders for food · Receipt · Food order · Sold items · Inventory data · Formatted sold item data · Formatted inventory data · Info. about daily sold items and amount · Info. about daily inventory depletion amount · Management report</td></tr></table>`}
+<tr><td>**Data flows**</td><td>Orders for food · Receipt · Food order · Sold items · Inventory data · Formatted sold item data · Formatted inventory data · Info. about daily sold items and amount · Info. about daily inventory depletion amount · Management report</td></tr></table>`},
+
+{h:"Example: Level 2 DFD (not from the slide)",sl:"uc·10",b:`
+<p class="note">⚠️ <b>Not from the slides.</b> The slides only describe Level 2 in words and never draw one. This example was made up by me: it breaks <b>process 1.0 Processing of an order</b> from the Level 1 example into smaller steps. The sub-process names (1.1 to 1.3) are my own, not the slide's.</p>
+<p><b>Level 2</b> takes <b>one Level 1 process</b> and decomposes it. Sub-processes are numbered under their parent: <b>1.0</b> becomes <b>1.1, 1.2, 1.3</b>.</p>
+<figure class="dia wide"><div class="made">Made-up example · not from the slide</div>{{svg:dfd2}}<figcaption>Level 2 DFD of process 1.0, my own example</figcaption></figure>
+<table class="t"><tr><th>Part</th><th>In this example</th></tr>
+<tr><td>**Parent process**</td><td>1.0 Processing of an order (from the Level 1 slide)</td></tr>
+<tr><td>**Sub-processes**</td><td>1.1 Record customer order · 1.2 Print receipt · 1.3 Send food order to kitchen</td></tr>
+<tr><td>**External entities**</td><td>Customer · Kitchen</td></tr>
+<tr><td>**Data flows**</td><td>Orders for food · Order details · Receipt · Food order</td></tr></table>`}
 ]
 };

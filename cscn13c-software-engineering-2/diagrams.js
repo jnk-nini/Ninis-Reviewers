@@ -70,5 +70,29 @@ dfd:`<svg viewBox="0 0 760 630" role="img" aria-labelledby="t-dfd"><title id="t-
 <text x="70" y="492">Info. about daily sold items</text><text x="70" y="507">and amount</text>
 <text x="690" y="492" text-anchor="end">Info. about daily inventory</text><text x="690" y="507" text-anchor="end">depletion amount</text>
 <text x="518" y="554" text-anchor="middle">Management report</text></g>
+</svg>`,
+
+/* MADE UP (not on the slides): Level 0 DFD / context diagram for the same restaurant */
+dfd0:`<svg viewBox="0 0 700 380" role="img" aria-labelledby="t-dfd0"><title id="t-dfd0">Made-up Level 0 data flow diagram, not from the slides. One process, Restaurant management system, with Customer, Kitchen and Restaurant manager. Customer sends Orders for food and receives a Receipt. Kitchen receives a Food order. Restaurant manager receives a Management report.</title>
+<defs><marker id="d0a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="currentColor" stroke-width="1.7"/></marker></defs>
+<g class="s-ent"><rect x="20" y="147" width="130" height="46" rx="3"/><rect x="550" y="62" width="120" height="46" rx="3"/><rect x="540" y="272" width="140" height="46" rx="3"/></g>
+<g class="s-t s-b" text-anchor="middle"><text x="85" y="175">Customer</text><text x="610" y="90">Kitchen</text><text x="610" y="290">Restaurant</text><text x="610" y="306">manager</text></g>
+<g class="s-proc"><circle cx="350" cy="190" r="84"/></g>
+<g class="s-t" text-anchor="middle"><text class="s-b" x="350" y="150">0</text><text x="350" y="186">Restaurant</text><text x="350" y="204">management</text><text x="350" y="222">system</text></g>
+<g class="s-flow" color="var(--ink)"><path d="M150 160L268 172" marker-end="url(#d0a)"/><path d="M270 212L150 182" marker-end="url(#d0a)"/><path d="M408 130L548 92" marker-end="url(#d0a)"/><path d="M406 250L538 294" marker-end="url(#d0a)"/></g>
+<g class="s-lbl" font-size="12.5"><text x="208" y="146" text-anchor="middle">Orders for food</text><text x="208" y="222" text-anchor="middle">Receipt</text><text x="468" y="96" text-anchor="middle">Food order</text><text x="440" y="304" text-anchor="middle">Management report</text></g>
+</svg>`,
+
+/* MADE UP (not on the slides): Level 2 DFD that decomposes process 1.0 of the Level 1 example */
+dfd2:`<svg viewBox="0 0 760 420" role="img" aria-labelledby="t-dfd2"><title id="t-dfd2">Made-up Level 2 data flow diagram, not from the slides. Process 1.0 Processing of an order is split into 1.1 Record customer order, 1.2 Print receipt and 1.3 Send food order to kitchen. Customer sends Orders for food to 1.1. 1.1 passes Order details to 1.2 and 1.3. 1.2 gives the Customer a Receipt. 1.3 sends a Food order to the Kitchen.</title>
+<defs><marker id="d2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="currentColor" stroke-width="1.7"/></marker></defs>
+<g class="s-ent"><rect x="20" y="147" width="130" height="46" rx="3"/><rect x="610" y="297" width="120" height="46" rx="3"/></g>
+<g class="s-t s-b" text-anchor="middle"><text x="85" y="175">Customer</text><text x="670" y="325">Kitchen</text></g>
+<g class="s-proc"><circle cx="330" cy="100" r="62"/><circle cx="330" cy="320" r="62"/><circle cx="570" cy="170" r="62"/></g>
+<g class="s-t" text-anchor="middle"><text class="s-b" x="330" y="60">1.1</text><text x="330" y="92">Record</text><text x="330" y="110">customer</text><text x="330" y="128">order</text>
+<text class="s-b" x="330" y="280">1.2</text><text x="330" y="312">Print</text><text x="330" y="330">receipt</text>
+<text class="s-b" x="570" y="130">1.3</text><text x="570" y="160">Send food order</text><text x="570" y="178">to kitchen</text></g>
+<g class="s-flow" color="var(--ink)"><path d="M120 147L272 112" marker-end="url(#d2a)"/><path d="M318 160Q316 220 318 258" marker-end="url(#d2a)"/><path d="M386 128L514 150" marker-end="url(#d2a)"/><path d="M270 330Q130 340 100 196" marker-end="url(#d2a)"/><path d="M590 232L640 295" marker-end="url(#d2a)"/></g>
+<g class="s-lbl" font-size="12.5"><text x="170" y="116" text-anchor="middle">Orders for food</text><text x="312" y="212" text-anchor="end">Order details</text><text x="450" y="124" text-anchor="middle">Order details</text><text x="150" y="350" text-anchor="middle">Receipt</text><text x="652" y="262">Food order</text></g>
 </svg>`
 };
