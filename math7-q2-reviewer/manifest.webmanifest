@@ -1,0 +1,13 @@
+{
+  "name": "Math 7 Quarter 2 Reviewer",
+  "short_name": "Math 7 Q2",
+  "description": "Roots, real numbers, unit conversion, volume of cylinders and pyramids, and sets: notes, listen mode, active recall, quizzes and drills with clues.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F6F3E8",
+  "theme_color": "#EAF1DE",
+  "icons": [
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ]
+}

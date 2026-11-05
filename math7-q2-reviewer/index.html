@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Math 7 Q2 Reviewer</title>
+<meta name="description" content="Mathematics 7 Quarter 2 reviewer: roots of perfect squares and cubes, real numbers, converting units, volume of cylinders and pyramids, and sets. Notes, listen mode, active recall, quizzes and drills with clues. Works offline.">
+<meta name="theme-color" content="#EEF3E2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121A14" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Math 7 Q2">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="bar-in">
+  <button class="logo" data-go="home" aria-label="Math 7 Q2 Reviewer, go to home">
+    <span class="m" aria-hidden="true"><svg viewBox="0 0 32 32" width="22" height="22"><path fill="currentColor" d="M6 26C6 13 15 6 27 5c-1 12-8 21-21 21z" opacity=".95"/><path d="M7 25L21 11" stroke="#2F6B45" stroke-width="2" stroke-linecap="round"/></svg></span>
+    <span class="lt"><b>Math 7 Reviewer</b><small>Quarter 2</small></span>
+  </button>
+  <nav class="topnav" aria-label="Main">
+    <button data-go="home">Home</button><button data-go="notes">Study notes</button><button data-go="practice">Practice</button><button data-go="sheet">Formulas</button>
+  </nav>
+  <span class="sp"></span>
+  <span class="pillnote warn" id="netPill" hidden>Offline</span>
+  <span class="pillnote ok" id="offPill" hidden title="All files are saved on this device">✓ Works offline</span>
+  <button class="ib" id="thmBtn" aria-label="Switch light or dark mode">🌙</button>
+</div></header>
+
+<noscript><p style="padding:16px">Please enable JavaScript to use the reviewer.</p></noscript>
+
+<main class="wrap" id="main">
+
+<!-- HOME -->
+<section id="v-home">
+  <div class="hero">
+    <span class="leaf l1" aria-hidden="true"></span><span class="leaf l2" aria-hidden="true"></span><span class="leaf l3" aria-hidden="true"></span>
+    <p class="eyebrow">Mathematics 7 · Quarter 2</p>
+    <h1>Review, recall, <span class="hl">ace it.</span></h1>
+    <p class="lead">All six lessons from the Quarter 2 review sheet, explained simply, with clues for every question and practice that adapts to what you miss.</p>
+    <div class="row"><button class="btn pri big" data-go="notes">📘 Start studying</button><button class="btn big" data-act="exam">📝 Mock exam</button></div>
+    <div class="lchips" aria-label="Lessons covered">
+      <button class="lchip t-r" data-act="review" data-t="r">🟩 Squares &amp; Cubes</button><button class="lchip t-n" data-act="review" data-t="n">🔢 Real Numbers</button><button class="lchip t-u" data-act="review" data-t="u">📏 Units</button><button class="lchip t-c" data-act="review" data-t="c">🥫 Cylinder</button><button class="lchip t-p" data-act="review" data-t="p">🔺 Pyramid</button><button class="lchip t-s" data-act="review" data-t="s">⭕ Sets</button>
+    </div>
+  </div>
+
+  <div class="ttl"><h2>Your study path</h2><span>One step at a time, no cramming</span></div>
+  <ol class="plan">
+    <li><span class="pn">1</span><b>Learn</b><span>Read one lesson. Start with the <em>Must-know</em> list. Tap 🎧 to listen while you do chores.</span></li>
+    <li><span class="pn">2</span><b>Recall</b><span>Turn on <em>Recall mode</em>, then do a Blurt test and flashcards. Pulling facts from memory makes them stick.</span></li>
+    <li><span class="pn">3</span><b>Practice</b><span>Quizzes and drills with a clue for every item. Each wrong answer shows the full solution.</span></li>
+    <li><span class="pn">4</span><b>Master</b><span>Clear <em>Fix my mistakes</em>, then take the mock exam. Aim for 85%+ in every lesson.</span></li>
+  </ol>
+
+  <div class="ttl"><h2>Study tools</h2></div>
+  <div class="tiles" id="tiles"></div>
+
+  <div class="ttl"><h2>Exam readiness</h2><span>Grows as you read, master items, and score in drills</span></div>
+  <div class="prog card">
+    <div class="ringwrap"><div class="ring" id="ring" style="--p:0"><div><b id="ringPct">0%</b><small id="ringLbl">Not started</small></div></div>
+      <div class="row center" id="fixRow" hidden><button class="btn sm warnb" data-act="fix">🔁 Fix <span id="fixN">0</span> mistakes</button></div></div>
+    <div class="mast" id="mast"></div>
+  </div>
+  <div class="row center" style="margin-top:12px"><button class="btn ghost sm" id="resetBtn">Reset my progress</button></div>
+  <footer class="foot">No sign-up needed. Works online and offline: add it to your home screen. Your progress is saved on this device only.</footer>
+</section>
+
+<!-- NOTES -->
+<section id="v-notes" hidden>
+  <div class="ttl"><h2>📘 Study notes</h2><span id="notesSub"></span></div>
+  <div class="filters card">
+    <div class="pills scroll" id="nFilter" role="group" aria-label="Choose a lesson"></div>
+    <div class="row tools">
+      <button class="tog" id="recallTog" aria-pressed="false"><span class="sw" aria-hidden="true"></span>🙈 Recall mode</button>
+      <button class="btn sm" id="expandTog" aria-pressed="false">⊕ Expand all</button>
+      <button class="btn sm pri" id="listenAll">🎧 Listen to all</button>
+    </div>
+    <p class="muted small hintline">Recall mode hides the key words. Say each one first, then tap to check. Listen mode reads every section aloud, so you can study while doing something else.</p>
+  </div>
+  <div id="notesList"></div>
+</section>
+
+<!-- PRACTICE -->
+<section id="v-practice" hidden>
+  <div class="ttl"><h2>🎯 Practice</h2><span>Every question has a clue. Using it gives ½ point.</span></div>
+  <div class="tiles" id="pTiles"></div>
+</section>
+
+<!-- SETUP -->
+<section id="v-setup" hidden>
+  <div class="ttl"><h2 id="setupTitle">Setup</h2><span id="setupSub"></span></div>
+  <div class="panel card">
+    <div id="fmtBox"><h3>1 · Question types <small class="muted">(pick one or more)</small></h3><div class="pills" id="fmts"></div></div>
+    <div><h3><span id="lblTopics">2</span> · Lessons</h3><div class="pills" id="topicPills"></div></div>
+    <p class="muted small" id="blurtTip" hidden>You'll write everything you remember about the lesson, then compare it with the must-know list.</p>
+    <div id="countBox"><h3><span id="lblCount">3</span> · How many items? <small class="muted" id="availNote"></small></h3>
+      <div class="pills" id="countPills"></div>
+      <div class="row" style="margin-top:10px"><label class="muted small" for="countIn">or type a number:</label><input id="countIn" class="num" type="number" min="1" value="10" inputmode="numeric"></div></div>
+    <div id="lvlBox"><h3>Difficulty of computations</h3><div class="pills" id="lvlPills"></div></div>
+    <div id="dirBox" hidden><h3>Card direction</h3><div class="pills" id="dirPills"></div></div>
+    <div id="optBox"><h3>Options</h3>
+      <label class="chk"><input type="checkbox" id="optInstant" checked> Show the answer and solution after each item</label>
+      <label class="chk"><input type="checkbox" id="optTimer"> Timer (1 minute per item)</label></div>
+    <div class="row"><button class="btn pri big" id="startBtn">Start ▶</button><button class="btn ghost" data-go="practice">Back</button></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="v-quiz" hidden>
+  <div class="qtop"><button class="ib" id="quitBtn" aria-label="Quit">✕</button><div class="prog-l" role="progressbar" aria-label="Progress"><i id="progFill"></i></div><b id="qCount" class="nowrap">1 / 10</b></div>
+  <div class="stats"><span class="stat" id="sMode"></span><span class="stat" id="sScore">⭐ 0 pts</span><span class="stat" id="sTimer" hidden>⏱ 0:00</span></div>
+  <div class="qcard card" id="qcard">
+    <div class="qmeta" id="qmeta"></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="qans"></div><div id="qclue"></div><div id="qfb" aria-live="polite"></div>
+  </div>
+  <p class="kbd muted small">Keyboard: A–D or 1–4 to choose · T / F · H for clue · Enter for next</p>
+</section>
+
+<!-- RESULTS -->
+<section id="v-results" hidden>
+  <div class="res card">
+    <div class="bigscore" id="rPct">0%</div>
+    <h2 id="rMsg"></h2>
+    <div class="rstats" id="rStats"></div>
+    <div class="row center">
+      <button class="btn pri" id="redoWrong">Practice my mistakes</button>
+      <button class="btn" id="againBtn">New set</button>
+      <button class="btn ghost" data-go="practice">Back to practice</button>
+    </div>
+  </div>
+  <div class="ttl" id="revTtl"><h2>Review these</h2><span>Read each solution once more</span></div>
+  <div class="review" id="review"></div>
+</section>
+
+<!-- FLASHCARDS -->
+<section id="v-flash" hidden>
+  <div class="qtop"><button class="ib" data-go="practice" aria-label="Back">✕</button><div class="prog-l"><i id="fProg"></i></div><b id="fCount" class="nowrap">1 / 10</b></div>
+  <div id="fArea"></div>
+</section>
+
+<!-- LIST RECALL -->
+<section id="v-list" hidden>
+  <div class="qtop"><button class="ib" data-go="practice" aria-label="Back">✕</button><div class="prog-l"><i id="lProg"></i></div><b id="lCount" class="nowrap">1 / 5</b></div>
+  <div id="lArea"></div>
+</section>
+
+<!-- BLURT -->
+<section id="v-blurt" hidden>
+  <div class="ttl"><h2>🧾 Blurt test</h2><span>The strongest memory exercise: no peeking!</span></div>
+  <div id="bArea"></div>
+</section>
+
+<!-- FORMULAS / SHEET -->
+<section id="v-sheet" hidden>
+  <div class="ttl"><h2>📐 Formulas &amp; key terms</h2><span>Your one-page summary</span></div>
+  <div class="pills" id="sheetTabs" role="tablist"><button class="pill" data-st="f">📐 Formula sheet</button><button class="pill" data-st="g">📚 Key terms</button><button class="pill" data-st="t">🎯 Exam tips</button></div>
+  <input class="search" id="glSearch" type="search" placeholder="Search a term or meaning…" aria-label="Search key terms" autocomplete="off" hidden>
+  <div id="sheetBody"></div>
+</section>
+</main>
+
+<!-- Listen-mode player -->
+<div class="tts" id="tts" hidden role="region" aria-label="Listen mode player">
+  <div class="tts-in">
+    <div class="tts-t"><small>🎧 Now reading</small><b id="ttsTitle"></b></div>
+    <div class="tts-c">
+      <button class="ib" id="ttsPrev" aria-label="Previous section">⏮</button>
+      <button class="ib big" id="ttsPlay" aria-label="Pause">⏸</button>
+      <button class="ib" id="ttsNext" aria-label="Next section">⏭</button>
+      <button class="ib" id="ttsStop" aria-label="Stop">⏹</button>
+      <select id="ttsRate" aria-label="Reading speed"><option value="0.8">0.8×</option><option value="1">1×</option><option value="1.2">1.2×</option><option value="1.4">1.4×</option></select>
+      <select id="ttsVoice" aria-label="Voice"></select>
+    </div>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="Main">
+  <button data-go="home"><span>🏠</span>Home</button>
+  <button data-go="notes"><span>📘</span>Notes</button>
+  <button data-go="practice"><span>🎯</span>Practice</button>
+  <button data-go="sheet"><span>📐</span>Formulas</button>
+</nav>
+
+<script src="data_notes.js"></script>
+<script src="data_bank.js"></script>
+<script src="gen.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
