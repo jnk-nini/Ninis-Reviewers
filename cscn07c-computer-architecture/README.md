@@ -24,4 +24,4 @@ Static site, no build step. Works offline through a service worker (`sw.js`) and
 
 ## Deploying
 
-Deployed to Vercel project `cscn07c-reviewer` with the files at the site root (flat, no `src/` prefix).
+Deployed to Vercel project `cscn07c-reviewer` with Root Directory set to `cscn07c-computer-architecture` (files are flat in the folder, no `src/` prefix).

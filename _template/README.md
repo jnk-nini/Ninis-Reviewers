@@ -9,4 +9,4 @@ Static site, no build step. Works offline through a service worker (`sw.js`).
 - `style.css`: styles
 - `sw.js`: offline cache (bump `CACHE` and list new files whenever you change anything)
 
-Deployed to Vercel project `TODO-vercel-project-name` with Root Directory set to this folder.
+Deployed to Vercel project `TODO-vercel-project-name` with Root Directory set to this folder (`TODO-course-code-subject`).
