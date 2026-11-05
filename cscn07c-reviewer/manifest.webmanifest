@@ -1,0 +1,13 @@
+{
+  "name": "CSCN07C Reviewer – Logic Gates, Arduino & ALU",
+  "short_name": "CSCN07C",
+  "description": "Notes, labs, flashcards, drills and mock quizzes for logic gates, resistors, Arduino architecture, the ALU and Cirkit Designer.",
+  "start_url": "./#/home",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eef4fb",
+  "theme_color": "#5a8ad6",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
