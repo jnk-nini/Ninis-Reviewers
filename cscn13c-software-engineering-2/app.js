@@ -278,7 +278,8 @@ function startQuiz(mode,n,topics,label,list,smart){
   SET.strict=S.prefs.strict;
   const qs=list||select([...SET.fmts],topics,n,!!smart).map(p=>build(p[0],p[1]));
   if(!qs.length)return;
-  Q={mode,topics,label,n:qs.length,list:qs,i:0,score:0,clues:0,correct:0,log:[],t0:Date.now(),fmts:new Set(SET.fmts),smart:!!smart};
+  const base=(list&&Q&&Q.base)?Q.base:{mode,n,topics,label,smart:!!smart,fmts:new Set(SET.fmts)};
+  Q={mode,topics,label,n:qs.length,list:qs,i:0,score:0,clues:0,correct:0,log:[],t0:Date.now(),fmts:new Set(SET.fmts),smart:!!smart,base};
   show("quiz");
   if(timerI){clearInterval(timerI);timerI=null}
   const useT=mode==="exam"&&S.prefs.timer;$("#sTimer").hidden=!useT;
@@ -351,7 +352,7 @@ function results(){if(timerI){clearInterval(timerI);timerI=null}
     const qtxt=q.type==="ctr"?esc(q.u.s):q.q;
     return"<div class='rv card tp-"+q.topic+"'><span class='chip'>"+T[q.topic].short+"</span> <span class='chip sl'>"+TYPE_NAME[q.fmt]+"</span> <span class='chip sl'>📄 "+slideTxt(q.sl)+"</span><div class='q'>"+qtxt+"</div><div class='a'><span class='y'>Your answer: "+esc(l.user)+"</span><span class='c'>Correct: "+esc(right)+"</span><span>"+q.explain+"</span></div></div>"}).join("");
   show("results")}
-$("#againBtn").onclick=()=>{const m=Q;SET.fmts=m.fmts;startQuiz(m.mode,m.n,m.topics,m.label,null,m.smart)};
+$("#againBtn").onclick=()=>{const b=Q.base;SET.fmts=b.fmts;startQuiz(b.mode,b.n,b.topics,b.label,null,b.smart)};
 $("#redoWrong").onclick=()=>{const list=Q.log.filter(l=>!l.ok).map(l=>build(l.q.u,l.q.fmt));const m=Q;startQuiz("drill",list.length,m.topics,"Practice my mistakes",shuffle(list))};
 
 /* ---------- flashcards ---------- */

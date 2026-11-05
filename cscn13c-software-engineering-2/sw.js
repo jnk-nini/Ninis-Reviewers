@@ -1,5 +1,5 @@
 /* Offline support: app files are cached on first visit; fonts are cached when first fetched. Bump CACHE when files change. */
-const CACHE="cscn13c-se2-reviewer-v5";
+const CACHE="cscn13c-se2-reviewer-v6";
 const FILES=["./","index.html","style.css","app.js","diagrams.js","data_notes.js","data_facts.js","data_cloze.js","data_tf.js","data_more.js","manifest.webmanifest","icon.svg"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
