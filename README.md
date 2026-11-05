@@ -13,7 +13,7 @@ Folders are named `<course code>-<subject>`.
 | [`rvan01g-rva`](rvan01g-rva) | RVAN01G | RVA (Midterms): Digital Arts and Technology, Reading Images | `rva-midterms-cs301-reviewer` |
 | [`math7-mathematics-q1`](math7-mathematics-q1) | Math 7 | Mathematics 7: percentages, rational numbers, fractions, decimals, roots | `math7-reviewer` |
 | [`math7-mathematics-q2`](math7-mathematics-q2) | Math 7 | Mathematics 7, Quarter 2 | `math7-q2-reviewer` |
-| [`jpl-jose-p-laurel`](jpl-jose-p-laurel) | JPL | Dr. Jose P. Laurel, Midterm | `jpl-midterm-reviewer` |
+| [`jpln01g-jose-p-laurel`](jpln01g-jose-p-laurel) | JPLN01G | Dr. Jose P. Laurel, Midterm | `jpl-midterm-reviewer` |
 
 ### Deployed but not in this repo yet
 
