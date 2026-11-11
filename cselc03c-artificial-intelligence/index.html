@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CSELC03C Prelim Reviewer</title>
+<meta name="description" content="CS Elective 3 (Artificial Intelligence) Prelims reviewer: notes, glossary, flashcards, drills and mock quizzes with clues. Works offline.">
+<meta name="theme-color" content="#FFF1F5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <button class="logo" id="goHome" aria-label="Go to home"><span class="m">AI</span><span><b>CSELC03C Reviewer</b><small>Prelims · Artificial Intelligence</small></span></button>
+  <span class="sp"></span>
+  <span class="off" id="offPill" hidden>✓ Offline ready</span>
+  <button class="ib" id="thmBtn" aria-label="Switch light or dark mode">🌙</button>
+</div></header>
+<noscript><p style="padding:16px">Please enable JavaScript to use the reviewer.</p></noscript>
+<main class="wrap">
+<section id="v-home">
+  <div class="hero card">
+    <h1>CS Elective 3<br><em>Prelims Reviewer</em></h1>
+    <p>Based only on <b>Lecture 1: Prelims</b> (Ms. Colocado): Course Orientation, Introduction to AI, Research Areas for AI, and Search Algorithms.</p>
+  </div>
+  <div class="ttl"><h2>Start here</h2><span>Study first, then test yourself. Every question has a clue.</span></div>
+  <div class="tiles" id="tiles"></div>
+  <div class="ttl"><h2>Your progress</h2><span>Fills up as you answer correctly</span></div>
+  <div class="prog-card card">
+    <div class="ring" id="ring" style="--p:0"><div><span><b id="ringPct">0%</b><br><small>READY</small></span></div></div>
+    <div id="mast"></div>
+  </div>
+  <footer>No sign-up needed. Works online and offline. Progress is saved only on this device.</footer>
+</section>
+
+<section id="v-notes" hidden>
+  <div class="ttl"><h2>📒 Study notes</h2><span>Tap a section to open it</span></div>
+  <div class="tnav" id="tnav"></div>
+  <div id="notesList"></div>
+</section>
+
+<section id="v-gloss" hidden>
+  <div class="ttl"><h2>📚 Glossary</h2><span id="glCount"></span></div>
+  <input class="search" id="glSearch" type="search" placeholder="Search a term or meaning…" aria-label="Search the glossary" autocomplete="off">
+  <div class="pills" id="glTopics" style="margin-top:10px"></div>
+  <div class="gl" id="glList"></div>
+</section>
+
+<section id="v-setup" hidden>
+  <div class="ttl"><h2 id="setupTitle">Setup</h2><span id="setupSub"></span></div>
+  <div class="panel card">
+    <div id="fmtBox"><h3>1. Question format</h3><div class="fmts" id="fmts"></div></div>
+    <div><h3>How many items? <small id="availNote"></small></h3>
+      <div class="pills" id="countPills"></div>
+      <div class="row" style="margin-top:10px"><span class="muted">or type a number:</span><input id="countIn" class="num" type="number" min="1" value="10" inputmode="numeric" aria-label="Number of items"></div></div>
+    <div><h3>Topics</h3><div class="pills" id="topicPills"></div></div>
+    <div class="note">💡 Every question has a <b>clue</b>. Using a clue gives half points, so try first!</div>
+    <div class="row"><button class="btn pri big" id="startBtn">Start ▶</button><button class="btn ghost" data-home>Back</button></div>
+  </div>
+</section>
+
+<section id="v-quiz" hidden>
+  <div class="qtop"><button class="ib quitbtn" id="quitBtn" aria-label="Quit">✕</button><div class="prog"><i id="progFill"></i></div><b id="qCount" style="white-space:nowrap">1 / 10</b></div>
+  <div class="stats"><span class="stat" id="sMode"></span><span class="stat" id="sScore">⭐ 0 pts</span></div>
+  <div class="qcard card" id="qcard">
+    <div class="qmeta" id="qmeta"></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="qans"></div><div id="qclue"></div><div id="qfb"></div>
+  </div>
+</section>
+
+<section id="v-results" hidden>
+  <div class="res card">
+    <div class="bigscore" id="rPct">0%</div>
+    <h2 id="rMsg"></h2>
+    <div class="rstats" id="rStats"></div>
+    <div class="row" style="justify-content:center">
+      <button class="btn pri" id="againBtn">Try again</button>
+      <button class="btn" id="redoWrong">Practice my mistakes</button>
+      <button class="btn" data-home>Home</button>
+    </div>
+  </div>
+  <div class="ttl" id="revTtl"><h2>Review your mistakes</h2><span>Read these before your exam</span></div>
+  <div class="review" id="review"></div>
+</section>
+
+<section id="v-flash" hidden>
+  <div class="qtop"><button class="ib" data-home aria-label="Back home">✕</button><div class="prog"><i id="fProg"></i></div><b id="fCount" style="white-space:nowrap">1 / 10</b></div>
+  <div id="fArea"></div>
+</section>
+</main>
+<script src="facts1.js"></script>
+<script src="facts2.js"></script>
+<script src="facts3.js"></script>
+<script src="fill1.js"></script>
+<script src="tf1.js"></script>
+<script src="tf2.js"></script>
+<script src="mc1.js"></script>
+<script src="mc2.js"></script>
+<script src="mc3.js"></script>
+<script src="notes_o1.js"></script>
+<script src="notes_i1.js"></script>
+<script src="notes_r1.js"></script>
+<script src="notes_s1.js"></script>
+<script src="core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
