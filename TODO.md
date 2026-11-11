@@ -9,7 +9,7 @@ These are live on Vercel but their source is not here. Paused for now. Details o
 - [ ] `cselc01c-clouddb-reviewer`: **the live site is newer than the repo copy** (`cselc01c-cloud-databases`). It has two extra files, `data_sum.js` and `extra.css`, and newer `app.js`, `index.html`, `style.css`, `sw.js`. Do this one first, and do it **before** connecting the project to Git, or a deploy would overwrite the newer version.
 - [ ] `rizal-ch5-reviewer`: needs a course code. Only the built page is downloadable (the source `parts/` and `build.sh` are not served), so import the built page.
 - [ ] `eneman20-reviewer`: needs a course code. About 11 files.
-- [ ] `cselc03c-reviewer`: about 20 files.
+- [x] `cselc03c-reviewer`: recovered into `cselc03c-artificial-intelligence` (2026-11-11), then updated with the Midterm module.
 
 Blocker: the session's shell cannot reach `vercel.app`. Either allow `vercel.app` and `*.vercel.app` in the environment's network settings (not found in the iOS app yet), or import file by file through the chat (slow).
 
@@ -21,6 +21,7 @@ Blocker: the session's shell cannot reach `vercel.app`. Either allow `vercel.app
   - `math7-q2-reviewer` → `math7-mathematics-q2` (matches live, safe now)
   - `jpl-midterm-reviewer` → `jpln01g-jose-p-laurel` (matches live, safe now)
   - `math7-reviewer` → `math7-mathematics-q1` (matches live, safe now)
+  - `cselc03c-reviewer` → `cselc03c-artificial-intelligence` (matches live, safe now)
   - `cselc01c-clouddb-reviewer` → `cselc01c-cloud-databases` (**not yet**, see above)
 - [ ] After connecting, turn on "Skip deployments when there are no changes to the root directory" in each project.
 - [ ] In GitHub → Settings → Branches, confirm `main` is the default branch.
@@ -33,3 +34,4 @@ Blocker: the session's shell cannot reach `vercel.app`. Either allow `vercel.app
 - [ ] `rvan01g-rva` still says "RVA Midterms CS301" inside the app. Decide whether to change it to the RVAN01G name.
 - [ ] Math 7 has no course code. Confirm the folder names `math7-mathematics-q1` / `q2` are fine.
 - [ ] Review `CLAUDE.md` and edit anything that doesn't match how you want your reviewers built.
+- [ ] `cselc03c-artificial-intelligence`: add the Finals (Robotics, Neural Networks, Prompt Engineering) when the Finals module is ready.

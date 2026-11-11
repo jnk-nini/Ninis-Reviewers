@@ -17,12 +17,13 @@ Folders are named `<course code>-<subject>`.
 | [`math7-mathematics-q2`](math7-mathematics-q2) | Math 7 | Mathematics 7, Quarter 2 | `math7-q2-reviewer` |
 | [`jpln01g-jose-p-laurel`](jpln01g-jose-p-laurel) | JPLN01G | Dr. Jose P. Laurel, Midterm | `jpl-midterm-reviewer` |
 | [`cscn13c-software-engineering-2`](cscn13c-software-engineering-2) | CSCN13C | Software Engineering 2: documentation Ch 1–3, methodologies, use case and data flow diagrams | `cscn13c-se2-reviewer` |
+| [`cselc03c-artificial-intelligence`](cselc03c-artificial-intelligence) | CSELC03C | CS Elective 3 (Artificial Intelligence): Prelims and Midterms (fuzzy logic, NLP, expert systems) | `cselc03c-reviewer` |
 
 ### Deployed but not in this repo yet
 
 These have live Vercel projects but their source still needs to be added here (then named `<course code>-<subject>`):
 
-`eneman20-reviewer`, `cselc03c-reviewer`, `rizal-ch5-reviewer`.
+`eneman20-reviewer`, `rizal-ch5-reviewer`.
 
 Also, the live `cselc01c-clouddb-reviewer` is newer than the copy in `cselc01c-cloud-databases` (it has extra `data_sum.js` and `extra.css`).
 

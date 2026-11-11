@@ -5,6 +5,7 @@ const pick=a=>a[Math.floor(Math.random()*a.length)];
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const tname=t=>TOPICS[t].short;
+const SLC=(t,sl)=>"Slide "+sl+(MID.has(t)?" (Midterm)":"");
 
 /* ---------- storage (safe) ---------- */
 const KEY="cselc03c-prelim-reviewer";
@@ -66,11 +67,12 @@ $("#thmBtn").onclick=()=>{S.theme=isDark()?"light":"dark";save();applyTheme()};
 
 /* ---------- home ---------- */
 const TILES=[
- ["notes","📒","Study notes","Short notes for all 4 topics, with slide numbers.","var(--i-soft)"],
+ ["notes","📒","Study notes","Short notes for all 7 topics, with slide numbers and must-know lists.","var(--i-soft)"],
  ["gloss","📚","Glossary","Search every key term and its meaning.","var(--r-soft)"],
  ["flash","🃏","Flashcards","Flip cards to memorize terms.","var(--s-soft)"],
  ["drill","🎯","Drill","Instant feedback after each answer. Great for learning.","var(--o-soft)"],
  ["quiz","📝","Mock quiz","Answers revealed at the end, like a real exam.","var(--i-soft)"],
+ ["mid","🎓","Midterm mock exam","Only the 3 midterm topics. Answers revealed at the end.","var(--o-soft)"],
  ["weak","💪","Train my weak spot","Practice the topic you know least.","var(--r-soft)"]
 ];
 function mastery(t){const m=S.mastery[t];if(!m||!m.a)return 0;return Math.round(m.c/m.a*Math.min(m.a,10)/10*100)}
@@ -81,16 +83,16 @@ function renderHome(){
   $("#mast").innerHTML=TK.map((t,i)=>"<div class='mrow tp-"+t+"'><span>"+TOPICS[t].icon+" "+tname(t)+"</span><span class='tr'><i style='width:"+v[i]+"%'></i></span><span>"+v[i]+"%</span></div>").join("")}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(!b)return;const a=b.dataset.act;
   if(a==="notes"){renderNotes();show("notes")}else if(a==="gloss"){renderGloss();show("gloss")}
-  else if(a==="flash")openSetup("flash");else if(a==="drill")openSetup("drill");else if(a==="quiz")openSetup("quiz");
+  else if(a==="flash")openSetup("flash");else if(a==="drill")openSetup("drill");else if(a==="quiz")openSetup("quiz");else if(a==="mid"){SET.topics=new Set(MID);SET.fmt="mixed";openSetup("quiz")}
   else if(a==="weak"){let w=TK[0],lo=1e9;TK.forEach(t=>{const x=mastery(t)+Math.random();if(x<lo){lo=x;w=t}});startQuiz("drill","mixed",10,new Set([w]),"Training: "+tname(w))}});
 
 /* ---------- notes ---------- */
 let notesTopic="o",notesBuilt=false;
 function renderNotes(){
   $("#tnav").innerHTML=TK.map(t=>"<button class='pill tp tp-"+t+"' aria-pressed='"+(t===notesTopic)+"' data-nt='"+t+"'>"+TOPICS[t].icon+" "+TOPICS[t].topic+": "+tname(t)+"</button>").join("");
-  $("#notesList").innerHTML=NOTES[notesTopic].map((s,i)=>"<details class='sec card tp-"+notesTopic+"'"+(i===0?" open":"")+"><summary><span>"+esc(s.h)+"</span><span class='chip sl'>Slide "+s.sl+"</span></summary><div class='body'>"+s.b+"</div></details>").join("")+
+  $("#notesList").innerHTML=NOTES[notesTopic].map((s,i)=>"<details class='sec card tp-"+notesTopic+"'"+(i===0?" open":"")+"><summary><span>"+esc(s.h)+"</span><span class='chip sl'>"+SLC(notesTopic,s.sl)+"</span></summary><div class='body'>"+s.b+"</div></details>").join("")+
     "<div class='row' style='margin-top:14px'><button class='btn pri' data-quicknote='"+notesTopic+"'>Quick drill on this topic ▶</button></div>";
-  if(notesTopic==="s")initTracer()}
+  if(notesTopic==="s")initTracer();if(notesTopic==="f")initFuzzy()}
 $("#tnav").onclick=e=>{const b=e.target.closest("[data-nt]");if(b){notesTopic=b.dataset.nt;renderNotes();window.scrollTo({top:0})}};
 $("#notesList").onclick=e=>{const b=e.target.closest("[data-quicknote]");if(b)startQuiz("drill","mixed",10,new Set([b.dataset.quicknote]),"Quick drill")};
 
@@ -128,6 +130,17 @@ function initTracer(){const el=$("#tracer");if(!el)return;trReset();
     if(a.dataset.tt){TR.tree=a.dataset.tt;trReset()}else if(a.dataset.ta){TR.algo=a.dataset.ta;trReset()}else if(a.id==="trStep")trStep();else if(a.id==="trReset")trReset();sync();trDraw()};
   trDraw()}
 
+/* Fuzzy fan calculator (membership functions and rules from Midterm slides 5-15) */
+function fzMem(t){const c=t<=15?1:t>=25?0:(25-t)/10,w=(t<=15||t>=35)?0:t<25?(t-15)/10:(35-t)/10,h=t<=25?0:t>=35?1:(t-25)/10;return[c,w,h].map(x=>Math.round(x*100)/100)}
+function fzDraw(){const t=+$("#fzR").value,[c,w,h]=fzMem(t),den=Math.round((c+w+h)*100)/100,num=Math.round((c*20+w*50+h*80)*100)/100,fan=Math.round(num/den*10)/10;
+  $("#fzT").textContent=t;
+  $("#fzOut").innerHTML="<table><tr><th>Cold</th><th>Warm</th><th>Hot</th></tr><tr><td>"+c+"</td><td>"+w+"</td><td>"+h+"</td></tr></table>"+
+   "<div class='calc'>Fan Speed = ("+c+" × 20 + "+w+" × 50 + "+h+" × 80) ÷ ("+c+" + "+w+" + "+h+")<br>= "+num+" ÷ "+den+" = <b>"+fan+"%</b></div>"+
+   "<div class='muted'>"+(fan<50?"Between Slow (20%) and Medium (50%).":fan===50?"Exactly Medium (50%).":"Between Medium (50%) and Fast (80%).")+"</div>"}
+function initFuzzy(){const el=$("#fzcalc");if(!el)return;el.className="tracer tp-f";
+  el.innerHTML="<h4>Try it: the aircon fan</h4><label for='fzR'>Temperature: <b id='fzT'>28</b>°C</label><input type='range' id='fzR' min='10' max='40' step='1' value='28' aria-label='Temperature in degrees Celsius'><div id='fzOut'></div><div class='muted'>Slide 14: 28°C gives 59%. Slide 15: 22°C gives 41%. Slide 17: 32°C gives 71%.</div>";
+  $("#fzR").oninput=fzDraw;fzDraw()}
+
 /* ---------- glossary ---------- */
 let glT="all";
 function renderGloss(){
@@ -136,7 +149,7 @@ function renderGloss(){
   const list=FACT_OBJ.filter(f=>(glT==="all"||f.t===glT)&&(!q||(f.term+" "+f.def+" "+f.alts.join(" ")).toLowerCase().includes(q))).sort((a,b)=>a.term.localeCompare(b.term));
   const hl=s=>{s=esc(s);if(!q)return s;const i=s.toLowerCase().indexOf(esc(q));return i<0?s:s.slice(0,i)+"<mark>"+s.slice(i,i+esc(q).length)+"</mark>"+s.slice(i+esc(q).length)};
   $("#glCount").textContent=list.length+" term"+(list.length===1?"":"s");
-  $("#glList").innerHTML=list.length?list.map(f=>"<div class='gi card tp-"+f.t+"'><b>"+hl(f.term)+"</b><p>"+hl(f.def)+"</p><span class='chip'>"+tname(f.t)+"</span> <span class='chip sl'>Slide "+f.sl+"</span></div>").join(""):"<p class='muted'>No match. Try another word.</p>"}
+  $("#glList").innerHTML=list.length?list.map(f=>"<div class='gi card tp-"+f.t+"'><b>"+hl(f.term)+"</b><p>"+hl(f.def)+"</p><span class='chip'>"+tname(f.t)+"</span> <span class='chip sl'>"+SLC(f.t,f.sl)+"</span></div>").join(""):"<p class='muted'>No match. Try another word.</p>"}
 $("#glTopics").onclick=e=>{const b=e.target.closest("[data-gt]");if(b){glT=b.dataset.gt;renderGloss()}};
 $("#glSearch").oninput=renderGloss;
 
@@ -150,7 +163,8 @@ function openSetup(mode){SET.mode=mode;
   renderSetup();show("setup")}
 function renderSetup(){
   $("#fmts").innerHTML=Object.keys(FORMATS).map(k=>"<button class='fmt' aria-pressed='"+(SET.fmt===k)+"' data-fmt='"+k+"'><b>"+FORMATS[k].icon+" "+FORMATS[k].name+"</b><span>"+FORMATS[k].d+"</span></button>").join("");
-  $("#topicPills").innerHTML="<button class='pill' aria-pressed='"+(SET.topics.size===TK.length)+"' data-topic='all'>⭐ All topics</button>"+TK.map(t=>"<button class='pill tp tp-"+t+"' aria-pressed='"+SET.topics.has(t)+"' data-topic='"+t+"'>"+TOPICS[t].icon+" "+tname(t)+"</button>").join("");
+  const sameSet=(a,b)=>a.size===b.size&&[...a].every(x=>b.has(x));
+  $("#topicPills").innerHTML="<button class='pill' aria-pressed='"+(SET.topics.size===TK.length)+"' data-topic='all'>⭐ All topics</button><button class='pill' aria-pressed='"+sameSet(SET.topics,PRE)+"' data-topic='grpP'>Prelims only</button><button class='pill' aria-pressed='"+sameSet(SET.topics,MID)+"' data-topic='grpM'>Midterms only</button>"+TK.map(t=>"<button class='pill tp tp-"+t+"' aria-pressed='"+SET.topics.has(t)+"' data-topic='"+t+"'>"+TOPICS[t].icon+" "+tname(t)+"</button>").join("");
   const max=SET.mode==="flash"?FACT_OBJ.filter(f=>SET.topics.has(f.t)).length:available(SET.fmt,SET.topics);
   if(SET.count>max)SET.count=Math.max(1,max);
   $("#countPills").innerHTML=[5,10,15,20,30,50].filter(n=>n<=max||n===5).map(n=>"<button class='pill' aria-pressed='"+(SET.count===n)+"' data-count='"+n+"'>"+n+"</button>").join("")+"<button class='pill' aria-pressed='"+(SET.count===max)+"' data-count='"+max+"'>All ("+max+")</button>";
@@ -160,7 +174,7 @@ $("#fmts").onclick=e=>{const b=e.target.closest("[data-fmt]");if(b){SET.fmt=b.da
 $("#countPills").onclick=e=>{const b=e.target.closest("[data-count]");if(b){SET.count=+b.dataset.count;renderSetup()}};
 $("#countIn").oninput=e=>{const v=parseInt(e.target.value,10);if(v>0){SET.count=v;const max=SET.mode==="flash"?FACT_OBJ.filter(f=>SET.topics.has(f.t)).length:available(SET.fmt,SET.topics);SET.count=Math.min(v,max);document.querySelectorAll("#countPills .pill").forEach(p=>p.setAttribute("aria-pressed",+p.dataset.count===SET.count))}};
 $("#topicPills").onclick=e=>{const b=e.target.closest("[data-topic]");if(!b)return;const t=b.dataset.topic;
-  if(t==="all")SET.topics=SET.topics.size===TK.length?new Set():new Set(TK);else SET.topics.has(t)?SET.topics.delete(t):SET.topics.add(t);renderSetup()};
+  if(t==="grpP")SET.topics=new Set(PRE);else if(t==="grpM")SET.topics=new Set(MID);else if(t==="all")SET.topics=SET.topics.size===TK.length?new Set():new Set(TK);else SET.topics.has(t)?SET.topics.delete(t):SET.topics.add(t);renderSetup()};
 $("#startBtn").onclick=()=>{const n=Math.max(1,SET.count||10);if(SET.mode==="flash")startFlash(n,SET.topics);else startQuiz(SET.mode,SET.fmt,n,new Set(SET.topics))};
 
 /* ---------- quiz engine ---------- */
@@ -203,7 +217,7 @@ function answer(ok,user,el){Q.done=true;const q=Q.list[Q.i];const cb=$("#clueBtn
   const btn="<div class='qacts'><button class='btn pri' id='nextBtn'>"+(last?"See my results 🏁":"Next ▶")+"</button></div>";
   if(Q.mode==="drill"){
     if(!ok){$("#qcard").classList.add("shake");setTimeout(()=>$("#qcard").classList.remove("shake"),400)}
-    $("#qfb").innerHTML="<div class='fb "+(ok?"ok":"no")+"'><h3>"+(ok?pick(PRAISE):pick(OOPS))+"</h3>"+(ok?"":"<p>Correct answer: <b>"+esc(q.show||q.correct)+"</b></p>")+"<p>"+q.explain+"</p><p><span class='chip sl'>📄 Slide "+q.sl+"</span>"+(Q.clueUsed&&ok?" <span class='chip sl'>half points (clue used)</span>":"")+"</p>"+btn+"</div>"}
+    $("#qfb").innerHTML="<div class='fb "+(ok?"ok":"no")+"'><h3>"+(ok?pick(PRAISE):pick(OOPS))+"</h3>"+(ok?"":"<p>Correct answer: <b>"+esc(q.show||q.correct)+"</b></p>")+"<p>"+q.explain+"</p><p><span class='chip sl'>📄 "+SLC(q.topic,q.sl)+"</span>"+(Q.clueUsed&&ok?" <span class='chip sl'>half points (clue used)</span>":"")+"</p>"+btn+"</div>"}
   else $("#qfb").innerHTML="<div class='fb saved'><h3>Answer saved ✔</h3><p class='muted'>You will see the correct answers at the end.</p>"+btn+"</div>";
   const nb=$("#nextBtn");nb.onclick=()=>{if(last)results();else{Q.i++;renderQ();window.scrollTo({top:0,behavior:"smooth"})}};
   setTimeout(()=>{try{nb.focus({preventScroll:true})}catch(e){};$("#qfb").scrollIntoView({behavior:"smooth",block:"nearest"})},80)}
@@ -221,7 +235,7 @@ function results(){const pct=Math.round(Q.correct/Q.n*100),secs=Math.round((Date
   const byT={};Q.log.forEach(l=>{const t=l.q.topic;(byT[t]=byT[t]||{a:0,c:0});byT[t].a++;if(l.ok)byT[t].c++});
   $("#rStats").innerHTML="<span class='stat'>✅ "+Q.correct+" / "+Q.n+" correct</span><span class='stat'>⭐ "+Q.score+" pts</span><span class='stat'>💡 "+Q.clues+" clue"+(Q.clues===1?"":"s")+"</span><span class='stat'>⏱ "+Math.floor(secs/60)+"m "+(secs%60)+"s</span>"+Object.keys(byT).map(t=>"<span class='stat'>"+TOPICS[t].icon+" "+tname(t)+": "+byT[t].c+"/"+byT[t].a+"</span>").join("");
   const wrong=Q.log.filter(l=>!l.ok);$("#redoWrong").hidden=!wrong.length;$("#revTtl").hidden=!wrong.length;
-  $("#review").innerHTML=wrong.map(l=>"<div class='rv card tp-"+l.q.topic+"'><span class='chip'>"+tname(l.q.topic)+"</span> <span class='chip sl'>📄 Slide "+l.q.sl+"</span><div class='q'>"+l.q.q+"</div><div class='a'><span class='y'>Your answer: "+l.user+"</span><span class='c'>Correct: "+esc(l.q.show||l.q.correct)+"</span><span>"+l.q.explain+"</span></div></div>").join("");
+  $("#review").innerHTML=wrong.map(l=>"<div class='rv card tp-"+l.q.topic+"'><span class='chip'>"+tname(l.q.topic)+"</span> <span class='chip sl'>📄 "+SLC(l.q.topic,l.q.sl)+"</span><div class='q'>"+l.q.q+"</div><div class='a'><span class='y'>Your answer: "+l.user+"</span><span class='c'>Correct: "+esc(l.q.show||l.q.correct)+"</span><span>"+l.q.explain+"</span></div></div>").join("");
   show("results")}
 $("#againBtn").onclick=()=>startQuiz(Q.mode,Q.fmt,Q.n,Q.topics,Q.label);
 $("#redoWrong").onclick=()=>{const list=Q.log.filter(l=>!l.ok).map(l=>l.q.type==="mc"?Object.assign({},l.q,{choices:shuffle(l.q.choices)}):l.q);const m=Q;startQuiz("drill",m.fmt,list.length,m.topics,"Practice my mistakes",shuffle(list));Q.retry=true};
@@ -234,7 +248,7 @@ function renderFlash(){const A=$("#fArea");
     A.innerHTML="<div class='res card'><div style='font-size:46px'>🃏</div><h2>Deck done!</h2><p style='margin:0'>You knew <b>"+FL.known+"</b> card"+(FL.known===1?"":"s")+" right away.</p>"+(l.length?"<p class='muted' style='margin:0'>Still learning: "+l.map(c=>esc(c.term)).join(", ")+"</p>":"")+"<div class='row' style='justify-content:center'>"+(l.length?"<button class='btn pri' id='fAgain'>Review “still learning” cards</button>":"")+"<button class='btn' id='fNew'>New deck</button><button class='btn' data-home>Home</button></div></div>";
     if(l.length)$("#fAgain").onclick=()=>{FL={deck:shuffle(l),i:0,known:0,learning:[],total:l.length};renderFlash()};$("#fNew").onclick=()=>openSetup("flash");return}
   const c=FL.deck[FL.i];$("#fProg").style.width=(FL.i/FL.deck.length*100)+"%";$("#fCount").textContent=(FL.i+1)+" / "+FL.deck.length;
-  A.innerHTML="<div class='flip tp-"+c.t+"'><button class='fcard' id='fc' aria-label='Flip card'><div class='face f'><div><span class='chip'>"+TOPICS[c.t].icon+" "+tname(c.t)+"</span><div class='big' style='margin-top:12px'>"+esc(c.term)+"</div></div><span class='tapnote'>Tap to flip 🔄</span></div><div class='face b'><div>"+esc(c.def)+"<div style='margin-top:10px'><span class='chip sl'>📄 Slide "+c.sl+"</span></div></div><span class='tapnote'>Tap to flip back</span></div></button></div><div class='row' style='justify-content:center;margin-top:18px'><button class='btn' id='fNo'>😅 Still learning</button><button class='btn good' id='fYes'>😎 I know it!</button></div>";
+  A.innerHTML="<div class='flip tp-"+c.t+"'><button class='fcard' id='fc' aria-label='Flip card'><div class='face f'><div><span class='chip'>"+TOPICS[c.t].icon+" "+tname(c.t)+"</span><div class='big' style='margin-top:12px'>"+esc(c.term)+"</div></div><span class='tapnote'>Tap to flip 🔄</span></div><div class='face b'><div>"+esc(c.def)+"<div style='margin-top:10px'><span class='chip sl'>📄 "+SLC(c.t,c.sl)+"</span></div></div><span class='tapnote'>Tap to flip back</span></div></button></div><div class='row' style='justify-content:center;margin-top:18px'><button class='btn' id='fNo'>😅 Still learning</button><button class='btn good' id='fYes'>😎 I know it!</button></div>";
   const fc=$("#fc");fc.onclick=()=>fc.classList.toggle("on");
   $("#fYes").onclick=()=>{FL.known++;FL.i++;renderFlash()};
   $("#fNo").onclick=()=>{if(!FL.learning.includes(c))FL.learning.push(c);FL.i++;renderFlash()}}
