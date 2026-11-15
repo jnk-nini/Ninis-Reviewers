@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" data-theme="night">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RVA Midterms CS301 Reviewer</title>
+<meta name="apple-mobile-web-app-title" content="CS301 Reviewer">
+<meta name="description" content="Reviewer for Digital Arts and Technology and Reading Images: study notes with read-aloud, flashcards, drills and mock exams (multiple choice, identification, true or false, fill in the blanks) with clues. Works offline.">
+<meta name="theme-color" content="#0b1636">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="sky" aria-hidden="true">
+  <div class="moon"></div>
+  <svg class="swirls" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <g class="sw1"><path d="M120 260c90-90 260-110 360-20s40 230-80 230-170-110-100-170 170-20 170 40"/><path d="M560 180c120-80 330-60 420 50s-10 230-140 210-150-140-60-180 150 10 140 70"/></g>
+    <g class="sw2"><path d="M-40 420c200-80 420-60 620 0s420 70 680-10"/><path d="M-40 470c220-70 420-40 640 20s400 50 660-30"/><path d="M-40 520c240-60 460-30 660 30s380 40 640-40"/></g>
+  </svg>
+  <div class="stars"></div>
+  <svg class="cypress" viewBox="0 0 120 400" preserveAspectRatio="xMinYMax meet"><path d="M60 0C48 60 70 90 50 140s20 70 0 120 25 60 5 140h60c-12-70 18-90 0-140s16-60-2-110 14-60-6-110S70 40 60 0Z"/></svg>
+</div>
+
+<header class="bar">
+  <div class="bar-in">
+    <button class="logo" data-go="home" aria-label="Go to home">
+      <img src="icon.svg" alt="" width="34" height="34">
+      <span><b>RVA Midterms CS301 Reviewer</b><small>Digital Arts &amp; Technology · Reading Images</small></span>
+    </button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <button data-go="home"><i>🏠</i><span>Home</span></button>
+      <button data-go="notes"><i>📒</i><span>Notes</span></button>
+      <button data-go="cards"><i>🃏</i><span>Cards</span></button>
+      <button data-go="drill"><i>🎯</i><span>Drill</span></button>
+      <button data-go="exam"><i>📝</i><span>Exam</span></button>
+    </nav>
+    <span class="pill off" id="offPill" hidden>✓ Offline ready</span>
+    <button class="ib" id="thmBtn" aria-label="Switch between night and day theme" title="Night / day theme">☀️</button>
+  </div>
+</header>
+<noscript><p class="card" style="margin:16px">Please enable JavaScript to use the reviewer.</p></noscript>
+
+<main class="wrap" id="main">
+
+<!-- HOME -->
+<section id="v-home" class="view">
+  <div class="hero card">
+    <p class="eyebrow">CS301 · Midterms</p>
+    <h1>RVA Midterms <em>CS301 Reviewer</em></h1>
+    <p class="lead">Everything in <b>Lesson 1: Digital Arts and Technology</b> and <b>Lesson 2: Reading Images, Symbolism, Meaning &amp; Context, Visual Communication</b>, in the slides' own terms.</p>
+    <div class="fmt-row" aria-label="Exam formats covered">
+      <span class="chip">Multiple Choice</span><span class="chip">Identification</span><span class="chip">True or False</span><span class="chip">Fill in the Blanks</span>
+    </div>
+  </div>
+
+  <div class="ttl"><h2>Your study path</h2><span>Follow the steps in order. Each step uses active recall.</span></div>
+  <ol class="path" id="path"></ol>
+
+  <div class="ttl"><h2>Exam readiness</h2><span>Fills up as you answer correctly. Tap a topic to drill it.</span></div>
+  <div class="card prog-card">
+    <div class="ring-wrap">
+      <div class="ring" id="ring" style="--p:0"><div><b id="ringPct">0%</b><small>READY</small></div></div>
+      <div class="kpis" id="kpis"></div>
+    </div>
+    <div id="mast"></div>
+  </div>
+
+  <div class="ttl"><h2>More tools</h2></div>
+  <div class="tiles">
+    <button class="tile" data-go="gloss"><i>📚</i><b>Glossary</b><span>Every key term, searchable, with read-aloud</span></button>
+    <button class="tile" data-go="mistakes"><i>🔁</i><b>Fix my mistakes</b><span id="mistakeCount">Re-test only what you got wrong</span></button>
+    <button class="tile" id="resetBtn"><i>🧹</i><b>Reset progress</b><span>Start fresh on this device</span></button>
+  </div>
+
+  <footer class="foot">
+    <p>No sign-up. Works online and offline (install it from your browser menu for one-tap access). Progress is saved only on this device.</p>
+    <details><summary>How this reviewer is designed</summary>
+      <p>The layout follows the 8 principles of design. <b>Balance</b>: centered, symmetrical cards on a steady grid. <b>Contrast</b>: starlight yellow on night blue for what matters most. <b>Emphasis</b>: "Must-know" boxes and one bright primary button per screen. <b>Movement</b>: the Starry Night swirls and the numbered study path lead the eye forward. <b>Pattern</b> and <b>Repetition</b>: every topic, card and question uses the same parts in the same places. <b>Rhythm</b>: one spacing scale keeps a calm, even beat. <b>Proportion</b> and <b>Hierarchy</b>: size and weight show what to read first. <b>Unity</b>: one palette, one type pairing, one icon style.</p>
+      <p>The study method combines active recall (flashcards, brain dumps, quick checks, recall mode), spaced repetition (cards return when you're about to forget them), and immediate feedback with explanations.</p>
+    </details>
+  </footer>
+</section>
+
+<!-- NOTES -->
+<section id="v-notes" class="view" hidden>
+  <div class="ttl"><h2>📒 Study notes</h2><span>Start with ⭐ Essentials, then open the full notes.</span></div>
+  <div class="toolbar card" id="notesBar">
+    <div class="seg" id="noteLesson" role="radiogroup" aria-label="Lesson filter"></div>
+    <div class="tools">
+      <button class="btn sm" id="expandBtn" aria-pressed="false">⊞ Expand all</button>
+      <button class="btn sm tog" id="essBtn" aria-pressed="false">⭐ Essentials only</button>
+      <button class="btn sm tog" id="recallBtn" aria-pressed="false" title="Hide key terms; tap a blank to reveal it">🙈 Recall mode</button>
+      <button class="btn sm pri" id="listenAll">🔊 Listen</button>
+    </div>
+    <div class="jump" id="noteJump" aria-label="Jump to topic"></div>
+  </div>
+  <p class="hint" id="recallHint" hidden>🙈 Recall mode is on: key terms are hidden. Say each one in your head, then tap the blank to check.</p>
+  <div id="notesList"></div>
+</section>
+
+<!-- GLOSSARY -->
+<section id="v-gloss" class="view" hidden>
+  <div class="ttl"><h2>📚 Glossary</h2><span id="glCount"></span></div>
+  <div class="toolbar card">
+    <input class="search" id="glSearch" type="search" placeholder="Search a term or meaning…" aria-label="Search the glossary" autocomplete="off">
+    <div class="seg" id="glLesson" role="radiogroup" aria-label="Lesson filter"></div>
+    <div class="tools"><button class="btn sm pri" id="glListen">🔊 Listen to these terms</button><button class="btn sm" data-go="cards">🃏 Turn into flashcards</button></div>
+  </div>
+  <div class="gl" id="glList"></div>
+</section>
+
+<!-- SETUP -->
+<section id="v-setup" class="view" hidden>
+  <div class="ttl"><h2 id="setupTitle">Setup</h2><span id="setupSub"></span></div>
+  <div class="panel card">
+    <div class="blk"><h3>Lessons</h3><div class="seg" id="setLesson" role="radiogroup" aria-label="Lesson"></div></div>
+    <div class="blk"><h3>Topics <small><button class="lnk" id="topAll">Select all</button> · <button class="lnk" id="topNone">Clear</button></small></h3><div class="pills" id="topicPills"></div></div>
+    <div class="blk" id="fmtBlk"><h3>Question formats</h3><div class="pills" id="fmtPills"></div></div>
+    <div class="blk" id="dirBlk" hidden><h3>Card direction</h3><div class="seg" id="dirSeg"></div></div>
+    <div class="blk"><h3>How many items? <small id="availNote"></small></h3>
+      <div class="pills" id="countPills"></div>
+      <label class="row num-row"><span class="muted">or type a number:</span><input id="countIn" class="num" type="number" min="1" value="20" inputmode="numeric" aria-label="Number of items"></label>
+    </div>
+    <label class="switch" id="weakRow"><input type="checkbox" id="weakChk" checked><span></span>Weak spots first (past mistakes and unseen items come first)</label>
+    <div class="note" id="setupNote"></div>
+    <div class="row"><button class="btn pri big" id="startBtn">Start ▶</button><button class="btn ghost" data-go="home">Back</button></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="v-quiz" class="view" hidden>
+  <div class="qtop"><button class="ib" id="quitBtn" aria-label="Quit">✕</button><div class="prog"><i id="progFill"></i></div><b id="qCount">1 / 10</b></div>
+  <div class="stats"><span class="pill" id="sMode"></span><span class="pill" id="sPart" hidden></span><span class="pill" id="sScore">⭐ 0 pts</span></div>
+  <div class="qcard card" id="qcard" aria-live="polite"></div>
+</section>
+
+<!-- RESULTS -->
+<section id="v-results" class="view" hidden>
+  <div class="res card">
+    <div class="bigscore" id="rPct">0%</div>
+    <h2 id="rMsg"></h2>
+    <div class="rstats" id="rStats"></div>
+    <div id="rBreak"></div>
+    <div class="row center">
+      <button class="btn pri" id="againBtn">New set, same settings</button>
+      <button class="btn" id="redoWrong">Re-test my mistakes</button>
+      <button class="btn ghost" data-go="home">Home</button>
+    </div>
+  </div>
+  <div class="ttl"><h2>Review</h2><div class="seg sm" id="revSeg"></div></div>
+  <div class="review" id="review"></div>
+</section>
+
+<!-- FLASHCARDS -->
+<section id="v-flash" class="view" hidden>
+  <div class="qtop"><button class="ib" id="fQuit" aria-label="Quit flashcards">✕</button><div class="prog"><i id="fProg"></i></div><b id="fCount">1 / 10</b></div>
+  <div id="fArea"></div>
+</section>
+
+</main>
+
+<div class="tts" id="tts" hidden role="region" aria-label="Read-aloud player">
+  <div class="tts-in">
+    <div class="tts-now"><small>Now reading</small><b id="ttsNow">…</b></div>
+    <div class="tts-ctl">
+      <button class="ib" id="ttsPrev" aria-label="Previous paragraph">⏮</button>
+      <button class="ib big" id="ttsPlay" aria-label="Pause">⏸</button>
+      <button class="ib" id="ttsNext" aria-label="Next paragraph">⏭</button>
+      <button class="ib" id="ttsStop" aria-label="Stop reading">⏹</button>
+      <button class="ib" id="ttsOpt" aria-label="Voice and speed settings" aria-expanded="false">⚙️</button>
+    </div>
+  </div>
+  <div class="tts-opts" id="ttsOpts" hidden>
+    <label>Speed <select id="ttsRate"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option><option value="1.4">1.4×</option><option value="1.6">1.6×</option></select></label>
+    <label>Voice <select id="ttsVoice"></select></label>
+    <label class="switch sm"><input type="checkbox" id="ttsFollow" checked><span></span>Follow along (auto-scroll)</label>
+    <p class="muted">Tip: on phones, keep this tab open. The screen is kept awake while reading.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="notes.js"></script>
+<script src="bank.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
