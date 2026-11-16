@@ -4,115 +4,182 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>CSELC03C Reviewer</title>
-<meta name="description" content="CS Elective 3 (Artificial Intelligence) Prelims and Midterms reviewer: notes, glossary, flashcards, drills and mock quizzes with clues. Works offline.">
-<meta name="theme-color" content="#FFF1F5">
+<meta name="description" content="Reviewer for CS Elective 3 (Artificial Intelligence), Prelims and Midterms: notes, active recall, flashcards, drills and mock exams with clues. Works offline.">
+<meta name="theme-color" content="#FFF1F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2A1A22" media="(prefers-color-scheme: dark)">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AI Reviewer">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+
 <header class="bar"><div class="bar-in">
-  <button class="logo" id="goHome" aria-label="Go to home"><span class="m">AI</span><span><b>CSELC03C Reviewer</b><small>Prelims + Midterms · AI</small></span></button>
+  <button class="logo" data-go="home" aria-label="Go to home">
+    <span class="m" aria-hidden="true">AI</span>
+    <span class="lt"><b>AI Reviewer</b><small>CSELC03C · Prelims + Midterms</small></span>
+  </button>
+  <nav class="topnav" aria-label="Main">
+    <button data-go="home">Home</button><button data-go="notes">Review</button><button data-go="practice">Practice</button><button data-go="cheat">Cheat sheet</button><button data-go="gloss">Glossary</button>
+  </nav>
   <span class="sp"></span>
-  <span class="off" id="offPill" hidden>✓ Offline ready</span>
+  <span class="off" id="offPill" hidden title="All files are saved on this device">✓ Offline ready</span>
   <button class="ib" id="thmBtn" aria-label="Switch light or dark mode">🌙</button>
 </div></header>
+
 <noscript><p style="padding:16px">Please enable JavaScript to use the reviewer.</p></noscript>
-<main class="wrap">
+
+<main class="wrap" id="main">
+
+<!-- HOME -->
 <section id="v-home">
-  <div class="hero card">
-    <h1>CS Elective 3<br><em>Prelims + Midterms Reviewer</em></h1>
-    <p>Based on the lectures of Ms. Colocado. <b>Lecture 1: Prelims</b> covers Course Orientation, Introduction to AI, Research Areas for AI, and Search Algorithms. <b>Lecture 2: Midterms</b> covers Fuzzy Logic Systems, Natural Language Processing, and Expert Systems.</p>
+  <div class="hero">
+    <p class="eyebrow">CSELC03C · CS Elective 3 · Artificial Intelligence</p>
+    <h1>Prelims + Midterms Reviewer</h1>
+    <p class="lead">Everything from the slides of <b>Ms. Colocado</b>: <b>Prelims</b> (Orientation, Intro to AI, Research Areas, Search Algorithms) and <b>Midterms</b> (Fuzzy Logic, NLP, Expert Systems). Read it, recall it, then test yourself.</p>
+    <div class="row"><button class="btn pri big" data-go="notes">📘 Start reviewing</button><button class="btn big" data-act="quick">⚡ Quick 10 quiz</button><button class="btn big" data-act="mid">🎓 Midterm mock exam</button></div>
+    <div class="row resume" id="resume" hidden></div>
   </div>
-  <div class="ttl"><h2>Start here</h2><span>Study first, then test yourself. Every question has a clue.</span></div>
+
+  <div class="ttl"><h2>Your 3-step plan</h2><span>Go in order. Small steps, no overload.</span></div>
+  <ol class="plan">
+    <li><b>1 · Read</b><span>Open the Review one section at a time. Turn on <em>Recall mode</em> to hide key words and say them before tapping.</span></li>
+    <li><b>2 · Recall</b><span>Flashcards and List recall pull the facts out of your memory. That's what makes them stick.</span></li>
+    <li><b>3 · Test</b><span>Drills give instant feedback and a clue. The mock exam shows your answers only at the end.</span></li>
+  </ol>
+
+  <div class="ttl"><h2>Study tools</h2></div>
   <div class="tiles" id="tiles"></div>
-  <div class="ttl"><h2>Your progress</h2><span>Fills up as you answer correctly</span></div>
+
+  <div class="ttl"><h2>Exam readiness</h2><span>An item counts once you get it right twice</span></div>
   <div class="prog-card card">
-    <div class="ring" id="ring" style="--p:0"><div><span><b id="ringPct">0%</b><br><small>READY</small></span></div></div>
-    <div id="mast"></div>
+    <div class="ring" id="ring" style="--p:0"><div><b id="ringPct">0%</b><small>READY</small></div></div>
+    <div class="mast" id="mast"></div>
   </div>
-  <footer>No sign-up needed. Works online and offline. Progress is saved only on this device.</footer>
+  <div class="row center" style="margin-top:10px"><button class="btn ghost sm" id="resetBtn">Reset my progress</button></div>
+  <footer class="foot">No sign-up. Works online and offline (add it to your home screen). Progress is saved only on this device.</footer>
 </section>
 
+<!-- NOTES / REVIEWER -->
 <section id="v-notes" hidden>
-  <div class="ttl"><h2>📒 Study notes</h2><span>Tap a section to open it</span></div>
-  <div class="tnav" id="tnav"></div>
+  <div class="ttl"><h2>📘 Review</h2><span id="notesSub"></span></div>
+  <div class="filters card">
+    <input class="search" id="nSearch" type="search" placeholder="Search the notes… (try “heuristic” or “tokenization”)" aria-label="Search the notes" autocomplete="off">
+    <div class="pills scroll" id="nFilter" role="group" aria-label="Choose topics"></div>
+    <div class="row tools">
+      <button class="tog" id="recallTog" aria-pressed="false"><span class="sw" aria-hidden="true"></span>🙈 Recall mode</button>
+      <span class="muted small" id="recallHint">Hides key words. Say the word, then tap it to check.</span>
+      <span class="sp"></span>
+      <button class="tog" id="expandTog" aria-pressed="false"><span class="sw" aria-hidden="true"></span><span id="expandLbl">Expand all</span></button>
+    </div>
+  </div>
   <div id="notesList"></div>
 </section>
 
+<!-- CHEAT SHEET -->
+<section id="v-cheat" hidden>
+  <div class="ttl"><h2>🧾 Cheat sheet</h2><span>The quick version, great for the night before</span></div>
+  <div class="pills scroll" id="chTabs" role="tablist"></div>
+  <div id="chBody"></div>
+</section>
+
+<!-- GLOSSARY -->
 <section id="v-gloss" hidden>
   <div class="ttl"><h2>📚 Glossary</h2><span id="glCount"></span></div>
   <input class="search" id="glSearch" type="search" placeholder="Search a term or meaning…" aria-label="Search the glossary" autocomplete="off">
-  <div class="pills" id="glTopics" style="margin-top:10px"></div>
+  <div class="pills scroll" id="glTopics" style="margin-top:10px"></div>
   <div class="gl" id="glList"></div>
 </section>
 
+<!-- PRACTICE HUB -->
+<section id="v-practice" hidden>
+  <div class="ttl"><h2>🎯 Practice</h2><span>Pick how you want to practice</span></div>
+  <div class="tiles" id="pTiles"></div>
+</section>
+
+<!-- SETUP -->
 <section id="v-setup" hidden>
   <div class="ttl"><h2 id="setupTitle">Setup</h2><span id="setupSub"></span></div>
   <div class="panel card">
-    <div id="fmtBox"><h3>1. Question format</h3><div class="fmts" id="fmts"></div></div>
-    <div><h3>How many items? <small id="availNote"></small></h3>
+    <div id="fmtBox"><h3>1 · Question types <small class="muted">(pick one or more)</small></h3>
+      <div class="pills" id="presetPills"></div>
+      <div class="fmts" id="fmts"></div></div>
+    <div id="flashBox" hidden><h3>1 · Card direction</h3><div class="pills" id="dirPills"></div>
+      <label class="chk"><input type="checkbox" id="typeFirst"> Type my answer before flipping (stronger recall)</label></div>
+    <div><h3><span id="lblTopics">2</span> · Topics</h3><div class="pills" id="topicPills"></div></div>
+    <div><h3><span id="lblCount">3</span> · How many items? <small class="muted" id="availNote"></small></h3>
       <div class="pills" id="countPills"></div>
-      <div class="row" style="margin-top:10px"><span class="muted">or type a number:</span><input id="countIn" class="num" type="number" min="1" value="10" inputmode="numeric" aria-label="Number of items"></div></div>
-    <div><h3>Topics</h3><div class="pills" id="topicPills"></div></div>
-    <div class="note">💡 Every question has a <b>clue</b>. Using a clue gives half points, so try first!</div>
-    <div class="row"><button class="btn pri big" id="startBtn">Start ▶</button><button class="btn ghost" data-home>Back</button></div>
+      <div class="row" style="margin-top:10px"><label class="muted" for="countIn">or type a number:</label><input id="countIn" class="num" type="number" min="1" value="20" inputmode="numeric"></div></div>
+    <div id="optBox"><h3>Options</h3>
+      <label class="chk"><input type="checkbox" id="optNitc"> Add “Not in the choices” as an option (some professors use it)</label>
+      <label class="chk"><input type="checkbox" id="optStrict"> Strict spelling &amp; capitalization for typed answers</label>
+      <label class="chk" id="timerRow"><input type="checkbox" id="optTimer"> Show a timer (1 minute per item)</label></div>
+    <div class="note">💡 Every question has a <b>clue</b>. Using it gives half points, so try first.</div>
+    <div class="row"><button class="btn pri big" id="startBtn">Start ▶</button><button class="btn ghost" data-go="practice">Back</button></div>
   </div>
 </section>
 
+<!-- QUIZ -->
 <section id="v-quiz" hidden>
-  <div class="qtop"><button class="ib quitbtn" id="quitBtn" aria-label="Quit">✕</button><div class="prog"><i id="progFill"></i></div><b id="qCount" style="white-space:nowrap">1 / 10</b></div>
-  <div class="stats"><span class="stat" id="sMode"></span><span class="stat" id="sScore">⭐ 0 pts</span></div>
+  <div class="qtop"><button class="ib quitbtn" id="quitBtn" aria-label="Quit">✕</button><div class="prog" role="progressbar" aria-label="Progress"><i id="progFill"></i></div><b id="qCount" class="nowrap">1 / 10</b></div>
+  <div class="stats"><span class="stat" id="sMode"></span><span class="stat" id="sScore">⭐ 0 pts</span><span class="stat" id="sTimer" hidden>⏱ 0:00</span></div>
   <div class="qcard card" id="qcard">
     <div class="qmeta" id="qmeta"></div>
     <div class="qtext" id="qtext"></div>
-    <div id="qans"></div><div id="qclue"></div><div id="qfb"></div>
+    <div id="qans"></div><div id="qclue"></div><div id="qfb" aria-live="polite"></div>
   </div>
+  <p class="kbd muted small">Keyboard: A–D or 1–4 to choose · T / F · Enter for next</p>
 </section>
 
+<!-- RESULTS -->
 <section id="v-results" hidden>
   <div class="res card">
     <div class="bigscore" id="rPct">0%</div>
     <h2 id="rMsg"></h2>
     <div class="rstats" id="rStats"></div>
-    <div class="row" style="justify-content:center">
-      <button class="btn pri" id="againBtn">Try again</button>
-      <button class="btn" id="redoWrong">Practice my mistakes</button>
-      <button class="btn" data-home>Home</button>
+    <div class="row center">
+      <button class="btn pri" id="redoWrong">Practice my mistakes</button>
+      <button class="btn" id="againBtn">New set</button>
+      <button class="btn ghost" data-go="home">Home</button>
     </div>
   </div>
-  <div class="ttl" id="revTtl"><h2>Review your mistakes</h2><span>Read these before your exam</span></div>
+  <div class="ttl" id="revTtl"><h2>Review your mistakes</h2><span>Read these once more before the exam</span></div>
   <div class="review" id="review"></div>
 </section>
 
+<!-- FLASHCARDS -->
 <section id="v-flash" hidden>
-  <div class="qtop"><button class="ib" data-home aria-label="Back home">✕</button><div class="prog"><i id="fProg"></i></div><b id="fCount" style="white-space:nowrap">1 / 10</b></div>
+  <div class="qtop"><button class="ib" data-go="practice" aria-label="Back">✕</button><div class="prog"><i id="fProg"></i></div><b id="fCount" class="nowrap">1 / 10</b></div>
   <div id="fArea"></div>
 </section>
+
+<!-- LIST RECALL -->
+<section id="v-list" hidden>
+  <div class="qtop"><button class="ib" data-go="practice" aria-label="Back">✕</button><div class="prog"><i id="lProg"></i></div><b id="lCount" class="nowrap">1 / 5</b></div>
+  <div id="lArea"></div>
+</section>
 </main>
-<script src="facts1.js"></script>
-<script src="facts2.js"></script>
-<script src="facts3.js"></script>
-<script src="fill1.js"></script>
-<script src="tf1.js"></script>
-<script src="tf2.js"></script>
-<script src="mc1.js"></script>
-<script src="mc2.js"></script>
-<script src="mc3.js"></script>
-<script src="facts_m1.js"></script>
-<script src="fill_m1.js"></script>
-<script src="tf_m1.js"></script>
-<script src="mc_m1.js"></script>
-<script src="notes_o1.js"></script>
-<script src="notes_i1.js"></script>
-<script src="notes_r1.js"></script>
-<script src="notes_s1.js"></script>
-<script src="notes_f1.js"></script>
-<script src="notes_n1.js"></script>
-<script src="notes_e1.js"></script>
-<script src="core.js"></script>
+
+<nav class="tabbar" aria-label="Main">
+  <button data-go="home"><span>🏠</span>Home</button>
+  <button data-go="notes"><span>📘</span>Review</button>
+  <button data-go="practice"><span>🎯</span>Practice</button>
+  <button data-go="cheat"><span>🧾</span>Cheat</button>
+  <button data-go="gloss"><span>📚</span>Terms</button>
+</nav>
+
+<script src="data_notes.js"></script>
+<script src="data_facts.js"></script>
+<script src="data_cloze.js"></script>
+<script src="data_tf.js"></script>
+<script src="data_more.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

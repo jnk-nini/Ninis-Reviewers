@@ -1,9 +1,16 @@
-const CACHE="cselc03c-reviewer-v5";
-const ASSETS=["./","index.html","style.css","app.js","manifest.webmanifest","icon.svg","facts1.js","facts2.js","facts3.js","fill1.js","tf1.js","tf2.js","mc1.js","mc2.js","mc3.js","notes_o1.js","notes_i1.js","notes_r1.js","notes_s1.js","facts_m1.js","fill_m1.js","tf_m1.js","mc_m1.js","notes_f1.js","notes_n1.js","notes_e1.js","core.js"];
-self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()))});
-self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
+/* Offline support: app files are cached on first visit; fonts are cached when first fetched. Bump CACHE when files change. */
+const CACHE="cselc03c-reviewer-v6";
+const FILES=["./","index.html","style.css","app.js","data_notes.js","data_facts.js","data_cloze.js","data_tf.js","data_more.js","manifest.webmanifest","icon.svg"];
+self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
+self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener("fetch",e=>{
-  if(e.request.method!=="GET")return;
-  e.respondWith(caches.match(e.request,{ignoreSearch:true}).then(hit=>{
-    const net=fetch(e.request).then(r=>{if(r&&r.ok&&new URL(e.request.url).origin===location.origin){const cp=r.clone();caches.open(CACHE).then(c=>c.put(e.request,cp))}return r}).catch(()=>hit||caches.match("index.html"));
-    return hit||net}))});
+  const req=e.request;if(req.method!=="GET")return;
+  const url=new URL(req.url);
+  if(url.origin===location.origin){
+    // network first so updates arrive when online; cache when offline
+    e.respondWith(fetch(req).then(r=>{if(r.ok){const cp=r.clone();caches.open(CACHE).then(c=>c.put(req,cp))}return r})
+      .catch(()=>caches.match(req,{ignoreSearch:true}).then(r=>r||caches.match("index.html"))));
+  }else if(/fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)){
+    e.respondWith(caches.match(req).then(hit=>hit||fetch(req).then(r=>{const cp=r.clone();caches.open(CACHE).then(c=>c.put(req,cp));return r})));
+  }
+});
